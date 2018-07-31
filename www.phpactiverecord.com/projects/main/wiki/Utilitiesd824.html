@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.phpactiverecord.com/projects/main/wiki/Utilities?format=html&version=11 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 May 2017 20:19:07 GMT -->
+<head>
+<title>Utilities</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<style>
+body { font:80% Verdana,Tahoma,Arial,sans-serif; }
+h1, h2, h3, h4 {  font-family: "Trebuchet MS",Georgia,"Times New Roman",serif; }
+ul.toc { padding: 4px; margin-left: 0; }
+ul.toc li { list-style-type:none; }
+ul.toc li.heading2 { margin-left: 1em; }
+ul.toc li.heading3 { margin-left: 2em; }
+a.wiki-anchor { display: none; margin-left: 6px; text-decoration: none; }
+a.wiki-anchor:hover { color: #aaa !important; text-decoration: none; }
+h1:hover a.wiki-anchor, h2:hover a.wiki-anchor, h3:hover a.wiki-anchor { display: inline; color: #ddd; }
+</style>
+</head>
+<body>
+<h2 id="Utilities">Utilities<a href="#Utilities" class="wiki-anchor">&para;</a></h2>
+
+
+	<ul id="topic-list">
+	<li><a href="Utilities.html#delegators">Delegators</a></li>
+		<li><a href="Utilities.html#attribute-setters">Attribute Setters</a></li>
+		<li><a href="Utilities.html#attribute-getters">Attribute Getters</a></li>
+		<li><a href="Utilities.html#aliased-attributes">Aliased attributes</a></li>
+		<li><a href="Utilities.html#protected-attributes">Protected attributes</a></li>
+		<li><a href="Utilities.html#accessible-attributes">Accessible attributes</a></li>
+		<li><a href="Utilities.html#serialization">Serialization</a></li>
+		<li><a href="Utilities.html#automatic-timestamps">Automatic Timestamps</a></li>
+	</ul>
+
+
+	<p>ActiveRecord offers numerous ways to make your life easier by adding some interesting features to your models.</p>
+
+
+	<h4 id="delegators">Delegators</h4>
+
+
+	<p>This is similar to <a href="Utilities.html#aliased-attributes">attribute aliasing</a>, except that it works via your associations. You can alias an attribute on your model to use a particular attribute on an association. Let's take a look.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">Person</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 2</span>   <span class="r">static</span> <span class="lv">$belongs_to</span> = <span class="pd">array</span>(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">venue</span><span class="dl">'</span></span>),<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">host</span><span class="dl">'</span></span>));
+<span class="no"> 3</span>   <span class="r">static</span> <span class="lv">$delegate</span> = <span class="pd">array</span>(
+<span class="no"> 4</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">name</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">state</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">to</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">venue</span><span class="dl">'</span></span>),
+<span class="no"> 5</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">name</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">to</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">host</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">prefix</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">host</span><span class="dl">'</span></span>));
+<span class="no"> 6</span> }
+<span class="no"> 7</span> 
+<span class="no"> 8</span> <span class="lv">$person</span> = <span class="co">Person</span>::first();
+<span class="no"> 9</span> <span class="lv">$person</span>-&gt;state     <span class="c"># same as calling $person-&gt;venue-&gt;state</span>
+<span class="no"><strong>10</strong></span> <span class="lv">$person</span>-&gt;name      <span class="c"># same as calling $person-&gt;venue-&gt;name</span>
+<span class="no">11</span> <span class="lv">$person</span>-&gt;host_name <span class="c"># same as calling $person-&gt;host-&gt;name</span>
+</span></code></pre>
+
+	<h4 id="attribute-setters">Attribute setters</h4>
+
+
+	<p>Setters allow you to define custom methods for assigning a value to one of your attributes. This means you can intercept the assign process and filter/modify the data to your needs. This is helpful in a situation such as encrypting user passwords. Normally, you define a setter which does not carry the same name as your attribute, but you can set your attribute inside of the method. In the example below, <strong>$user->password</strong> is a virtual attribute: if you try to read/access the attribute instead of assign, an <a href="../../../docs/ActiveRecord/UndefinedPropertyException.html">UndefinedPropertyException</a> will be thrown.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">User</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 2</span> 
+<span class="no"> 3</span>   <span class="c"># A setter method must have set_ prepended to its name to qualify.</span>
+<span class="no"> 4</span>   <span class="c"># $this-&gt;encrypted_password is the actual attribute for this model.</span>
+<span class="no"> 5</span>   <span class="r">public</span> <span class="r">function</span> <span class="fu">set_password</span>(<span class="lv">$plaintext</span>) {
+<span class="no"> 6</span>     <span class="lv">$this</span>-&gt;encrypted_password = <span class="pd">md5</span>(<span class="lv">$plaintext</span>);
+<span class="no"> 7</span>   }
+<span class="no"> 8</span> }
+<span class="no"> 9</span> 
+<span class="no"><strong>10</strong></span> <span class="lv">$user</span> = <span class="r">new</span> <span class="co">User</span>;
+<span class="no">11</span> <span class="lv">$user</span>-&gt;password = <span class="s"><span class="dl">'</span><span class="k">plaintext</span><span class="dl">'</span></span>;  <span class="c"># will call $user-&gt;set_password('plaintext')</span>
+<span class="no">12</span> <span class="c"># if you did an echo $user-&gt;password you would get an UndefinedPropertyException</span>
+</span></code></pre>
+
+	<p>If you define a custom setter with the same name as an attribute then you will need to use <a href="../../../docs/ActiveRecord/Model.html#methodassign_attribute">assign_attribute()</a> to assign the value to the attribute. This is necessary due to the way <a href="../../../docs/ActiveRecord/Model.html#method__set">Model::__set()</a> works. For example, assume 'name' is a field on the table and we're defining a custom setter called 'name':</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">User</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 2</span> 
+<span class="no"> 3</span>   <span class="c"># INCORRECT:</span>
+<span class="no"> 4</span>   <span class="c"># function set_name($name) {</span>
+<span class="no"> 5</span>   <span class="c">#   $this-&gt;name = strtoupper($name);</span>
+<span class="no"> 6</span>   <span class="c"># }</span>
+<span class="no"> 7</span> 
+<span class="no"> 8</span>   <span class="r">public</span> <span class="r">function</span> <span class="fu">set_name</span>(<span class="lv">$name</span>) {
+<span class="no"> 9</span>     <span class="lv">$this</span>-&gt;assign_attribute(<span class="s"><span class="dl">'</span><span class="k">name</span><span class="dl">'</span></span>,<span class="pd">strtoupper</span>(<span class="lv">$name</span>));
+<span class="no"><strong>10</strong></span>   }
+<span class="no">11</span> }
+<span class="no">12</span> 
+<span class="no">13</span> <span class="lv">$user</span> = <span class="r">new</span> <span class="co">User</span>;
+<span class="no">14</span> <span class="lv">$user</span>-&gt;name = <span class="s"><span class="dl">'</span><span class="k">bob</span><span class="dl">'</span></span>;
+<span class="no">15</span> <span class="pd">echo</span> <span class="lv">$user</span>-&gt;name; <span class="c"># =&gt; BOB</span>
+</span></code></pre>
+
+	<h4 id="attribute-getters">Attribute getters</h4>
+
+
+	<p>Getters allow you to intercept attribute/property value retrieval on your models. They are defined in a similar manner to setters. See <a href="../../../docs/ActiveRecord/Model.html#method__get">Model::__get</a> for details.</p>
+
+
+	<h4 id="aliased-attributes">Aliased attributes</h4>
+
+
+	<p>This option is fairly straight-forward. An aliased attribute allows you to set/get the attribute via a different name. This comes in handy when you have terrible field names like field_one, field_two, or for legacy tables. In this example, the alias first_name is created to reference the existing field person_first_name.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">Person</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 2</span>   <span class="r">static</span> <span class="lv">$alias_attribute</span> = <span class="pd">array</span>(
+<span class="no"> 3</span>     <span class="s"><span class="dl">'</span><span class="k">first_name</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">person_first_name</span><span class="dl">'</span></span>,
+<span class="no"> 4</span>     <span class="s"><span class="dl">'</span><span class="k">last_name</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">person_last_name</span><span class="dl">'</span></span>);
+<span class="no"> 5</span> }
+<span class="no"> 6</span> 
+<span class="no"> 7</span> <span class="lv">$person</span> = <span class="co">Person</span>::first();
+<span class="no"> 8</span> <span class="pd">echo</span> <span class="lv">$person</span>-&gt;person_first_name; <span class="c"># =&gt; Jax</span>
+<span class="no"> 9</span> 
+<span class="no"><strong>10</strong></span> <span class="lv">$person</span>-&gt;first_name = <span class="s"><span class="dl">'</span><span class="k">Tito</span><span class="dl">'</span></span>;
+<span class="no">11</span> <span class="pd">echo</span> <span class="lv">$person</span>-&gt;first_name; <span class="c"># =&gt; Tito</span>
+<span class="no">12</span> <span class="pd">echo</span> <span class="lv">$person</span>-&gt;person_first_name; <span class="c"># =&gt; Tito</span>
+</span></code></pre>
+
+	<h4 id="protected-attributes">Protected attributes</h4>
+
+
+	<p>Blacklist of attributes that cannot be mass-assigned. Protecting these attributes allows you to avoid security problems where a malicious user may try to create additional post values. This is the opposite of <a href="Utilities.html#accessible-attributes">accessible attributes</a>.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">User</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 2</span>   <span class="r">static</span> <span class="lv">$attr_protected</span> = <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">admin</span><span class="dl">'</span></span>);
+<span class="no"> 3</span> }
+<span class="no"> 4</span> 
+<span class="no"> 5</span> <span class="lv">$attributes</span> = <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">first_name</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">Tito</span><span class="dl">'</span></span>,<span class="s"><span class="dl">'</span><span class="k">admin</span><span class="dl">'</span></span> =&gt; <span class="i">1</span>);
+<span class="no"> 6</span> <span class="lv">$user</span> = <span class="r">new</span> <span class="co">User</span>(<span class="lv">$attributes</span>);
+<span class="no"> 7</span> 
+<span class="no"> 8</span> <span class="pd">echo</span> <span class="lv">$user</span>-&gt;first_name; <span class="c"># =&gt; Tito</span>
+<span class="no"> 9</span> <span class="pd">echo</span> <span class="lv">$user</span>-&gt;admin; <span class="c"># =&gt; null</span>
+<span class="no"><strong>10</strong></span> <span class="c"># now no one can fake post values and make themselves an admin against your will!</span>
+</span></code></pre>
+
+	<h4 id="accessible-attributes">Accessible attributes</h4>
+
+
+	<p>Whitelist of attributes that are checked from mass-assignment calls such as constructing a model or using <a href="../../../docs/ActiveRecord/Model.html#methodupdate_attributes">Model::update_attributes()</a>. This is the opposite of <a href="Utilities.html#protected-attributes">protected attributes</a>. Accessible attributes can also be used as a security measure against fake post values, except that it is often more pragmatic because it is a whitelist approach.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">User</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 2</span>   <span class="r">static</span> <span class="lv">$attr_accessible</span> = <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">first_name</span><span class="dl">'</span></span>);
+<span class="no"> 3</span> }
+<span class="no"> 4</span> 
+<span class="no"> 5</span> <span class="lv">$attributes</span> = <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">first_name</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">Tito</span><span class="dl">'</span></span>,<span class="s"><span class="dl">'</span><span class="k">last_name</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">J.</span><span class="dl">'</span></span>,<span class="s"><span class="dl">'</span><span class="k">admin</span><span class="dl">'</span></span> =&gt; <span class="i">1</span>);
+<span class="no"> 6</span> <span class="lv">$user</span> = <span class="r">new</span> <span class="co">User</span>(<span class="lv">$attributes</span>);
+<span class="no"> 7</span> 
+<span class="no"> 8</span> <span class="pd">echo</span> <span class="lv">$person</span>-&gt;last_name; <span class="c"># =&gt; null</span>
+<span class="no"> 9</span> <span class="pd">echo</span> <span class="lv">$person</span>-&gt;admin; <span class="c"># =&gt; null</span>
+<span class="no"><strong>10</strong></span> <span class="pd">echo</span> <span class="lv">$person</span>-&gt;first_name; <span class="c"># =&gt; Tito</span>
+<span class="no">11</span> <span class="c"># first_name is the only attribute that can be mass-assigned, so the other 2 are null</span>
+</span></code></pre>
+
+	<h4 id="serialization">Serialization</h4>
+
+
+	<p>This is not the normal kind of PHP serialization you are used to. This will not serialize your entire object; however, it will serialize the attributes of your model to either an xml or a json representation. An options array can take the following parameters:</p>
+
+
+	<p><strong>only</strong>: a string or array of attributes to be included.<br /><strong>except</strong>: a string or array of attributes to be excluded.<br /><strong>methods</strong>: a string or array of methods to invoke. The method's name will be used as a key for the final attributes array along with the method's returned value<br /><strong>include</strong>: a string or array of associated models to include in the final serialized product.<br /><strong>skip_instruct</strong>: set to true to skip the <?xml ...?> declaration.</p>
+
+
+	<p>Below only includes <a href="../../../docs/ActiveRecord/Model.html#methodto_json">Model::to_json()</a> examples; however, you can use all of the examples with <a href="../../../docs/ActiveRecord/Model.html#methodto_xml">Model::to_xml()</a></p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">User</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 2</span>   <span class="r">static</span> <span class="lv">$has_many</span> = <span class="pd">array</span>(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">orders</span><span class="dl">'</span></span>));
+<span class="no"> 3</span> 
+<span class="no"> 4</span>   <span class="r">public</span> <span class="r">function</span> <span class="fu">name</span>() {
+<span class="no"> 5</span>     <span class="r">return</span> <span class="lv">$this</span>-&gt;first_name .<span class="s"><span class="dl">'</span><span class="k"> </span><span class="dl">'</span></span>. <span class="lv">$this</span>-&gt;last_name;
+<span class="no"> 6</span>   }
+<span class="no"> 7</span> }
+<span class="no"> 8</span> 
+<span class="no"> 9</span> <span class="c"># assume these fields are on our `users` table:</span>
+<span class="no"><strong>10</strong></span> <span class="c"># id, first_name, last_name, email, social_security, phone_number</span>
+<span class="no">11</span> 
+<span class="no">12</span> <span class="lv">$user</span> = <span class="co">User</span>::first();
+<span class="no">13</span> 
+<span class="no">14</span> <span class="c"># json should only contain id and email</span>
+<span class="no">15</span> <span class="lv">$json</span> = <span class="lv">$user</span>-&gt;to_json(<span class="pd">array</span>(
+<span class="no">16</span>   <span class="s"><span class="dl">'</span><span class="k">only</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">id</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">email</span><span class="dl">'</span></span>)
+<span class="no">17</span> ));
+<span class="no">18</span> 
+<span class="no">19</span> <span class="pd">echo</span> <span class="lv">$json</span>; <span class="c"># =&gt; {&quot;id&quot;:1,&quot;email&quot;:&quot;<a class="__cf_email__" href="../../../cdn-cgi/l/email-protection.html" data-cfemail="deb0b1b0bb9ebbb3bfb7b2f0bdb1b3">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&quot;}</span>
+<span class="no"><strong>20</strong></span> 
+<span class="no">21</span> <span class="c"># limit via exclusion (here we use a string, but an array can be passed)</span>
+<span class="no">22</span> <span class="lv">$json</span> = <span class="lv">$user</span>-&gt;to_json(<span class="pd">array</span>(
+<span class="no">23</span>   <span class="s"><span class="dl">'</span><span class="k">except</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">social_security</span><span class="dl">'</span></span>
+<span class="no">24</span> ));
+<span class="no">25</span> 
+<span class="no">26</span> <span class="pd">echo</span> <span class="lv">$json</span>; <span class="c"># =&gt; {&quot;id&quot;:1,&quot;first_name&quot;:&quot;George&quot;,&quot;last_name&quot;:&quot;Bush&quot;,</span>
+<span class="no">27</span>             <span class="c">#     &quot;email&quot;:&quot;<a class="__cf_email__" href="../../../cdn-cgi/l/email-protection.html" data-cfemail="620c0d0c0722070f030b0e4c010d0f">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&quot;,&quot;phone_number&quot;:&quot;555-5555&quot;}</span>
+<span class="no">28</span> 
+<span class="no">29</span> <span class="c"># call $user-&gt;name() and the returned value will be in our json</span>
+<span class="no"><strong>30</strong></span> <span class="lv">$json</span> = <span class="lv">$user</span>-&gt;to_json(<span class="pd">array</span>(
+<span class="no">31</span>   <span class="s"><span class="dl">'</span><span class="k">only</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">email</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">name</span><span class="dl">'</span></span>),
+<span class="no">32</span>   <span class="s"><span class="dl">'</span><span class="k">methods</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">name</span><span class="dl">'</span></span>
+<span class="no">33</span> ));
+<span class="no">34</span> 
+<span class="no">35</span> <span class="pd">echo</span> <span class="lv">$json</span>; <span class="c"># =&gt; {&quot;name&quot;:&quot;George Bush&quot;,&quot;email&quot;:&quot;<a class="__cf_email__" href="../../../cdn-cgi/l/email-protection.html" data-cfemail="066869686346636b676f6a2865696b">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&quot;}</span>
+<span class="no">36</span> 
+<span class="no">37</span> <span class="c"># call $user-&gt;name() and the returned value will be in our json</span>
+<span class="no">38</span> <span class="lv">$json</span> = <span class="lv">$user</span>-&gt;to_json(<span class="pd">array</span>(
+<span class="no">39</span>   <span class="s"><span class="dl">'</span><span class="k">only</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">email</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">name</span><span class="dl">'</span></span>),
+<span class="no"><strong>40</strong></span>   <span class="s"><span class="dl">'</span><span class="k">methods</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">name</span><span class="dl">'</span></span>
+<span class="no">41</span> ));
+<span class="no">42</span> 
+<span class="no">43</span> <span class="c"># include the orders association</span>
+<span class="no">44</span> <span class="lv">$json</span> = <span class="lv">$user</span>-&gt;to_json(<span class="pd">array</span>(
+<span class="no">45</span>   <span class="s"><span class="dl">'</span><span class="k">include</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">orders</span><span class="dl">'</span></span>)
+<span class="no">46</span> ));
+<span class="no">47</span> 
+<span class="no">48</span> <span class="c"># you can nest includes .. here orders also has a payments association</span>
+<span class="no">49</span> <span class="lv">$json</span> = <span class="lv">$user</span>-&gt;to_json(<span class="pd">array</span>(
+<span class="no"><strong>50</strong></span>   <span class="s"><span class="dl">'</span><span class="k">include</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">orders</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">except</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">id</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">include</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">payments</span><span class="dl">'</span></span>)
+<span class="no">51</span> ));
+</span></code></pre>
+
+	<p>DateTime fields are serialized to <a href="http://www.php.net/manual/en/class.datetime.php#datetime.constants.iso8601" class="external">ISO8601</a> format by default. This format can be changed by setting <strong>ActiveRecord\Serialization::$DATETIME_FORMAT</strong>. You can use a raw formatter or any of the pre-defined formats defined in <a href="../../../docs/ActiveRecord/DateTime.html#var$FORMATS">DateTime::$FORMAT</a></p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="co">ActiveRecord</span>\<span class="co">Serialization</span>::<span class="lv">$DATETIME_FORMAT</span> = <span class="s"><span class="dl">'</span><span class="k">Y-m-d</span><span class="dl">'</span></span>;
+<span class="no">2</span> <span class="co">ActiveRecord</span>\<span class="co">Serialization</span>::<span class="lv">$DATETIME_FORMAT</span> = <span class="s"><span class="dl">'</span><span class="k">atom</span><span class="dl">'</span></span>;
+<span class="no">3</span> <span class="co">ActiveRecord</span>\<span class="co">Serialization</span>::<span class="lv">$DATETIME_FORMAT</span> = <span class="s"><span class="dl">'</span><span class="k">long</span><span class="dl">'</span></span>;
+<span class="no">4</span> <span class="co">ActiveRecord</span>\<span class="co">Serialization</span>::<span class="lv">$DATETIME_FORMAT</span> = \<span class="co">DateTime</span>::<span class="co">RSS</span>;
+</span></code></pre>
+
+	<h4 id="automatic-timestamps">Automatic Timestamps</h4>
+
+
+	<p>Models with fields named <strong>created_at</strong> and <strong>updated_at</strong> will have those fields automatically updated upon model creation and model updates.</p>
+</body>
+
+<!-- Mirrored from www.phpactiverecord.com/projects/main/wiki/Utilities?format=html&version=11 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 May 2017 20:19:07 GMT -->
+</html>

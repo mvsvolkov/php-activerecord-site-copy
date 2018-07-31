@@ -1,0 +1,373 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+	
+<!-- Mirrored from www.phpactiverecord.com/wiki/main/Configuration__Setup/diff?version=5 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 May 2017 20:18:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+		<title>PHP ActiveRecord - An easy to use ORM for PHP</title>
+		<link rel="canonical" href="http://www.phpactiverecord.org/wiki/main/Configuration__Setup/diff"/>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="issue,bug,tracker" />
+		<meta name="description" content="Redmine" />
+		<meta name="googlebot" content="NOODP" />
+		<meta name="robots" content="index,follow,noodp,noydir" />
+		<link href="../../../stylesheets/blueprint/screen35c2.css?1366183229" media="screen" rel="stylesheet" type="text/css" />
+		<link href="../../../stylesheets/blueprint/print35c2.css?1366183229" media="print" rel="stylesheet" type="text/css" />
+		<!--[if lt IE 8]><link href="/stylesheets/blueprint/ie.css?1366183229" media="screen" rel="stylesheet" type="text/css" /><![endif]-->
+		<link href="../../../themes/basecamp/stylesheets/application3445.css?1366183196" media="screen" rel="stylesheet" type="text/css" />
+		<link href="../../../stylesheets/jstoolbar35c2.css?1366183229" media="screen" rel="stylesheet" type="text/css" />
+		<!--[if IE]>
+		    <style type="text/css">
+		      * html body{ width: expression( document.documentElement.clientWidth < 900 ? '900px' : '100%' ); }
+		      body {behavior: url(/stylesheets/csshover.htc?1366183229);}
+		    </style>
+		<![endif]-->
+		
+		<!-- page specific tags -->
+				<link href="../../../themes/basecamp/stylesheets/main3445.css?1366183196" media="screen" rel="stylesheet" type="text/css" />
+	</head>
+<body>
+	
+<div id="wrapper">
+	<div id="header">
+	    <div class="container">
+	        <div class="span-7">
+	            <h1><a href="http://www.phpactiverecord.org/" target="_top">php.activerecord</a></h1>
+	        </div>
+	        <div class="span-13" id="main-nav">
+		        <ul class="horizontal"><li><a href="../../../download/index/main.html" class="download">Download</a></li>
+<li><a href="../../../projects/main/wiki/Configuration__Setup.html" class="guides">Wiki</a></li>
+<li><a href="../../../docs/index/main.html" class="docs">Docs</a></li>
+<li><a href="../../../news/index/mainddf6.html?project_id=main" class="news">News</a></li>
+<li><a href="../../../projects/main/boards.html" class="boards">Forums</a></li>
+<li><a href="../../../welcome/about/main.html" class="about-us">About us</a></li></ul>	        </div>
+          <div class="span-4 last" id="account-menu">
+		        <ul class="horizontal"><li><a href="../../../login.html" class="login">Sign in</a></li>
+<li><a href="../../../account/register.html" class="register">Register</a></li></ul>          </div>
+	    </div>
+	</div>
+
+	<div id="main-frame">
+		<div id="breadcrumbs" class="container">
+			<ul class="span-24 last">
+				<li><a href="../../../index.html">Home</a></li><li><a href="../../../projects/main/wiki.html">Wiki</a></li><li class="last"><a href="../../../projects/main/wiki/Configuration__Setup.html">Configuration Setup</a></li>
+			</ul>
+		</div>
+
+		<div id="main" class="container">
+			<div id="content" class="span-16 colborder">
+				
+				<div class="contextual">
+<a href="../../../projects/main/wiki/Configuration__Setup/history.html" class="icon icon-history">History</a>
+</div>
+
+<h2>Configuration  Setup</h2>
+
+<p>
+Version <a href="../../../projects/main/wiki/Configuration__Setupad21.html?version=4">4</a>
+<em>(Kien La, 2010-08-22 11:50 AM)</em>
+&#8594;
+Version <a href="../../../projects/main/wiki/Configuration__Setup79ee.html?version=5">5</a>/6
+<em>(Sergio Figueiredo, 2011-12-26 04:18 PM)</em>
+</p>
+
+<hr />
+
+h2. Configuration    Setup <br /><br /> *(#topic-list) &quot;Default connection&quot;:/projects/main/wiki/Configuration__Setup#default-connection 
+<br /> * &quot;Multi-connections&quot;:/projects/main/wiki/Configuration__Setup#multi-connections 
+<br /> * &quot;Setting the encoding&quot;:/projects/main/wiki/Configuration__Setup#encoding <br /><br /> Setup is very easy and straight-forward. There are essentially only two configuration points you must concern yourself with: <br /><br /> # Setting the model auto_load directory. 
+<br /> # Configuring your database connections. <br /><br /> By setting the model auto_load directory, you are telling PHP where to look for your model classes. This means that you can have an app/folder structure of your choice as long as you have a real directory that holds your model classes. Each class should have it&#39;s own php file that is the same name of the class with a .php extension of course. <br /><br /> There are two ways you can initialize your configuration options. The easiest path is wrapping the calls in a closure which is sent through the Config initializer method. This is a neat and clean way to take advantage of PHP&#39;s new closure feature. <br /><br /> &lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt; 
+<br /> # inclue the ActiveRecord library 
+<br /> require_once &#39;php-activerecord/ActiveRecord.php&#39;; 
+<br /> 
+<br /> ActiveRecord\Config::initialize(function($cfg) 
+<br /> { 
+<br />   $cfg-&gt;set_model_directory(&#39;/path/to/your/model_directory&#39;); 
+<br />   $cfg-&gt;set_connections(array(&#39;development&#39; =&gt; 
+<br />     &#39;mysql://username:<a class="__cf_email__" href="../../../cdn-cgi/l/email-protection.html" data-cfemail="5e2e3f2d2d29312c3a1e32313d3f3236312d2a">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/database_name&#39;)); 
+<br /> }); 
+<br /> &lt;/code&gt;&lt;/pre&gt; <br /><br /> That&#39;s it! ActiveRecord takes care of the rest for you. It does not require that you map your table schema to yaml/xml files. It will query the database for this information and cache it so that it does not make multiple calls to the database for a single schema. <br /><br /> If you aren&#39;t feeling fancy, you can drop the closure and access the ActiveRecord\Config singleton directly. <br /><br /> &lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt; 
+<br /> $cfg = ActiveRecord\Config::instance(); 
+<br /> $cfg-&gt;set_model_directory(&#39;/path/to/your/model_directory&#39;); 
+<br /> $cfg-&gt;set_connections(array(&#39;development&#39; =&gt; 
+<br />   &#39;mysql://username:<a class="__cf_email__" href="../../../cdn-cgi/l/email-protection.html" data-cfemail="93e3f2e0e0e4fce1f7d3fffcf0f2fffbfce0e7">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/database_name&#39;)); 
+<br /> &lt;/code&gt;&lt;/pre&gt; <br /><br /> h4(#default-connections). Default connection <br /><br /> The development connection is the default by convention. You can change this by setting a new default connection based off of one of the connections you passed to set_connections. <br /><br /> &lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt; 
+<br /> $connections = array( 
+<br />   &#39;development&#39; =&gt; &#39;mysql://username:<a class="__cf_email__" href="../../../cdn-cgi/l/email-protection.html" data-cfemail="fe8e9f8d8d89918c9abe92919d9f9296918d8a">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/development&#39;, 
+<br />   &#39;production&#39; =&gt; &#39;mysql://username:<a class="__cf_email__" href="../../../cdn-cgi/l/email-protection.html" data-cfemail="9aeafbe9e9edf5e8fedaf6f5f9fbf6f2f5e9ee">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/production&#39;, 
+<br />   &#39;test&#39; =&gt; &#39;mysql://username:<a class="__cf_email__" href="../../../cdn-cgi/l/email-protection.html" data-cfemail="1464756767637b667054787b7775787c7b6760">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/test&#39; 
+<br /> ); 
+<br /> 
+<br /> # must issue a &quot;use&quot; statement in your closure if passing variables 
+<br /> ActiveRecord\Config::initialize(function($cfg) use ($connections) 
+<br /> { 
+<br />   $cfg-&gt;set_model_directory(&#39;/path/to/your/model_directory&#39;); 
+<br />   $cfg-&gt;set_connections($connections); 
+<br /> 
+<br />   # default connection is now production 
+<br />   $cfg-&gt;set_default_connection(&#39;production&#39;); 
+<br /> }); 
+<br /> &lt;/code&gt;&lt;/pre&gt; <br /><br /> h4(#multi-connections). Multi-connections <br /><br /> You can easily configure ActiveRecord to accept multiple database connections. All you have to do is specify the connection in the given model that should be using a different database. <br /><br /> &lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt; 
+<br /> $connections = array( 
+<br />   &#39;development&#39; =&gt; &#39;mysql://username:<a class="__cf_email__" href="../../../cdn-cgi/l/email-protection.html" data-cfemail="e898899b9b9f879a8ca884878b898480879b9c">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/development&#39;, 
+<br />   &#39;pgsql&#39; =&gt; &#39;pgsql://username:<a class="__cf_email__" href="../../../cdn-cgi/l/email-protection.html" data-cfemail="671706141410081503270b0804060b0f081413">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/development&#39;, 
+<br />   &#39;sqlite&#39; =&gt; &#39;sqlite://my_database.db&#39;, 
+<br />   &#39;oci&#39; =&gt; &#39;oci://username:<a class="__cf_email__" href="../../../cdn-cgi/l/email-protection.html" data-cfemail="bdcddccecececad2cfd9fdd1d2dedcd1d5d2cec9">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/xe&#39; 
+<br /> ); 
+<br /> 
+<br /> # must issue a &quot;use&quot; statement in your closure if passing variables 
+<br /> ActiveRecord\Config::initialize(function($cfg) use ($connections) 
+<br /> { 
+<br />   $cfg-&gt;set_model_directory(&#39;/path/to/your/model_directory&#39;); 
+<br />   $cfg-&gt;set_connections($connections); 
+<br /> }); 
+<br /> &lt;/code&gt;&lt;/pre&gt; <br /><br /> Your models would look like the following. <br /><br /> &lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt; 
+<br /> # SomeOciModel.php 
+<br /> class SomeOciModel extends ActiveRecord\Model 
+<br /> { 
+<br />   static $connection = &#39;oci&#39;; 
+<br /> } 
+<br /> 
+<br /> # SomeSqliteModel.php 
+<br /> class SomeSqliteModel extends ActiveRecord\Model 
+<br /> { 
+<br />   static $connection = &#39;sqlite&#39;; 
+<br /> } 
+<br /> &lt;/code&gt;&lt;/pre&gt; <br /><br /> You could also have a base &#39;connection&#39; model so all sub-classes will inherit the db setting. <br /><br /> &lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt; 
+<br /> # OciModels.php 
+<br /> abstract class OciModels extends ActiveRecord\Model 
+<br /> { 
+<br />   static $connection = &#39;oci&#39;; 
+<br /> } 
+<br /> 
+<br /> # AnotherOciModel.php 
+<br /> class AnotherOciModel extends OciModels 
+<br /> { 
+<br />    # automatically inherits the oci database 
+<br /> } 
+<br /> &lt;/code&gt;&lt;/pre&gt; <br /><br /> h4(#encoding). Setting the encoding <br /><br /> The character encoding can be specified in your connection parameters: <br /><br /> &lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt; 
+<br /> $config-&gt;set_connections(array( 
+<br />   &#39;development&#39; =&gt; <span class="diff_in">&#39;mysql://user:<a class="__cf_email__" href="../../../cdn-cgi/l/email-protection.html" data-cfemail="7a0a1b09093a1615191b161215090e">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/mydb;charset=utf8&#39;)</span> <span class="diff_out"> &#39;mysql://user:<a class="__cf_email__" href="../../../cdn-cgi/l/email-protection.html" data-cfemail="89f9e8fafac9e5e6eae8e5e1e6fafd">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/mydb?charset=utf8&#39;)</span> 
+<br /> ); 
+<br /> &lt;/code&gt;&lt;/pre&gt;
+
+				
+			</div>
+
+			<div id="sidebar" class="span-7 last">
+				<div class="r-button" id="stable-build">
+					<a href="../../../download.html">Get Stable Build - <em>v1.0</em><p>June 27 2010</p></a>
+				</div>
+				<div class="r-button" id="nightly-build">
+					<a href="../../../download.html">Get Nightly Build <p>April 16, 2013</p></a>
+				</div>
+		
+				
+
+				<h2 id="news-header">
+	<a href="../../../news.html">Latest News</a>
+	<a class="feed" href="../../../projects/main/news.atom"><img src="../../../images/feed-icon-14x14.png"/></a>
+</h2>
+
+<ul id="news-summary" class="icon-list">
+	
+	<li class="article">
+		<a href="../../../news/6-website-downtime.html">Website Downtime</a>
+		
+		<div class="meta">
+			<em class="relative" title="2011-09-26T16:43:49Z">Mon Sep 26 12:43:49 -0400 2011</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="../../../news/5-did-you-know-php-ar-has-eager-loading.html">Did you know? PHP-AR has Eager Loading</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-08-31T23:31:08Z">Tue Aug 31 19:31:08 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="../../../news/4-php-activerecord-1-0-released.html">php-activerecord 1.0 released!</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-06-28T00:02:55Z">Sun Jun 27 20:02:55 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="../../../news/3-website-updated-with-forums-and-wiki.html">Website updated with forums and wiki</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-06-18T21:37:23Z">Fri Jun 18 17:37:23 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="../../../news/2-php-activerecord-1-0-rc1-released.html">php-activerecord 1.0 RC1 released!</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-04-07T00:00:15Z">Tue Apr 06 20:00:15 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+</ul>
+
+
+
+
+				<h2><a href="../../../projects/main/activity.html">Recent Activity</a></h2>
+<ul id="recent-activity" class="icon-list">
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/1/topics/2069-re-support-for-multi-row-inserts-and-insert-ignore">Encotrei uma solução alternativa para varias inserções.
+
+Model::query(&#39;inse...</a>
+		
+		<div class="author">
+			by <a href="../../../users/3231.html">renan henrique constancio</a>
+			<em class="relative" title="2017-03-17T14:08:17Z">Fri Mar 17 10:08:17 -0400 2017</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/4/topics/2068-re-can-t-get-groupname-using-associations">I have the same question, have you find the answer?</a>
+		
+		<div class="author">
+			by <a href="../../../users/3194.html">Israel Sousa</a>
+			<em class="relative" title="2017-03-03T19:52:52Z">Fri Mar 03 14:52:52 -0500 2017</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/4/topics/2067-cannot-change-primary_key">Hi, 
+I cannot change  $primary_key of entity.
+After save is still in database o...</a>
+		
+		<div class="author">
+			by <a href="../../../users/2785.html">Vasek Keberdle</a>
+			<em class="relative" title="2017-01-03T17:20:13Z">Tue Jan 03 12:20:13 -0500 2017</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/4/topics/2066-re-saving-date-to-mysql-problem">That static property is not available anymore in stable build 1.0, so that won&#39;t ...</a>
+		
+		<div class="author">
+			by <a href="../../../users/3038.html">Jos Faber</a>
+			<em class="relative" title="2016-12-07T13:21:47Z">Wed Dec 07 08:21:47 -0500 2016</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/4/topics/2065-re-can-t-get-groupname-using-associations">Project is dead?</a>
+		
+		<div class="author">
+			by <a href="../../../users/2948.html">McLotos McLotos</a>
+			<em class="relative" title="2016-09-28T09:58:57Z">Wed Sep 28 05:58:57 -0400 2016</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/96100175f2c268648a6b9fad3157620a6a6649d1">Merge pull request #284 from fetch/test-require-fix
+
+Using __DIR__ in require_onc...</a>
+		
+		<div class="author">
+			by <a href="../../../users/3.html">Jacques Fuentes</a>
+			<em class="relative" title="2013-04-15T13:09:16Z">Mon Apr 15 09:09:16 -0400 2013</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/f8220bfaaf820f53d99e3c97b97b4a5ee2a0adfe">absolute path require_once</a>
+		
+		<div class="author">
+			by <a href="../../../users/1660.html">Koen Punt</a>
+			<em class="relative" title="2013-04-15T08:07:39Z">Mon Apr 15 04:07:39 -0400 2013</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/17eb9c6155ae3fb8ac144ab07ee828a19a8be9c1">Re #282, pointing phpunit at the tests...</a>
+		
+		<div class="author">
+			by <a href="../../../users/show/David%20Rogers%20.html">David Rogers </a>
+			<em class="relative" title="2013-04-11T20:39:30Z">Thu Apr 11 16:39:30 -0400 2013</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/ec53c90187577c9671fd16a1a96979aed067b8cf">Driving tests with phpunit.xml re #282</a>
+		
+		<div class="author">
+			by <a href="../../../users/show/David%20Rogers%20.html">David Rogers </a>
+			<em class="relative" title="2013-04-11T20:26:29Z">Thu Apr 11 16:26:29 -0400 2013</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/d8c90b6a640da93539ec0e758e60800fcee9bc8a">Create .travis.yml to drive Travis CI build</a>
+		
+		<div class="author">
+			by <a href="../../../users/show/David%20Rogers%20.html">David Rogers </a>
+			<em class="relative" title="2013-04-11T19:39:42Z">Thu Apr 11 15:39:42 -0400 2013</em>
+		</div>
+	</li>
+	</ul>
+
+
+				
+				
+			</div>
+		</div>
+	</div>
+
+	<div id="ajax-indicator" style="display:none;"><span>Loading...</span></div>
+
+	<div id="footer">
+	    <div class="container">
+	        <div class="span-24 last">
+			    <ul class="horizontal">
+	<li><a href="../../../index.html">Home</a></li>
+	<li><a href="../../../download/index/main.html">Download</a></li>
+	<li><a href="../../../projects/main/wiki/Configuration__Setup.html">Wiki</a></li>
+	<li><a href="../../../docs.html">Documentation</a></li>
+	<li><a href="http://github.com/kla/php-activerecord/issues">Issues</a></li
+	<li><a href="../../../news.html">News</a></li>
+	<li><a href="../../../projects/main/boards.html">Forums</a></li>
+	<li class="last"><a href="../../../welcome/about.html">About Us</a></li>
+</ul>
+<p>
+	<a href="http://www.phpactiverecord.org/" target="_top">phpactiverecord.org - An easy to use ORM for PHP</a><br/>
+	<a href="http://www.opensource.org/licenses/mit-license.php">MIT License</a>
+</p>
+
+	        </div>
+	    </div>
+	</div>
+</div>
+
+
+<script src="../../../assets/core35c2.js?1366183229" type="text/javascript"></script>
+
+
+<script type="text/javascript">var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));</script>
+<script type="text/javascript">try { var pageTracker = _gat._getTracker("UA-10078176-1"); pageTracker._trackPageview();} catch(err) {}</script>
+
+
+
+</body>
+
+<!-- Mirrored from www.phpactiverecord.com/wiki/main/Configuration__Setup/diff?version=5 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 May 2017 20:18:38 GMT -->
+</html>

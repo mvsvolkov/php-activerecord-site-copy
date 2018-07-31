@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>An easy to use ORM for PHP: Latest projects</title>
+  <link href="http://www.phpactiverecord.com/projects.atom" rel="self"/>
+  <link href="http://www.phpactiverecord.com/projects" rel="alternate"/>
+  <id>http://www.phpactiverecord.com/</id>
+  <updated>2009-12-15T12:46:37-05:00</updated>
+  <author>
+    <name>An easy to use ORM for PHP</name>
+  </author>
+  <generator uri="http://www.redmine.org/">
+Redmine  </generator>
+  <entry>
+    <title>Project: PHP ActiveRecord</title>
+    <link href="http://www.phpactiverecord.com/projects/main" rel="alternate"/>
+    <id>http://www.phpactiverecord.com/projects/main</id>
+    <updated>2009-12-15T12:46:37-05:00</updated>
+    <content type="html">
+    </content>
+  </entry>
+</feed>

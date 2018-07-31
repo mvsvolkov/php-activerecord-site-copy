@@ -1,0 +1,5 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+.phpactiverecord.com	TRUE	/	FALSE	1999999999	__cfduid	d4067de605deab259ab3d356feb364a181495223288
+www.phpactiverecord.com	TRUE	/	FALSE	1999999999	_redmine_session	BAh7CDoQX2NzcmZfdG9rZW4iMU5YY25qeE9XeS94c2JWSnZvdW8wVmJCWlE0OHdxZWVlbHB2Mm93YUlKUlU9Og9zZXNzaW9uX2lkIiU2NWYyZGJkODdhZjA3OGJhNjBlNWZjYzUxNDhjOGUyODoNcGVyX3BhZ2VpaQ%3D%3D--cfe758b056af7533d2ee56d880b5ff01aac1a72f
+

@@ -1,0 +1,16 @@
+h2. SQLBuilder
+
+This guide will show you how to use the php-activerecord SQL builder.
+
+The first steps are to get the database connection and setup the SQL builder.
+
+<pre class="code"><code class="php">
+$cfg = ActiveRecord\Config::instance();                                                                                                                              
+$conn = $cfg->get_connection("development");                                                                                                                         
+$builder = new ActiveRecord\SQLBuilder($conn, "authors"); 
+
+$builder->where("name = ?", "Hemingway");
+echo $builder; /* => SELECT * FROM authors WHERE name = ? */
+print_r($builder->get_where_values()); /* => array("Hemingway") */
+</class>
+</pre>

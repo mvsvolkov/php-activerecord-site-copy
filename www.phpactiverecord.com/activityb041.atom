@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>PHP ActiveRecord: Szymon W</title>
+  <link href="http://www.phpactiverecord.com/activity.atom?user_id=10" rel="self"/>
+  <link href="http://www.phpactiverecord.com/activity?user_id=10" rel="alternate"/>
+  <id>http://www.phpactiverecord.com/</id>
+  <updated>2017-05-19T16:12:52-04:00</updated>
+  <author>
+    <name>An easy to use ORM for PHP</name>
+  </author>
+  <generator uri="http://www.redmine.org/">
+Redmine  </generator>
+</feed>

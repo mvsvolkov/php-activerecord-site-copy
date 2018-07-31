@@ -1,0 +1,1801 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+	
+<!-- Mirrored from www.phpactiverecord.com/projects/main/wiki/Associations/annotate/5 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 May 2017 20:17:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+		<title>PHP ActiveRecord - An easy to use ORM for PHP</title>
+		<link rel="canonical" href="http://www.phpactiverecord.org/projects/main/wiki/Associations/annotate/5"/>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="issue,bug,tracker" />
+		<meta name="description" content="Redmine" />
+		<meta name="googlebot" content="NOODP" />
+		<meta name="robots" content="index,follow,noodp,noydir" />
+		<link href="../../../../../stylesheets/blueprint/screen35c2.css?1366183229" media="screen" rel="stylesheet" type="text/css" />
+		<link href="../../../../../stylesheets/blueprint/print35c2.css?1366183229" media="print" rel="stylesheet" type="text/css" />
+		<!--[if lt IE 8]><link href="/stylesheets/blueprint/ie.css?1366183229" media="screen" rel="stylesheet" type="text/css" /><![endif]-->
+		<link href="../../../../../themes/basecamp/stylesheets/application3445.css?1366183196" media="screen" rel="stylesheet" type="text/css" />
+		<link href="../../../../../stylesheets/jstoolbar35c2.css?1366183229" media="screen" rel="stylesheet" type="text/css" />
+		<!--[if IE]>
+		    <style type="text/css">
+		      * html body{ width: expression( document.documentElement.clientWidth < 900 ? '900px' : '100%' ); }
+		      body {behavior: url(/stylesheets/csshover.htc?1366183229);}
+		    </style>
+		<![endif]-->
+		
+		<!-- page specific tags -->
+		
+<link href="../../../../../stylesheets/scm35c2.css?1366183229" media="screen" rel="stylesheet" type="text/css" />
+		<link href="../../../../../themes/basecamp/stylesheets/main3445.css?1366183196" media="screen" rel="stylesheet" type="text/css" />
+	</head>
+<body>
+	
+<div id="wrapper">
+	<div id="header">
+	    <div class="container">
+	        <div class="span-7">
+	            <h1><a href="http://www.phpactiverecord.org/" target="_top">php.activerecord</a></h1>
+	        </div>
+	        <div class="span-13" id="main-nav">
+		        <ul class="horizontal"><li><a href="../../../../../download/index/main.html" class="download">Download</a></li>
+<li><a href="../../Associations.html" class="guides">Wiki</a></li>
+<li><a href="../../../../../docs/index/main.html" class="docs">Docs</a></li>
+<li><a href="../../../../../news/index/mainddf6.html?project_id=main" class="news">News</a></li>
+<li><a href="../../../boards.html" class="boards">Forums</a></li>
+<li><a href="../../../../../welcome/about/main.html" class="about-us">About us</a></li></ul>	        </div>
+          <div class="span-4 last" id="account-menu">
+		        <ul class="horizontal"><li><a href="../../../../../login.html" class="login">Sign in</a></li>
+<li><a href="../../../../../account/register.html" class="register">Register</a></li></ul>          </div>
+	    </div>
+	</div>
+
+	<div id="main-frame">
+		<div id="breadcrumbs" class="container">
+			<ul class="span-24 last">
+				<li><a href="../../../../../index.html">Home</a></li><li><a href="../../../wiki.html">Wiki</a></li><li class="last"><a href="../../Associations.html">Associations</a></li>
+			</ul>
+		</div>
+
+		<div id="main" class="container">
+			<div id="content" class="span-16 colborder">
+				
+				<div class="contextual">
+<a href="../../../../../login0c47.html" class="icon icon-edit">Edit</a>
+<a href="../history.html" class="icon icon-history">History</a>
+</div>
+
+<h2>Associations</h2>
+
+<p>
+Version <a href="../../Associations79ee.html?version=5">5</a>
+<em>(Kien La, 2010-06-19 06:37 PM)</em>
+</p>
+
+
+
+<table class="filecontent annotate">
+<tbody>
+
+<tr class="bloc-0">
+    <th class="line-num">1</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>h2. Associations</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">2</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-1">
+    <th class="line-num">3</th>
+    <td class="revision"><a href="../../Associations7fb8.html?version=3">3</a></td>
+    <td class="author">Kien La</td>
+    <td class="line-code"><pre>*(#topic-list) &quot;Common options&quot;:/projects/main/wiki/Associations#common-options</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">4</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>* &quot;has_many&quot;:/projects/main/wiki/Associations#has_many</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">5</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>* &quot;belongs_to&quot;:/projects/main/wiki/Associations#belongs_to</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">6</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>* &quot;has_one&quot;:/projects/main/wiki/Associations#has_one</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">7</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>* &quot;Self-referential&quot;:/projects/main/wiki/Associations#self-referential</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">8</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">9</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>What are associations? By declaring associations on your models, you allow them to communicate with each other. These associations should match the way data in your tables relate to each other.</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">10</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-2">
+    <th class="line-num">11</th>
+    <td class="revision"><a href="../../Associations67d9.html?version=2">2</a></td>
+    <td class="author">Kien La</td>
+    <td class="line-code"><pre>h4(#common-options). Common options</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">12</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">13</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>These are available amongst each type of association.</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">14</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">15</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>*conditions*: string/array of &quot;finder conditions&quot;:/projects/main/wiki/Finders#conditions</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">16</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>*readonly*: whether associated objects can be &quot;saved/destroyed&quot;:/projects/main/wiki/Finders#read-only</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">17</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>*select*: specify fields in the &quot;select clause&quot;:/projects/main/wiki/Finders#select</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">18</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>*class_name*: the class name of the associated model</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">19</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>*foreign_key*: name of foreign_key</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">20</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">21</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>Let&#39;s take a look at these options with a few different association types</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">22</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-2">
+    <th class="line-num">23</th>
+    <td class="revision"><a href="../../Associations67d9.html?version=2">2</a></td>
+    <td class="author">Kien La</td>
+    <td class="line-code"><pre>h5. conditions</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">24</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">25</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>Below, we specify that associated payments of an order object should not be void.</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">26</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">27</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt;</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">28</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>class Order extends ActiveRecord\Model {</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">29</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  static $has_many = array(</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">30</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>    array(&#39;payments&#39;, &#39;conditions&#39; =&gt; array(&#39;void = ?&#39; =&gt; array(0)))</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">31</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  );</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">32</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>}</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">33</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>&lt;/code&gt;&lt;/pre&gt;</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">34</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre> </pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">35</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>h5. readonly</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">36</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">37</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>If you add a readonly option to your association, then the associatied object cannot be saved, although, the base object can still be saved.</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">38</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">39</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt;</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">40</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>class Payment extends ActiveRecord\Model {</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">41</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  static $belongs_to = array(</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">42</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>    array(&#39;user&#39;, &#39;readonly&#39; =&gt; true)</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">43</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  );</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">44</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>}</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">45</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre> </pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">46</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>$payment = Payment::first();</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">47</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>$payment-&gt;paid = 1;</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">48</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>$payment-&gt;save(); # this will save just fine</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">49</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">50</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>$payment-&gt;user-&gt;first_name = &#39;John&#39;;</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">51</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>$payment-&gt;user-&gt;save(); # this will throw a ReadOnlyException</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">52</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>&lt;/code&gt;&lt;/pre&gt;</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">53</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">54</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>h5. select</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">55</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">56</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>Sometimes you may not need all of the fields back from one of your associations (e.g. it may be a ridiculously large table) and so you can specify the particular fields you want.</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">57</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">58</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt;</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">59</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>class Payment extends ActiveRecord\Model {</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">60</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  static $belongs_to = array(</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">61</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>    array(&#39;person&#39;, &#39;select&#39; =&gt; &#39;id, first_name, last_name&#39;)</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">62</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  );</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">63</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>}</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">64</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>&lt;/code&gt;&lt;/pre&gt;</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">65</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre> </pre></td>
+</tr>
+
+<tr class="bloc-3">
+    <th class="line-num">66</th>
+    <td class="revision"><a href="../../Associations79ee.html?version=5">5</a></td>
+    <td class="author">Kien La</td>
+    <td class="line-code"><pre>h5(#class_name). class_name</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">67</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">68</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>In this example payment has a one-to-one relationship with a user, but we want to access the association thru &quot;person.&quot; Thus, we have to provide the class name of the associated model; otherwise, ActiveRecord would try to look for a &quot;Person&quot; class.</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">69</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">70</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt;</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">71</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>class Payment extends ActiveRecord\Model {</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">72</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  static $belongs_to = array(</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">73</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>    array(&#39;person&#39;, &#39;class_name&#39; =&gt; &#39;User&#39;)</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">74</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  );</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">75</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>}</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">76</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>&lt;/code&gt;&lt;/pre&gt;</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">77</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre> </pre></td>
+</tr>
+
+<tr class="bloc-4">
+    <th class="line-num">78</th>
+    <td class="revision"><a href="../../Associationsad21.html?version=4">4</a></td>
+    <td class="author">Kien La</td>
+    <td class="line-code"><pre>h4(#has_many). has_many</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">79</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-2">
+    <th class="line-num">80</th>
+    <td class="revision"><a href="../../Associations67d9.html?version=2">2</a></td>
+    <td class="author">Kien La</td>
+    <td class="line-code"><pre>A one-to-many relationship. You should use a pluralized form of the associated model when declaring a has_many association, unless you want to use the &quot;class_name&quot;:/projects/main/wiki/Associations#class_name option.</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">81</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">82</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt;</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">83</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre># one-to-many association with the model &quot;Payment&quot;</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">84</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>class User extends ActiveRecord\Model {</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">85</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  static $has_many = array(</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">86</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>    array(&#39;payments&#39;)</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">87</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  );</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">88</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>}</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">89</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre> </pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">90</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>$user = User::first();</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">91</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>print_r($user-&gt;payments); # =&gt; will print an array of Payment objects</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">92</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>&lt;/code&gt;&lt;/pre&gt; </pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">93</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-2">
+    <th class="line-num">94</th>
+    <td class="revision"><a href="../../Associations67d9.html?version=2">2</a></td>
+    <td class="author">Kien La</td>
+    <td class="line-code"><pre>Options (not part of &quot;common options&quot;:/projects/main/wiki/Associations#common-options)</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">95</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-2">
+    <th class="line-num">96</th>
+    <td class="revision"><a href="../../Associations67d9.html?version=2">2</a></td>
+    <td class="author">Kien La</td>
+    <td class="line-code"><pre>*limit/offset*: limit the number of records</pre></td>
+</tr>
+
+<tr class="bloc-2">
+    <th class="line-num">97</th>
+    <td class="revision"><a href="../../Associations67d9.html?version=2">2</a></td>
+    <td class="author">Kien La</td>
+    <td class="line-code"><pre>*primary_key*: name of the primary_key of the association (assumed to be &quot;id&quot;)</pre></td>
+</tr>
+
+<tr class="bloc-2">
+    <th class="line-num">98</th>
+    <td class="revision"><a href="../../Associations67d9.html?version=2">2</a></td>
+    <td class="author">Kien La</td>
+    <td class="line-code"><pre>*group*: GROUP BY clause</pre></td>
+</tr>
+
+<tr class="bloc-2">
+    <th class="line-num">99</th>
+    <td class="revision"><a href="../../Associations67d9.html?version=2">2</a></td>
+    <td class="author">Kien La</td>
+    <td class="line-code"><pre>*order*: ORDER BY clause</pre></td>
+</tr>
+
+<tr class="bloc-2">
+    <th class="line-num">100</th>
+    <td class="revision"><a href="../../Associations67d9.html?version=2">2</a></td>
+    <td class="author">Kien La</td>
+    <td class="line-code"><pre>*through*: the association used to go &quot;through&quot;</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">101</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">102</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt;</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">103</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>class Order extends ActiveRecord\Model {</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">104</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  static $has_many = array(</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">105</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>    array(&#39;payments&#39;, &#39;limit&#39; =&gt; 5),</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">106</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>    array(&#39;items&#39;, &#39;order&#39; =&gt; &#39;name asc&#39;, &#39;group&#39; =&gt; &#39;type&#39;)</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">107</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  );</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">108</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>}</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">109</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>&lt;/code&gt;&lt;/pre&gt;</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">110</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre> </pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">111</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>has_many through</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">112</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">113</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>This is a convenient way to configure a many-to-many association. In this example an order is associated with users by going the its payments association.</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">114</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">115</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt;</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">116</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>class Order extends ActiveRecord\Model {</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">117</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  static $has_many = array(</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">118</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>    array(&#39;payments&#39;),</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">119</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>    array(&#39;users&#39;, &#39;through&#39; =&gt; &#39;payments&#39;)</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">120</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  );</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">121</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>}</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">122</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre> </pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">123</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>class Payment extends ActiveRecord\Model {</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">124</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  static $belongs_to = array(</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">125</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>    array(&#39;user&#39;),</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">126</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>    array(&#39;order&#39;)</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">127</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  );</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">128</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>}</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">129</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre> </pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">130</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>class User extends ActiveRecord\Model {</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">131</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  static $has_many = array(</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">132</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>    array(&#39;payments&#39;)</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">133</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  );</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">134</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>}</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">135</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre> </pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">136</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>$order = Order::first();</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">137</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre># direct access to users</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">138</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>print_r($order-&gt;users); # will print an array of User object</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">139</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>&lt;/code&gt;&lt;/pre&gt;</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">140</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-2">
+    <th class="line-num">141</th>
+    <td class="revision"><a href="../../Associations67d9.html?version=2">2</a></td>
+    <td class="author">Kien La</td>
+    <td class="line-code"><pre>h4(#belongs_to). belongs_to</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">142</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-2">
+    <th class="line-num">143</th>
+    <td class="revision"><a href="../../Associations67d9.html?version=2">2</a></td>
+    <td class="author">Kien La</td>
+    <td class="line-code"><pre>This indicates a one-to-one relationship. Its difference from &quot;has_one&quot;:/projects/main/wiki/Associations#has_one is that the foreign key will be on the table which declares a belongs_to association. You should use a singular form of the associated model when declaring this association, unless you want to use the &quot;class_name&quot;:/projects/main/wiki/Associations#class_name option.</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">144</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">145</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt;</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">146</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>class Payment extends ActiveRecord\Model {</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">147</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  static $belongs_to = array(</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">148</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>    array(&#39;user&#39;)</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">149</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  );</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">150</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>}</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">151</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre> </pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">152</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>$payment = Payment::first();</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">153</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>echo $payment-&gt;user-&gt;first_name; # first_name of associated User object</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">154</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>&lt;/code&gt;&lt;/pre&gt; </pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">155</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-2">
+    <th class="line-num">156</th>
+    <td class="revision"><a href="../../Associations67d9.html?version=2">2</a></td>
+    <td class="author">Kien La</td>
+    <td class="line-code"><pre>Options (not part of &quot;common options&quot;:/projects/main/wiki/Associations#common-options)</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">157</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">158</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>*primary_key*: name of the primary_key of the association (assumed to be &quot;id&quot;)</pre></td>
+</tr>
+
+<tr class="bloc-4">
+    <th class="line-num">159</th>
+    <td class="revision"><a href="../../Associationsad21.html?version=4">4</a></td>
+    <td class="author">Kien La</td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-4">
+    <th class="line-num">160</th>
+    <td class="revision"><a href="../../Associationsad21.html?version=4">4</a></td>
+    <td class="author">Kien La</td>
+    <td class="line-code"><pre>h4(#has_one). has_one</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">161</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-2">
+    <th class="line-num">162</th>
+    <td class="revision"><a href="../../Associations67d9.html?version=2">2</a></td>
+    <td class="author">Kien La</td>
+    <td class="line-code"><pre>This indicates a one-to-one relationship. A has_one will have the foreign key on the associated table unlike &quot;belongs_to&quot;:/projects/main/wiki/Associations#belongs_to. You should use a singular form of the associated model when declaring this association, unless you want to use the &quot;class_name&quot;:/projects/main/wiki/Associations#class_name option.</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">163</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">164</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt;</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">165</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>class Payment extends ActiveRecord\Model {</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">166</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  static $has_one = array(</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">167</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>    array(&#39;receipt&#39;)</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">168</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  );</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">169</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>}</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">170</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>&lt;/code&gt;&lt;/pre&gt; </pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">171</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-2">
+    <th class="line-num">172</th>
+    <td class="revision"><a href="../../Associations67d9.html?version=2">2</a></td>
+    <td class="author">Kien La</td>
+    <td class="line-code"><pre>Options (not part of &quot;common options&quot;:/projects/main/wiki/Associations#common-options)</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">173</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-2">
+    <th class="line-num">174</th>
+    <td class="revision"><a href="../../Associations67d9.html?version=2">2</a></td>
+    <td class="author">Kien La</td>
+    <td class="line-code"><pre>*primary_key*: name of the primary_key of the association (assumed to be &quot;id&quot;)</pre></td>
+</tr>
+
+<tr class="bloc-2">
+    <th class="line-num">175</th>
+    <td class="revision"><a href="../../Associations67d9.html?version=2">2</a></td>
+    <td class="author">Kien La</td>
+    <td class="line-code"><pre>*through*: the association used to go &quot;through&quot;</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">176</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-2">
+    <th class="line-num">177</th>
+    <td class="revision"><a href="../../Associations67d9.html?version=2">2</a></td>
+    <td class="author">Kien La</td>
+    <td class="line-code"><pre>h5. has_one through</pre></td>
+</tr>
+
+<tr class="bloc-2">
+    <th class="line-num">178</th>
+    <td class="revision"><a href="../../Associations67d9.html?version=2">2</a></td>
+    <td class="author">Kien La</td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">179</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>A one-to-one association. In this example, an owner has a quarter_back by going through its team association.</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">180</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">181</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt;</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">182</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>class Owner extends ActiveRecord\Model {</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">183</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  static $has_one = array(</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">184</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>    array(&#39;team&#39;),</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">185</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>    array(&#39;quarter_back&#39;, &#39;through&#39; =&gt; &#39;team&#39;)</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">186</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  );</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">187</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>}</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">188</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre> </pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">189</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>class Team extends ActiveRecord\Model {</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">190</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  static $belongs_to = array(</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">191</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>    array(&#39;owner&#39;)</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">192</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  );</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">193</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre> </pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">194</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  static $has_one = array(</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">195</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>    array(&#39;quarter_back&#39;)</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">196</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  );</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">197</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>}</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">198</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre> </pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">199</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>class QuarterBack extends ActiveRecord\Model {</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">200</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  static $belongs_to = array(</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">201</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>    array(&#39;team&#39;)</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">202</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  );</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">203</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>}</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">204</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>&lt;/code&gt;&lt;/pre&gt;</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">205</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-2">
+    <th class="line-num">206</th>
+    <td class="revision"><a href="../../Associations67d9.html?version=2">2</a></td>
+    <td class="author">Kien La</td>
+    <td class="line-code"><pre>h4(#self-referential). Self-referential</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">207</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">208</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>Model&#39;s can declare associations to themselves. This can be helpful for table auditing, or in the example below, where a post would need to know about its parent.</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">209</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre></pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">210</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>&lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt;</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">211</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>class Post extends ActiveRecord\Model {</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">212</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>  static $belongs_to = array(array(&#39;parent_post&#39;, &#39;class_name&#39; =&gt; &#39;Post&#39;));</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">213</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>}</pre></td>
+</tr>
+
+<tr class="bloc-0">
+    <th class="line-num">214</th>
+    <td class="revision"><a href="../../Associationse42d.html?version=1">1</a></td>
+    <td class="author"></td>
+    <td class="line-code"><pre>&lt;/code&gt;&lt;/pre&gt; </pre></td>
+</tr>
+
+</tbody>
+</table>
+
+
+
+				
+			</div>
+
+			<div id="sidebar" class="span-7 last">
+				<div class="r-button" id="stable-build">
+					<a href="../../../../../download.html">Get Stable Build - <em>v1.0</em><p>June 27 2010</p></a>
+				</div>
+				<div class="r-button" id="nightly-build">
+					<a href="../../../../../download.html">Get Nightly Build <p>April 16, 2013</p></a>
+				</div>
+		
+				
+
+				<h2 id="news-header">
+	<a href="../../../../../news.html">Latest News</a>
+	<a class="feed" href="../../../news.atom"><img src="../../../../../images/feed-icon-14x14.png"/></a>
+</h2>
+
+<ul id="news-summary" class="icon-list">
+	
+	<li class="article">
+		<a href="../../../../../news/6-website-downtime.html">Website Downtime</a>
+		
+		<div class="meta">
+			<em class="relative" title="2011-09-26T16:43:49Z">Mon Sep 26 12:43:49 -0400 2011</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="../../../../../news/5-did-you-know-php-ar-has-eager-loading.html">Did you know? PHP-AR has Eager Loading</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-08-31T23:31:08Z">Tue Aug 31 19:31:08 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="../../../../../news/4-php-activerecord-1-0-released.html">php-activerecord 1.0 released!</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-06-28T00:02:55Z">Sun Jun 27 20:02:55 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="../../../../../news/3-website-updated-with-forums-and-wiki.html">Website updated with forums and wiki</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-06-18T21:37:23Z">Fri Jun 18 17:37:23 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="../../../../../news/2-php-activerecord-1-0-rc1-released.html">php-activerecord 1.0 RC1 released!</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-04-07T00:00:15Z">Tue Apr 06 20:00:15 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+</ul>
+
+
+
+
+				<h2><a href="../../../activity.html">Recent Activity</a></h2>
+<ul id="recent-activity" class="icon-list">
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/1/topics/2069-re-support-for-multi-row-inserts-and-insert-ignore">Encotrei uma solução alternativa para varias inserções.
+
+Model::query(&#39;inse...</a>
+		
+		<div class="author">
+			by <a href="../../../../../users/3231.html">renan henrique constancio</a>
+			<em class="relative" title="2017-03-17T14:08:17Z">Fri Mar 17 10:08:17 -0400 2017</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/4/topics/2068-re-can-t-get-groupname-using-associations">I have the same question, have you find the answer?</a>
+		
+		<div class="author">
+			by <a href="../../../../../users/3194.html">Israel Sousa</a>
+			<em class="relative" title="2017-03-03T19:52:52Z">Fri Mar 03 14:52:52 -0500 2017</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/4/topics/2067-cannot-change-primary_key">Hi, 
+I cannot change  $primary_key of entity.
+After save is still in database o...</a>
+		
+		<div class="author">
+			by <a href="../../../../../users/2785.html">Vasek Keberdle</a>
+			<em class="relative" title="2017-01-03T17:20:13Z">Tue Jan 03 12:20:13 -0500 2017</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/4/topics/2066-re-saving-date-to-mysql-problem">That static property is not available anymore in stable build 1.0, so that won&#39;t ...</a>
+		
+		<div class="author">
+			by <a href="../../../../../users/3038.html">Jos Faber</a>
+			<em class="relative" title="2016-12-07T13:21:47Z">Wed Dec 07 08:21:47 -0500 2016</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/4/topics/2065-re-can-t-get-groupname-using-associations">Project is dead?</a>
+		
+		<div class="author">
+			by <a href="../../../../../users/2948.html">McLotos McLotos</a>
+			<em class="relative" title="2016-09-28T09:58:57Z">Wed Sep 28 05:58:57 -0400 2016</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/96100175f2c268648a6b9fad3157620a6a6649d1">Merge pull request #284 from fetch/test-require-fix
+
+Using __DIR__ in require_onc...</a>
+		
+		<div class="author">
+			by <a href="../../../../../users/3.html">Jacques Fuentes</a>
+			<em class="relative" title="2013-04-15T13:09:16Z">Mon Apr 15 09:09:16 -0400 2013</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/f8220bfaaf820f53d99e3c97b97b4a5ee2a0adfe">absolute path require_once</a>
+		
+		<div class="author">
+			by <a href="../../../../../users/1660.html">Koen Punt</a>
+			<em class="relative" title="2013-04-15T08:07:39Z">Mon Apr 15 04:07:39 -0400 2013</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/17eb9c6155ae3fb8ac144ab07ee828a19a8be9c1">Re #282, pointing phpunit at the tests...</a>
+		
+		<div class="author">
+			by <a href="../../../../../users/show/David%20Rogers%20.html">David Rogers </a>
+			<em class="relative" title="2013-04-11T20:39:30Z">Thu Apr 11 16:39:30 -0400 2013</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/ec53c90187577c9671fd16a1a96979aed067b8cf">Driving tests with phpunit.xml re #282</a>
+		
+		<div class="author">
+			by <a href="../../../../../users/show/David%20Rogers%20.html">David Rogers </a>
+			<em class="relative" title="2013-04-11T20:26:29Z">Thu Apr 11 16:26:29 -0400 2013</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/d8c90b6a640da93539ec0e758e60800fcee9bc8a">Create .travis.yml to drive Travis CI build</a>
+		
+		<div class="author">
+			by <a href="../../../../../users/show/David%20Rogers%20.html">David Rogers </a>
+			<em class="relative" title="2013-04-11T19:39:42Z">Thu Apr 11 15:39:42 -0400 2013</em>
+		</div>
+	</li>
+	</ul>
+
+
+				
+				
+			</div>
+		</div>
+	</div>
+
+	<div id="ajax-indicator" style="display:none;"><span>Loading...</span></div>
+
+	<div id="footer">
+	    <div class="container">
+	        <div class="span-24 last">
+			    <ul class="horizontal">
+	<li><a href="../../../../../index.html">Home</a></li>
+	<li><a href="../../../../../download/index/main.html">Download</a></li>
+	<li><a href="../../Associations.html">Wiki</a></li>
+	<li><a href="../../../../../docs.html">Documentation</a></li>
+	<li><a href="http://github.com/kla/php-activerecord/issues">Issues</a></li
+	<li><a href="../../../../../news.html">News</a></li>
+	<li><a href="../../../boards.html">Forums</a></li>
+	<li class="last"><a href="../../../../../welcome/about.html">About Us</a></li>
+</ul>
+<p>
+	<a href="http://www.phpactiverecord.org/" target="_top">phpactiverecord.org - An easy to use ORM for PHP</a><br/>
+	<a href="http://www.opensource.org/licenses/mit-license.php">MIT License</a>
+</p>
+
+	        </div>
+	    </div>
+	</div>
+</div>
+
+
+<script src="../../../../../assets/core35c2.js?1366183229" type="text/javascript"></script>
+
+
+<script type="text/javascript">var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));</script>
+<script type="text/javascript">try { var pageTracker = _gat._getTracker("UA-10078176-1"); pageTracker._trackPageview();} catch(err) {}</script>
+
+
+
+</body>
+
+<!-- Mirrored from www.phpactiverecord.com/projects/main/wiki/Associations/annotate/5 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 May 2017 20:17:04 GMT -->
+</html>

@@ -1,0 +1,510 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+	
+<!-- Mirrored from www.phpactiverecord.com/wiki/main/Validations/diff?version=8 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 May 2017 20:19:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+		<title>PHP ActiveRecord - An easy to use ORM for PHP</title>
+		<link rel="canonical" href="http://www.phpactiverecord.org/wiki/main/Validations/diff"/>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="issue,bug,tracker" />
+		<meta name="description" content="Redmine" />
+		<meta name="googlebot" content="NOODP" />
+		<meta name="robots" content="index,follow,noodp,noydir" />
+		<link href="../../../stylesheets/blueprint/screen35c2.css?1366183229" media="screen" rel="stylesheet" type="text/css" />
+		<link href="../../../stylesheets/blueprint/print35c2.css?1366183229" media="print" rel="stylesheet" type="text/css" />
+		<!--[if lt IE 8]><link href="/stylesheets/blueprint/ie.css?1366183229" media="screen" rel="stylesheet" type="text/css" /><![endif]-->
+		<link href="../../../themes/basecamp/stylesheets/application3445.css?1366183196" media="screen" rel="stylesheet" type="text/css" />
+		<link href="../../../stylesheets/jstoolbar35c2.css?1366183229" media="screen" rel="stylesheet" type="text/css" />
+		<!--[if IE]>
+		    <style type="text/css">
+		      * html body{ width: expression( document.documentElement.clientWidth < 900 ? '900px' : '100%' ); }
+		      body {behavior: url(/stylesheets/csshover.htc?1366183229);}
+		    </style>
+		<![endif]-->
+		
+		<!-- page specific tags -->
+				<link href="../../../themes/basecamp/stylesheets/main3445.css?1366183196" media="screen" rel="stylesheet" type="text/css" />
+	</head>
+<body>
+	
+<div id="wrapper">
+	<div id="header">
+	    <div class="container">
+	        <div class="span-7">
+	            <h1><a href="http://www.phpactiverecord.org/" target="_top">php.activerecord</a></h1>
+	        </div>
+	        <div class="span-13" id="main-nav">
+		        <ul class="horizontal"><li><a href="../../../download/index/main.html" class="download">Download</a></li>
+<li><a href="../../../projects/main/wiki/Validations.html" class="guides">Wiki</a></li>
+<li><a href="../../../docs/index/main.html" class="docs">Docs</a></li>
+<li><a href="../../../news/index/mainddf6.html?project_id=main" class="news">News</a></li>
+<li><a href="../../../projects/main/boards.html" class="boards">Forums</a></li>
+<li><a href="../../../welcome/about/main.html" class="about-us">About us</a></li></ul>	        </div>
+          <div class="span-4 last" id="account-menu">
+		        <ul class="horizontal"><li><a href="../../../login.html" class="login">Sign in</a></li>
+<li><a href="../../../account/register.html" class="register">Register</a></li></ul>          </div>
+	    </div>
+	</div>
+
+	<div id="main-frame">
+		<div id="breadcrumbs" class="container">
+			<ul class="span-24 last">
+				<li><a href="../../../index.html">Home</a></li><li><a href="../../../projects/main/wiki.html">Wiki</a></li><li class="last"><a href="../../../projects/main/wiki/Validations.html">Validations</a></li>
+			</ul>
+		</div>
+
+		<div id="main" class="container">
+			<div id="content" class="span-16 colborder">
+				
+				<div class="contextual">
+<a href="../../../projects/main/wiki/Validations/history.html" class="icon icon-history">History</a>
+</div>
+
+<h2>Validations</h2>
+
+<p>
+Version <a href="../../../projects/main/wiki/Validations17dd.html?version=7">7</a>
+<em>(Kien La, 2010-06-20 03:31 PM)</em>
+&#8594;
+Version <a href="../../../projects/main/wiki/Validationsded1.html?version=8">8</a>/19
+<em>(Szymon W, 2010-06-22 04:27 AM)</em>
+</p>
+
+<hr />
+
+h2. Validations <br /><br /> *(#topic-list) &quot;Is my model valid or not?&quot;:/projects/main/wiki/Validations#is-my-model-valid-or-not 
+<br /> * &quot;Commonalities&quot;:/projects/main/wiki/Validations#commonalities 
+<br /> * &quot;Available validations&quot;:/projects/main/wiki/Validations#available-validations 
+<br /> * &quot;validates_presence_of&quot;:/projects/main/wiki/Validations#validates_presence_of 
+<br /> * &quot;validates_size_of / validates_length_of&quot;:/projects/main/wiki/Validations#validates_size_of 
+<br /> * &quot;validates_(in|ex)clusion_of&quot;:/projects/main/wiki/Validations#validates_in_ex_clusion_of 
+<br /> * &quot;validates_format_of&quot;:/projects/main/wiki/Validations#validates_format_of 
+<br /> * &quot;validates_numericality_of&quot;:/projects/main/wiki/Validations#validates_numericality_of 
+<br /> * &quot;validates_uniqueness_of&quot;:/projects/main/wiki/Validations#validates_uniqueness_of <br /><br /> On the contrary, validations offer a simple and powerful pattern to ensure the integrity of your data. By declaring validations on your models, you can be certain that only valid data will be saved to your database. No longer will you need to recall where you put that function which verifies the legitimacy of an e-mail and whether or not it will stop the record fom being saved. With validations, if your data is invalid, ActiveRecord will take care of marking the record as invalid instead of writing it to the database. <br /><br /> Validations will run for the following methods normally: <br /><br /> &lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt; 
+<br /> $book-&gt;save(); 
+<br /> Book::create(); 
+<br /> $book-&gt;update_attributes(array(&#39;title&#39; =&gt; &#39;new title&#39;)); 
+<br /> &lt;/code&gt;&lt;/pre&gt; 
+<br /> 
+<br /> The following will skip validations and save the record: <br /><br /> &lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt; 
+<br /> $book-&gt;update_attribute(); 
+<br /> $book-&gt;save(false); # anytime you pass false to save it will skip validations 
+<br /> &lt;/code&gt;&lt;/pre&gt; 
+<br /> 
+<br /> h4(#is-my-model-valid-or-not). Is my model valid or not? <br /><br /> You can determine whether or not your model is valid and can be saved to the database by issuing one of these methods: &quot;Model::is_valid&quot;:/docs/ActiveRecord/Model#methodis_valid or &quot;Model::is_invalid&quot;:/docs/ActiveRecord/Model#methodis_invalid. Both of these methods will run the validations for your model when invoked. <br /><br /> &lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt; 
+<br /> class Book extends ActiveRecord\Model 
+<br /> { 
+<br />   static $validates_presence_of = array( 
+<br />     array(&#39;title&#39;) 
+<br />   ); 
+<br /> } <br /><br /> # our book won&#39;t pass validates_presence_of 
+<br /> $book = new Book(array(&#39;title&#39; =&gt; &#39;&#39;)); 
+<br /> echo $book-&gt;is_valid(); # false 
+<br /> echo $book-&gt;is_invalid(); # true 
+<br /> &lt;/code&gt;&lt;/pre&gt; 
+<br /> 
+<br /> If validation(s) fails for your model, then you can access the error message(s) like so. Let&#39;s assume that our validation was &quot;validates_presence_of&quot;:/projects/main/wiki/Validations#validates_presence_of. <br /><br /> &lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt; 
+<br /> class Book extends ActiveRecord\Model 
+<br /> { 
+<br />   static $validates_presence_of = array( 
+<br />     array(&#39;title&#39;) 
+<br />   ); 
+<br /> } 
+<br /> 
+<br /> $book = new Book(array(&#39;title&#39; =&gt; &#39;&#39;)); 
+<br /> $book-&gt;save(); 
+<br /> $book-&gt;errors-&gt;is_invalid(&#39;title&#39;); # =&gt; true <br /><br /> # if the attribute fails more than 1 validation, 
+<br /> # you would get an array of errors below <br /><br /> echo $book-&gt;errors-&gt;on(&#39;title&#39;); # =&gt; can&#39;t be blank 
+<br /> &lt;/code&gt;&lt;/pre&gt; 
+<br /> 
+<br /> Now let&#39;s assume our model failed two validations: &quot;validates_presence_of&quot;:/projects/main/wiki/Validations#validates_presence_of and &quot;validates_size_of&quot;:/projects/main/wiki/Validations#validates_size_of. <br /><br /> &lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt; 
+<br /> class Book extends ActiveRecord\Model 
+<br /> { 
+<br />   static $validates_presence_of = array( 
+<br />     array(&#39;title&#39;) 
+<br />   ); 
+<br /> 
+<br />   static $validates_size_of = array( 
+<br />     array(&#39;title&#39;, &#39;within&#39; =&gt; array(1,20)) 
+<br />   ); 
+<br /> } 
+<br /> 
+<br /> $book = new Book(array(&#39;title&#39; =&gt; &#39;&#39;)); 
+<br /> $book-&gt;save(); 
+<br /> $book-&gt;errors-&gt;is_invalid(&#39;title&#39;); # true <br /><br /> print_r($book-&gt;errors-&gt;on(&#39;title&#39;)); 
+<br /> 
+<br /> # which would give us: <br /><br /> # Array 
+<br /> # ( 
+<br /> #     [0] =&gt; can&#39;t be blank 
+<br /> #     [1] =&gt; is too short (minimum is 1 characters) 
+<br /> # ) 
+<br /> &lt;/code&gt;&lt;/pre&gt; <br /><br /> h4(#commonalities). Commonalities <br /><br /> Validations are defined with a common set of options and some of them have specific options. As you&#39;ve seen above, creating a validation is as simple as declaring a static validation variable in your model class as a multi-dimensional array (to validate multiple attributes). Each validation will require you to put the attribute name in the 0 index of the array. You can configure the error message by creating a message key with the message string as the value. You can also add an option which will only run the validation on either creation or update. By default, your validation will run everytime Model#save() is called. <br /><br /> &lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt; 
+<br /> class Book extends ActiveRecord\Model 
+<br /> { 
+<br />   # 0 index is title, the attribute to test against 
+<br />   # message is our custom error msg 
+<br />   # only run this validation on creation - not when updating 
+<br />   static $validates_presence_of = array( 
+<br />     array(&#39;title&#39;, &#39;message&#39; =&gt; &#39;cannot be blank on a book!&#39;, &#39;on&#39; =&gt; &#39;create&#39;) 
+<br />   ); 
+<br /> } 
+<br /> &lt;/code&gt;&lt;/pre&gt; <br /><br /> In some validations you may use: in, is within. In/within designate a range whereby you use an array with the first and second elements representing the beginning and end of the range respectively. Is represents equality. <br /><br /> h4(#available-validations). Available validations <br /><br /> There are a number of pre-defined validation routines that you can declare on your model for specific attributes. <br /><br /> * &quot;validates_presence_of&quot;:/projects/main/wiki/Validations#validates_presence_of 
+<br /> * &quot;validates_size_of&quot;:/projects/main/wiki/Validations#validates_size_of 
+<br /> * &quot;validates_length_of&quot;:/projects/main/wiki/Validations#validates_size_of 
+<br /> * &quot;validates_(in|ex)clusion_of&quot;:/projects/main/wiki/Validations#validates_in_ex_clusion_of 
+<br /> * &quot;validates_format_of&quot;:/projects/main/wiki/Validations#validates_format_of 
+<br /> * &quot;validates_numericality_of&quot;:/projects/main/wiki/Validations#validates_numericality_of 
+<br /> * &quot;validates_uniqueness_of&quot;:/projects/main/wiki/Validations#validates_uniqueness_of 
+<br /> * &quot;validates_presence_of&quot;:/projects/main/wiki/Validations#validates_presence_of <br /><br /> h4(#validates_presence_of). validates_presence_of <br /><br /> This is probably the simplest of all the validations. It will make sure that the value of the attribute is not null or a blank string. Available options: <br /><br /> * message: default: *can&#39;t be blank* <br /><br /> &lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt; 
+<br /> class Book extends ActiveRecord\Model 
+<br /> { 
+<br />   static $validates_presence_of = array( 
+<br />     array(&#39;title&#39;), 
+<br />     array(&#39;cover_blurb&#39;, &#39;message&#39; =&gt; &#39;must be present and witty&#39;) 
+<br />   ); 
+<br /> } 
+<br /> 
+<br /> $book = new Book(array(&#39;title&#39; =&gt; &#39;&#39;)); 
+<br /> $book-&gt;save(); 
+<br /> 
+<br /> echo $book-&gt;errors-&gt;on(&#39;cover_blurb&#39;); # =&gt; must be present and witty 
+<br /> echo $book-&gt;errors-&gt;on(&#39;title&#39;); # =&gt; can&#39;t be blank 
+<br /> &lt;/code&gt;&lt;/pre&gt; <br /><br /> h4(#validates_size_of). validates_size_of / validates_length_of <br /><br /> These two validations are one and the same. The purpose is to validate the length in characters of a given attribute. Available options: <br /><br /> *is*: attribute should be *exactly* n characters long 
+<br /> *in/within*: attribute should be within an range <span class="diff_in">array(n, m)</span> <span class="diff_out"> array(1,5)</span> 
+<br /> *maximum/minimum*: attribute should not be above/below respectively <br /><br /> Each of the options has a particular message and can be changed. <br /><br /> * *is*: uses key &#39;wrong_length&#39; 
+<br /> * *in/within*: uses keys &#39;too_long&#39; &amp; &#39;too_short&#39; 
+<br /> * *maximum/minimum*: uses keys &#39;too_long&#39; &amp; &#39;too_short&#39; <br /><br /> &lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt; 
+<br /> class Book extends ActiveRecord\Model 
+<br /> { 
+<br />   static $validates_size_of = array( 
+<br />     array(&#39;title&#39;, &#39;within&#39; =&gt; array(1,5), &#39;too_short&#39; =&gt; &#39;too short!&#39;), 
+<br />     array(&#39;cover_blurb&#39;, &#39;is&#39; =&gt; 20), 
+<br />     array(&#39;description&#39;, &#39;maximum&#39; =&gt; 10, &#39;too_long&#39; =&gt; &#39;should be short and sweet&#39;) 
+<br />   ); 
+<br /> } 
+<br /> 
+<br /> $book = new Book; 
+<br /> $book-&gt;title = &#39;War and Peace&#39;; 
+<br /> $book-&gt;cover_blurb = &#39;not 20 chars&#39;; 
+<br /> $book-&gt;description = &#39;this description is longer than 10 chars&#39;; 
+<br /> $ret = $book-&gt;save(); 
+<br /> 
+<br /> # validations failed so we get a false return 
+<br /> if ($ret == false) 
+<br /> { 
+<br />   # too short! 
+<br />   echo $book-&gt;errors-&gt;on(&#39;title&#39;); 
+<br /> 
+<br />   # is the wrong length (should be 20 chars) 
+<br />   echo $book-&gt;errors-&gt;on(&#39;cover_blurb&#39;); 
+<br /> 
+<br />   # should be short and sweet 
+<br />   echo $book-&gt;errors-&gt;on(&#39;description&#39;); 
+<br /> } 
+<br /> &lt;/code&gt;&lt;/pre&gt; <br /><br /> h4(#validates_in_ex_clusion_of). validates_(in|ex)clusion_of <br /><br /> As you can see from the names, these two are similar. In fact, this is just a white/black list approach to your validations. Inclusion is a whitelist that will require a value to be within a given set. Exclusion is the opposite: a blacklist that requires a value to *not* be within a given set. Available options: <br /><br /> * *in/within*: attribute should/shouldn&#39;t be a value within an array 
+<br /> * *message*: custom error message <br /><br /> &lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt; 
+<br /> class Car extends ActiveRecord\Model 
+<br /> { 
+<br />   static $validates_inclusion_of = array( 
+<br />     array(&#39;fuel_type&#39;, &#39;in&#39; =&gt; array(&#39;petroleum&#39;, &#39;hydrogen&#39;, &#39;electric&#39;)), 
+<br />   ); 
+<br /> } 
+<br /> 
+<br /> # this will pass since it&#39;s in the above list 
+<br /> $car = new Car(array(&#39;fuel_type&#39; =&gt; &#39;electric&#39;)); 
+<br /> $ret = $car-&gt;save(); 
+<br /> echo $ret # =&gt; true <br /><br /> class User extends ActiveRecord\Model 
+<br /> { 
+<br />   static $validates_exclusion_of = array( 
+<br />     array(&#39;password&#39;, &#39;in&#39; =&gt; array(&#39;god&#39;, &#39;sex&#39;, &#39;password&#39;, &#39;love&#39;, &#39;secret&#39;), 
+<br />       &#39;message&#39; =&gt; &#39;should not be one of the four most used passwords&#39;) 
+<br />   ); 
+<br /> } 
+<br /> 
+<br /> $user = new User; 
+<br /> $user-&gt;password = &#39;god&#39;; 
+<br /> $user-&gt;save(); <br /><br /> # =&gt; should not be one of the four most used passwords 
+<br /> echo $user-&gt;errors-&gt;on(&#39;password&#39;); 
+<br /> &lt;/code&gt;&lt;/pre&gt; <br /><br /> h4(#validates_format_of). validates_format_of <br /><br /> This validation uses &quot;preg_match&quot;:http://www.php.net/preg_match to verify the format of an attribute. You can create a regular expression to test against. Available options: <br /><br /> * *with*: regular expression 
+<br /> * *message*: custom error message <br /><br /> &lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt; 
+<br /> class User extends ActiveRecord\Model 
+<br /> { 
+<br />   static $validates_format_of = array( 
+<br />     array(&#39;email&#39;, &#39;with&#39; =&gt; 
+<br />       &#39;/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/&#39;) 
+<br />     array(&#39;password&#39;, &#39;with&#39; =&gt; 
+<br />       &#39;/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$/&#39;, &#39;message&#39; =&gt; &#39;is too weak&#39;) 
+<br />   ); 
+<br /> } 
+<br /> 
+<br /> $user = new User; 
+<br /> $user-&gt;email = &#39;not_a_real_email.com&#39;; 
+<br /> $user-&gt;password = &#39;notstrong&#39;; 
+<br /> $user-&gt;save(); 
+<br /> 
+<br /> echo $user-&gt;errors-&gt;on(&#39;email&#39;); # =&gt; is invalid 
+<br /> echo $user-&gt;errors-&gt;on(&#39;password&#39;); # =&gt; is too weak 
+<br /> &lt;/code&gt;&lt;/pre&gt; <br /><br /> h4(#validates_numericality_of). validates_numericality_of <br /><br /> As the name suggests, this gem tests whether or not a given attribute is a number, and whether or not it is of a certain value. Available options: <br /><br /> * *only_integer*: value must be an integer (e.g. not a float), message: &quot;is not a number&quot; 
+<br /> * *even, message*: &quot;must be even&quot; 
+<br /> * *odd, message*: &quot;must be odd&quot; 
+<br /> * *greater_than*: &gt;, message: &quot;must be greater than %d&quot; 
+<br /> * *greater_than_or_equal_to*: &gt;=, message: &quot;must be greater than or equal to %d&quot; 
+<br /> * *equal_to*: ==, message: &quot;must be equal to %d&quot; 
+<br /> * *less_than*: &lt;, message: &quot;must be less than %d&quot; 
+<br /> * *less_than_or_equal_to*: &lt;=, message: &quot;must be less than or equal to %d&quot; <br /><br /> &lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt; 
+<br /> class Order extends ActiveRecord\Model 
+<br /> { 
+<br />   static $validates_numericality_of = array( 
+<br />     array(&#39;price&#39;, &#39;greater_than&#39; =&gt; 0.01), 
+<br />     array(&#39;quantity&#39;, &#39;only_integer&#39; =&gt; true), 
+<br />     array(&#39;shipping&#39;, &#39;greater_than_or_equal_to&#39; =&gt; 0), 
+<br />     array(&#39;discount&#39;, &#39;less_than_or_equal_to&#39; =&gt; 5, &#39;greater_than_or_equal_to&#39; =&gt; 0) 
+<br />   ); 
+<br /> } 
+<br /> 
+<br /> $order = new Order; 
+<br /> $order-&gt;price = 0; 
+<br /> $order-&gt;quantity = 1.25; 
+<br /> $order-&gt;shipping = 5; 
+<br /> $order-&gt;discount = 2; 
+<br /> $order-&gt;save(); 
+<br /> 
+<br /> echo $order-&gt;errors-&gt;on(&#39;price&#39;); # =&gt; must be greater than 0.01 
+<br /> echo $order-&gt;errors-&gt;on(&#39;quantity&#39;); # =&gt; is not a number 
+<br /> echo $order-&gt;errors-&gt;on(&#39;shipping&#39;); # =&gt; null 
+<br /> echo $order-&gt;errors-&gt;on(&#39;discount&#39;); # =&gt; null 
+<br /> &lt;/code&gt;&lt;/pre&gt; <br /><br /> h4(#validates_uniqueness_of). validates_uniqueness_of <br /><br /> Tests whether or not a given attribute already exists in the table or not. <br /><br /> * *message*: custom error message <br /><br /> &lt;pre class=&quot;code&quot;&gt;&lt;code class=&quot;php&quot;&gt; 
+<br /> class User extends ActiveRecord\Model 
+<br /> { 
+<br />   static $validates_uniqueness_of = array( 
+<br />     array(&#39;name&#39;), 
+<br />     array(array(&#39;blah&#39;,&#39;bleh&#39;), &#39;message&#39; =&gt; &#39;blah and bleh!&#39;) 
+<br />   ); 
+<br /> } 
+<br /> 
+<br /> User::create(array(&#39;name&#39; =&gt; &#39;Tito&#39;)); 
+<br /> $user = User::create(array(&#39;name&#39; =&gt; &#39;Tito&#39;)); 
+<br /> $user-&gt;is_valid(); # =&gt; false 
+<br /> &lt;/code&gt;&lt;/pre&gt;
+
+				
+			</div>
+
+			<div id="sidebar" class="span-7 last">
+				<div class="r-button" id="stable-build">
+					<a href="../../../download.html">Get Stable Build - <em>v1.0</em><p>June 27 2010</p></a>
+				</div>
+				<div class="r-button" id="nightly-build">
+					<a href="../../../download.html">Get Nightly Build <p>April 16, 2013</p></a>
+				</div>
+		
+				
+
+				<h2 id="news-header">
+	<a href="../../../news.html">Latest News</a>
+	<a class="feed" href="../../../projects/main/news.atom"><img src="../../../images/feed-icon-14x14.png"/></a>
+</h2>
+
+<ul id="news-summary" class="icon-list">
+	
+	<li class="article">
+		<a href="../../../news/6-website-downtime.html">Website Downtime</a>
+		
+		<div class="meta">
+			<em class="relative" title="2011-09-26T16:43:49Z">Mon Sep 26 12:43:49 -0400 2011</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="../../../news/5-did-you-know-php-ar-has-eager-loading.html">Did you know? PHP-AR has Eager Loading</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-08-31T23:31:08Z">Tue Aug 31 19:31:08 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="../../../news/4-php-activerecord-1-0-released.html">php-activerecord 1.0 released!</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-06-28T00:02:55Z">Sun Jun 27 20:02:55 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="../../../news/3-website-updated-with-forums-and-wiki.html">Website updated with forums and wiki</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-06-18T21:37:23Z">Fri Jun 18 17:37:23 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="../../../news/2-php-activerecord-1-0-rc1-released.html">php-activerecord 1.0 RC1 released!</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-04-07T00:00:15Z">Tue Apr 06 20:00:15 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+</ul>
+
+
+
+
+				<h2><a href="../../../projects/main/activity.html">Recent Activity</a></h2>
+<ul id="recent-activity" class="icon-list">
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/1/topics/2069-re-support-for-multi-row-inserts-and-insert-ignore">Encotrei uma solução alternativa para varias inserções.
+
+Model::query(&#39;inse...</a>
+		
+		<div class="author">
+			by <a href="../../../users/3231.html">renan henrique constancio</a>
+			<em class="relative" title="2017-03-17T14:08:17Z">Fri Mar 17 10:08:17 -0400 2017</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/4/topics/2068-re-can-t-get-groupname-using-associations">I have the same question, have you find the answer?</a>
+		
+		<div class="author">
+			by <a href="../../../users/3194.html">Israel Sousa</a>
+			<em class="relative" title="2017-03-03T19:52:52Z">Fri Mar 03 14:52:52 -0500 2017</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/4/topics/2067-cannot-change-primary_key">Hi, 
+I cannot change  $primary_key of entity.
+After save is still in database o...</a>
+		
+		<div class="author">
+			by <a href="../../../users/2785.html">Vasek Keberdle</a>
+			<em class="relative" title="2017-01-03T17:20:13Z">Tue Jan 03 12:20:13 -0500 2017</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/4/topics/2066-re-saving-date-to-mysql-problem">That static property is not available anymore in stable build 1.0, so that won&#39;t ...</a>
+		
+		<div class="author">
+			by <a href="../../../users/3038.html">Jos Faber</a>
+			<em class="relative" title="2016-12-07T13:21:47Z">Wed Dec 07 08:21:47 -0500 2016</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/4/topics/2065-re-can-t-get-groupname-using-associations">Project is dead?</a>
+		
+		<div class="author">
+			by <a href="../../../users/2948.html">McLotos McLotos</a>
+			<em class="relative" title="2016-09-28T09:58:57Z">Wed Sep 28 05:58:57 -0400 2016</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/96100175f2c268648a6b9fad3157620a6a6649d1">Merge pull request #284 from fetch/test-require-fix
+
+Using __DIR__ in require_onc...</a>
+		
+		<div class="author">
+			by <a href="../../../users/3.html">Jacques Fuentes</a>
+			<em class="relative" title="2013-04-15T13:09:16Z">Mon Apr 15 09:09:16 -0400 2013</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/f8220bfaaf820f53d99e3c97b97b4a5ee2a0adfe">absolute path require_once</a>
+		
+		<div class="author">
+			by <a href="../../../users/1660.html">Koen Punt</a>
+			<em class="relative" title="2013-04-15T08:07:39Z">Mon Apr 15 04:07:39 -0400 2013</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/17eb9c6155ae3fb8ac144ab07ee828a19a8be9c1">Re #282, pointing phpunit at the tests...</a>
+		
+		<div class="author">
+			by <a href="../../../users/show/David%20Rogers%20.html">David Rogers </a>
+			<em class="relative" title="2013-04-11T20:39:30Z">Thu Apr 11 16:39:30 -0400 2013</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/ec53c90187577c9671fd16a1a96979aed067b8cf">Driving tests with phpunit.xml re #282</a>
+		
+		<div class="author">
+			by <a href="../../../users/show/David%20Rogers%20.html">David Rogers </a>
+			<em class="relative" title="2013-04-11T20:26:29Z">Thu Apr 11 16:26:29 -0400 2013</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/d8c90b6a640da93539ec0e758e60800fcee9bc8a">Create .travis.yml to drive Travis CI build</a>
+		
+		<div class="author">
+			by <a href="../../../users/show/David%20Rogers%20.html">David Rogers </a>
+			<em class="relative" title="2013-04-11T19:39:42Z">Thu Apr 11 15:39:42 -0400 2013</em>
+		</div>
+	</li>
+	</ul>
+
+
+				
+				
+			</div>
+		</div>
+	</div>
+
+	<div id="ajax-indicator" style="display:none;"><span>Loading...</span></div>
+
+	<div id="footer">
+	    <div class="container">
+	        <div class="span-24 last">
+			    <ul class="horizontal">
+	<li><a href="../../../index.html">Home</a></li>
+	<li><a href="../../../download/index/main.html">Download</a></li>
+	<li><a href="../../../projects/main/wiki/Validations.html">Wiki</a></li>
+	<li><a href="../../../docs.html">Documentation</a></li>
+	<li><a href="http://github.com/kla/php-activerecord/issues">Issues</a></li
+	<li><a href="../../../news.html">News</a></li>
+	<li><a href="../../../projects/main/boards.html">Forums</a></li>
+	<li class="last"><a href="../../../welcome/about.html">About Us</a></li>
+</ul>
+<p>
+	<a href="http://www.phpactiverecord.org/" target="_top">phpactiverecord.org - An easy to use ORM for PHP</a><br/>
+	<a href="http://www.opensource.org/licenses/mit-license.php">MIT License</a>
+</p>
+
+	        </div>
+	    </div>
+	</div>
+</div>
+
+
+<script src="../../../assets/core35c2.js?1366183229" type="text/javascript"></script>
+
+
+<script type="text/javascript">var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));</script>
+<script type="text/javascript">try { var pageTracker = _gat._getTracker("UA-10078176-1"); pageTracker._trackPageview();} catch(err) {}</script>
+
+
+
+</body>
+
+<!-- Mirrored from www.phpactiverecord.com/wiki/main/Validations/diff?version=8 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 May 2017 20:19:07 GMT -->
+</html>

@@ -1,0 +1,1330 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+	
+<!-- Mirrored from www.phpactiverecord.com/docs by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 May 2017 20:17:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+		<title>PHP ActiveRecord - An easy to use ORM for PHP</title>
+		<link rel="canonical" href="http://www.phpactiverecord.org/docs"/>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="issue,bug,tracker" />
+		<meta name="description" content="Redmine" />
+		<meta name="googlebot" content="NOODP" />
+		<meta name="robots" content="index,follow,noodp,noydir" />
+		<link href="stylesheets/blueprint/screen35c2.css?1366183229" media="screen" rel="stylesheet" type="text/css" />
+		<link href="stylesheets/blueprint/print35c2.css?1366183229" media="print" rel="stylesheet" type="text/css" />
+		<!--[if lt IE 8]><link href="/stylesheets/blueprint/ie.css?1366183229" media="screen" rel="stylesheet" type="text/css" /><![endif]-->
+		<link href="themes/basecamp/stylesheets/application3445.css?1366183196" media="screen" rel="stylesheet" type="text/css" />
+		<link href="stylesheets/jstoolbar35c2.css?1366183229" media="screen" rel="stylesheet" type="text/css" />
+		<!--[if IE]>
+		    <style type="text/css">
+		      * html body{ width: expression( document.documentElement.clientWidth < 900 ? '900px' : '100%' ); }
+		      body {behavior: url(/stylesheets/csshover.htc?1366183229);}
+		    </style>
+		<![endif]-->
+		
+		<!-- page specific tags -->
+				<link href="themes/basecamp/stylesheets/main3445.css?1366183196" media="screen" rel="stylesheet" type="text/css" />
+	</head>
+<body>
+	
+<div id="wrapper">
+	<div id="header">
+	    <div class="container">
+	        <div class="span-7">
+	            <h1><a href="http://www.phpactiverecord.org/" target="_top">php.activerecord</a></h1>
+	        </div>
+	        <div class="span-13" id="main-nav">
+		        <ul class="horizontal"><li><a href="download/index/main.html" class="download">Download</a></li>
+<li><a href="projects/main/wiki.html" class="guides">Wiki</a></li>
+<li><a href="docs/index/main.html" class="docs selected">Docs</a></li>
+<li><a href="news/index/mainddf6.html?project_id=main" class="news">News</a></li>
+<li><a href="projects/main/boards.html" class="boards">Forums</a></li>
+<li><a href="welcome/about/main.html" class="about-us">About us</a></li></ul>	        </div>
+          <div class="span-4 last" id="account-menu">
+		        <ul class="horizontal"><li><a href="login.html" class="login">Sign in</a></li>
+<li><a href="account/register.html" class="register">Register</a></li></ul>          </div>
+	    </div>
+	</div>
+
+	<div id="main-frame">
+		<div id="breadcrumbs" class="container">
+			<ul class="span-24 last">
+				<li><a href="index.html">Home</a></li><li class="last"><a href="docs.html">Docs</a></li>
+			</ul>
+		</div>
+
+		<div id="main" class="container">
+			<div id="content" class="span-16 colborder">
+				
+				<h2 id="top">Index of all elements</h2>
+<p id="doc-element-index">
+	<a href="#a">a</a><a href="#b">b</a><a href="#c">c</a><a href="#d">d</a><a href="#e">e</a><a href="#f">f</a><a href="#g">g</a><a href="#h">h</a><a href="#i">i</a><a href="#j">j</a><a href="#k">k</a><a href="#l">l</a><a href="#m">m</a><a href="#n">n</a><a href="#o">o</a><a href="#p">p</a><a href="#q">q</a><a href="#r">r</a><a href="#s">s</a><a href="#t">t</a><a href="#u">u</a><a href="#v">v</a><a href="#w">w</a><a href="#x">x</a><a href="#_">_</a></p>
+
+<div id="a">
+	<h3>a</h3>
+	<dl>
+				<dt><b>$adapter</b></dt>
+		<dd>in file Cache.php, variable <a href="docs/default/Cache.html#var$adapter">Cache::$adapter</a></dd>
+				<dt><b>$alias_attribute</b></dt>
+		<dd>in file Model.php, variable <a href="docs/ActiveRecord/Model.html#var$alias_attribute">Model::$alias_attribute</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Allows you to create aliases for attributes.</dd>
+				<dt><b>$attributes</b></dt>
+		<dd>in file Serialization.php, variable <a href="docs/ActiveRecord/Serialization.html#var$attributes">Serialization::$attributes</a></dd>
+				<dt><b>$attribute_name</b></dt>
+		<dd>in file Relationship.php, variable <a href="docs/ActiveRecord/AbstractRelationship.html#var$attribute_name">AbstractRelationship::$attribute_name</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Name to be used that will trigger call to the relationship.</dd>
+				<dt><b>$attr_accessible</b></dt>
+		<dd>in file Model.php, variable <a href="docs/ActiveRecord/Model.html#var$attr_accessible">Model::$attr_accessible</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Whitelist of attributes that are checked from mass-assignment calls such as constructing a model or using update_attributes.</dd>
+				<dt><b>$attr_protected</b></dt>
+		<dd>in file Model.php, variable <a href="docs/ActiveRecord/Model.html#var$attr_protected">Model::$attr_protected</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Blacklist of attributes that cannot be mass-assigned.</dd>
+				<dt><b>$auto_increment</b></dt>
+		<dd>in file Column.php, variable <a href="docs/ActiveRecord/Column.html#var$auto_increment">Column::$auto_increment</a><br>&nbsp;&nbsp;&nbsp;&nbsp;True if this column is set to auto_increment.</dd>
+				<dt><b>AbstractRelationship</b></dt>
+		<dd>in file Relationship.php, class <a href="docs/ActiveRecord/AbstractRelationship.html">AbstractRelationship</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Abstract class that all relationships must extend from.</dd>
+				<dt><b>accepts_limit_and_order_for_update_and_delete</b></dt>
+		<dd>in file SqliteAdapter.php, method <a href="docs/ActiveRecord/SqliteAdapter.html#methodaccepts_limit_and_order_for_update_and_delete">SqliteAdapter::accepts_limit_and_order_for_update_and_delete()</a></dd>
+				<dt><b>accepts_limit_and_order_for_update_and_delete</b></dt>
+		<dd>in file MysqlAdapter.php, method <a href="docs/ActiveRecord/MysqlAdapter.html#methodaccepts_limit_and_order_for_update_and_delete">MysqlAdapter::accepts_limit_and_order_for_update_and_delete()</a></dd>
+				<dt><b>accepts_limit_and_order_for_update_and_delete</b></dt>
+		<dd>in file Connection.php, method <a href="docs/ActiveRecord/Connection.html#methodaccepts_limit_and_order_for_update_and_delete">Connection::accepts_limit_and_order_for_update_and_delete()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Specifies whether or not adapter can use LIMIT/ORDER clauses with DELETE &amp; UPDATE operations</dd>
+				<dt><b>ActiveRecordException</b></dt>
+		<dd>in file Exceptions.php, class <a href="docs/ActiveRecord/ActiveRecordException.html">ActiveRecordException</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Generic base exception for all ActiveRecord specific errors.</dd>
+				<dt><b>add</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Errors.html#methodadd">Errors::add()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Add an error message.</dd>
+				<dt><b>add</b></dt>
+		<dd>in file Reflections.php, method <a href="docs/ActiveRecord/Reflections.html#methodadd">Reflections::add()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Instantiates a new ReflectionClass for the given class.</dd>
+				<dt><b>add_condition</b></dt>
+		<dd>in file Utils.php, method <a href="docs/ActiveRecord/Utils.html#methodadd_condition">Utils::add_condition()</a></dd>
+				<dt><b>add_on_blank</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Errors.html#methodadd_on_blank">Errors::add_on_blank()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Adds the error message only if the attribute value was null or an empty string.</dd>
+				<dt><b>add_on_empty</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Errors.html#methodadd_on_empty">Errors::add_on_empty()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Adds an error message only if the attribute value is <a href="http://www.php.net/empty">empty</a>.</dd>
+				<dt><b>all</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodall">Model::all()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Alias for self::find('all').</dd>
+				<dt><b>all</b></dt>
+		<dd>in file Utils.php, function <a href="docs/ActiveRecord/_Utils.html#functionall">all()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns true if all values in $haystack === $needle</dd>
+				<dt><b>append_record_to_associate</b></dt>
+		<dd>in file Relationship.php, method <a href="docs/ActiveRecord/AbstractRelationship.html#methodappend_record_to_associate">AbstractRelationship::append_record_to_associate()</a></dd>
+				<dt><b>ArraySerializer</b></dt>
+		<dd>in file Serialization.php, class <a href="docs/ActiveRecord/ArraySerializer.html">ArraySerializer</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Array serializer.</dd>
+				<dt><b>array_flatten</b></dt>
+		<dd>in file Utils.php, function <a href="docs/ActiveRecord/_Utils.html#functionarray_flatten">array_flatten()</a></dd>
+				<dt><b>assign_attribute</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodassign_attribute">Model::assign_attribute()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Assign a value to an attribute.</dd>
+				<dt><b>attributes</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodattributes">Model::attributes()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a copy of the model's attributes hash.</dd>
+				<dt><b>attribute_is_dirty</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodattribute_is_dirty">Model::attribute_is_dirty()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Check if a particular attribute has been modified since loading the model.</dd>
+				<dt><b>attribute_of</b></dt>
+		<dd>in file DateTime.php, method <a href="docs/ActiveRecord/DateTime.html#methodattribute_of">DateTime::attribute_of()</a></dd>
+			</dl>
+</div>
+<p><a href="#top">top</a></p>
+<div id="b">
+	<h3>b</h3>
+	<dl>
+				<dt><b>BelongsTo</b></dt>
+		<dd>in file Relationship.php, class <a href="docs/ActiveRecord/BelongsTo.html">BelongsTo</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Belongs to relationship.</dd>
+				<dt><b>bind</b></dt>
+		<dd>in file Expressions.php, method <a href="docs/ActiveRecord/Expressions.html#methodbind">Expressions::bind()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Bind a value to the specific one based index. There must be a bind marker  for each value bound or to_s() will throw an exception.</dd>
+				<dt><b>bind_values</b></dt>
+		<dd>in file SQLBuilder.php, method <a href="docs/ActiveRecord/SQLBuilder.html#methodbind_values">SQLBuilder::bind_values()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the bind values.</dd>
+				<dt><b>bind_values</b></dt>
+		<dd>in file Expressions.php, method <a href="docs/ActiveRecord/Expressions.html#methodbind_values">Expressions::bind_values()</a></dd>
+				<dt><b>build_association</b></dt>
+		<dd>in file Relationship.php, method <a href="docs/ActiveRecord/InterfaceRelationship.html#methodbuild_association">InterfaceRelationship::build_association()</a></dd>
+				<dt><b>build_association</b></dt>
+		<dd>in file Relationship.php, method <a href="docs/ActiveRecord/HasMany.html#methodbuild_association">HasMany::build_association()</a></dd>
+				<dt><b>build_association</b></dt>
+		<dd>in file Relationship.php, method <a href="docs/ActiveRecord/AbstractRelationship.html#methodbuild_association">AbstractRelationship::build_association()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates a new instance of specified <a href="docs/ActiveRecord/Model.html">Model</a> with the attributes pre-loaded.</dd>
+			</dl>
+</div>
+<p><a href="#top">top</a></p>
+<div id="c">
+	<h3>c</h3>
+	<dl>
+				<dt><b>$callback</b></dt>
+		<dd>in file Table.php, variable <a href="docs/ActiveRecord/Table.html#var$callback">Table::$callback</a><br>&nbsp;&nbsp;&nbsp;&nbsp;A instance of CallBack for this model/table</dd>
+				<dt><b>$class</b></dt>
+		<dd>in file Table.php, variable <a href="docs/ActiveRecord/Table.html#var$class">Table::$class</a></dd>
+				<dt><b>$class_name</b></dt>
+		<dd>in file Relationship.php, variable <a href="docs/ActiveRecord/AbstractRelationship.html#var$class_name">AbstractRelationship::$class_name</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Class name of the associated model.</dd>
+				<dt><b>$columns</b></dt>
+		<dd>in file Table.php, variable <a href="docs/ActiveRecord/Table.html#var$columns">Table::$columns</a></dd>
+				<dt><b>$conn</b></dt>
+		<dd>in file Table.php, variable <a href="docs/ActiveRecord/Table.html#var$conn">Table::$conn</a></dd>
+				<dt><b>$connection</b></dt>
+		<dd>in file Model.php, variable <a href="docs/ActiveRecord/Model.html#var$connection">Model::$connection</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set to the name of the connection this <a href="docs/ActiveRecord/Model.html">Model</a> should use.</dd>
+				<dt><b>$connection</b></dt>
+		<dd>in file Connection.php, variable <a href="docs/ActiveRecord/Connection.html#var$connection">Connection::$connection</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The PDO connection object.</dd>
+				<dt><b>Cache</b></dt>
+		<dd>in file Cache.php, class <a href="docs/default/Cache.html">Cache</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Cache::get('the-cache-key', function() {</dd>
+				<dt><b></b></dt>
+		<dd></dd>
+				<dt><b>CallBack</b></dt>
+		<dd>in file CallBack.php, class <a href="docs/ActiveRecord/CallBack.html">CallBack</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Callbacks allow the programmer to hook into the life cycle of a <a href="docs/ActiveRecord/Model.html">Model</a>.</dd>
+				<dt><b></b></dt>
+		<dd></dd>
+				<dt><b>camelize</b></dt>
+		<dd>in file Inflector.php, method <a href="docs/ActiveRecord/Inflector.html#methodcamelize">Inflector::camelize()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Turn a string into its camelized version.</dd>
+				<dt><b>cast</b></dt>
+		<dd>in file Column.php, method <a href="docs/ActiveRecord/Column.html#methodcast">Column::cast()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Casts a value to the column's type.</dd>
+				<dt><b>classify</b></dt>
+		<dd>in file Utils.php, function <a href="docs/ActiveRecord/_Utils.html#functionclassify">classify()</a></dd>
+				<dt><b>clear</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Errors.html#methodclear">Errors::clear()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Clears out all error messages.</dd>
+				<dt><b>clear_cache</b></dt>
+		<dd>in file Table.php, method <a href="docs/ActiveRecord/Table.html#methodclear_cache">Table::clear_cache()</a></dd>
+				<dt><b>clear_model</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Errors.html#methodclear_model">Errors::clear_model()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Nulls $model so we don't get pesky circular references. $model is only needed during the  validation process and so can be safely cleared once that is done.</dd>
+				<dt><b>collect</b></dt>
+		<dd>in file Utils.php, function <a href="docs/ActiveRecord/_Utils.html#functioncollect">collect()</a></dd>
+				<dt><b>Column</b></dt>
+		<dd>in file Column.php, class <a href="docs/ActiveRecord/Column.html">Column</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Class for a table column.</dd>
+				<dt><b></b></dt>
+		<dd></dd>
+				<dt><b>columns</b></dt>
+		<dd>in file Connection.php, method <a href="docs/ActiveRecord/Connection.html#methodcolumns">Connection::columns()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Retrieves column meta data for the specified table.</dd>
+				<dt><b>commit</b></dt>
+		<dd>in file Connection.php, method <a href="docs/ActiveRecord/Connection.html#methodcommit">Connection::commit()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Commits the current transaction.</dd>
+				<dt><b>Config</b></dt>
+		<dd>in file Config.php, class <a href="docs/ActiveRecord/Config.html">Config</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Manages configuration options for ActiveRecord.</dd>
+				<dt><b></b></dt>
+		<dd></dd>
+				<dt><b>ConfigException</b></dt>
+		<dd>in file Exceptions.php, class <a href="docs/ActiveRecord/ConfigException.html">ConfigException</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Thrown for configuration problems.</dd>
+				<dt><b>Connection</b></dt>
+		<dd>in file Connection.php, class <a href="docs/ActiveRecord/Connection.html">Connection</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The base class for database connection adapters.</dd>
+				<dt><b>connection</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodconnection">Model::connection()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Retrieve the connection for this model.</dd>
+				<dt><b></b></dt>
+		<dd></dd>
+				<dt><b>ConnectionManager</b></dt>
+		<dd>in file ConnectionManager.php, class <a href="docs/ActiveRecord/ConnectionManager.html">ConnectionManager</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Singleton to manage any and all database connections.</dd>
+				<dt><b></b></dt>
+		<dd></dd>
+				<dt><b>construct_inner_join_sql</b></dt>
+		<dd>in file Relationship.php, method <a href="docs/ActiveRecord/AbstractRelationship.html#methodconstruct_inner_join_sql">AbstractRelationship::construct_inner_join_sql()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates INNER JOIN SQL for associations.</dd>
+				<dt><b>count</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodcount">Model::count()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get a count of qualifying records.</dd>
+				<dt><b>create</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodcreate">Model::create()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates a model and saves it to the database.</dd>
+				<dt><b>create_association</b></dt>
+		<dd>in file Relationship.php, method <a href="docs/ActiveRecord/AbstractRelationship.html#methodcreate_association">AbstractRelationship::create_association()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates a new instance of <a href="docs/ActiveRecord/Model.html">Model</a> and invokes save.</dd>
+				<dt><b>create_association</b></dt>
+		<dd>in file Relationship.php, method <a href="docs/ActiveRecord/HasMany.html#methodcreate_association">HasMany::create_association()</a></dd>
+				<dt><b>create_association</b></dt>
+		<dd>in file Relationship.php, method <a href="docs/ActiveRecord/InterfaceRelationship.html#methodcreate_association">InterfaceRelationship::create_association()</a></dd>
+				<dt><b>create_column</b></dt>
+		<dd>in file MysqlAdapter.php, method <a href="docs/ActiveRecord/MysqlAdapter.html#methodcreate_column">MysqlAdapter::create_column()</a></dd>
+				<dt><b>create_column</b></dt>
+		<dd>in file PgsqlAdapter.php, method <a href="docs/ActiveRecord/PgsqlAdapter.html#methodcreate_column">PgsqlAdapter::create_column()</a></dd>
+				<dt><b>create_column</b></dt>
+		<dd>in file OciAdapter.php, method <a href="docs/ActiveRecord/OciAdapter.html#methodcreate_column">OciAdapter::create_column()</a></dd>
+				<dt><b>create_column</b></dt>
+		<dd>in file SqliteAdapter.php, method <a href="docs/ActiveRecord/SqliteAdapter.html#methodcreate_column">SqliteAdapter::create_column()</a></dd>
+				<dt><b>create_conditions_from_keys</b></dt>
+		<dd>in file Relationship.php, method <a href="docs/ActiveRecord/AbstractRelationship.html#methodcreate_conditions_from_keys">AbstractRelationship::create_conditions_from_keys()</a></dd>
+				<dt><b>create_conditions_from_underscored_string</b></dt>
+		<dd>in file SQLBuilder.php, method <a href="docs/ActiveRecord/SQLBuilder.html#methodcreate_conditions_from_underscored_string">SQLBuilder::create_conditions_from_underscored_string()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Converts a string like &quot;id_and_name_or_z&quot; into a conditions value like array(&quot;id=? AND name=? OR z=?&quot;, values, ...).</dd>
+				<dt><b>create_hash_from_underscored_string</b></dt>
+		<dd>in file SQLBuilder.php, method <a href="docs/ActiveRecord/SQLBuilder.html#methodcreate_hash_from_underscored_string">SQLBuilder::create_hash_from_underscored_string()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Like create_conditions_from_underscored_string but returns a hash of name =&gt; value array instead.</dd>
+				<dt><b>create_joins</b></dt>
+		<dd>in file Table.php, method <a href="docs/ActiveRecord/Table.html#methodcreate_joins">Table::create_joins()</a></dd>
+				<dt><b>CsvSerializer</b></dt>
+		<dd>in file Serialization.php, class <a href="docs/ActiveRecord/CsvSerializer.html">CsvSerializer</a><br>&nbsp;&nbsp;&nbsp;&nbsp;CSV serializer.</dd>
+			</dl>
+</div>
+<p><a href="#top">top</a></p>
+<div id="d">
+	<h3>d</h3>
+	<dl>
+				<dt><b>$DATETIME_FORMAT</b></dt>
+		<dd>in file Serialization.php, variable <a href="docs/ActiveRecord/Serialization.html#var$DATETIME_FORMAT">Serialization::$DATETIME_FORMAT</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The default format to serialize DateTime objects to.</dd>
+				<dt><b>$db</b></dt>
+		<dd>in file Model.php, variable <a href="docs/ActiveRecord/Model.html#var$db">Model::$db</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set to the name of the database this Model's table is in.</dd>
+				<dt><b>$db_name</b></dt>
+		<dd>in file Table.php, variable <a href="docs/ActiveRecord/Table.html#var$db_name">Table::$db_name</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Name of the database (optional)</dd>
+				<dt><b>$default</b></dt>
+		<dd>in file Column.php, variable <a href="docs/ActiveRecord/Column.html#var$default">Column::$default</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The default value of the column.</dd>
+				<dt><b>$DEFAULT_ERROR_MESSAGES</b></dt>
+		<dd>in file Validations.php, variable <a href="docs/ActiveRecord/Errors.html#var$DEFAULT_ERROR_MESSAGES">Errors::$DEFAULT_ERROR_MESSAGES</a></dd>
+				<dt><b>$DEFAULT_FORMAT</b></dt>
+		<dd>in file DateTime.php, variable <a href="docs/ActiveRecord/DateTime.html#var$DEFAULT_FORMAT">DateTime::$DEFAULT_FORMAT</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Default format used for format() and __toString()</dd>
+				<dt><b>$DEFAULT_PORT</b></dt>
+		<dd>in file MysqlAdapter.php, variable <a href="docs/ActiveRecord/MysqlAdapter.html#var$DEFAULT_PORT">MysqlAdapter::$DEFAULT_PORT</a></dd>
+				<dt><b>$DEFAULT_PORT</b></dt>
+		<dd>in file PgsqlAdapter.php, variable <a href="docs/ActiveRecord/PgsqlAdapter.html#var$DEFAULT_PORT">PgsqlAdapter::$DEFAULT_PORT</a></dd>
+				<dt><b>$DEFAULT_PORT</b></dt>
+		<dd>in file Connection.php, variable <a href="docs/ActiveRecord/Connection.html#var$DEFAULT_PORT">Connection::$DEFAULT_PORT</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Default port.</dd>
+				<dt><b>$DEFAULT_PORT</b></dt>
+		<dd>in file OciAdapter.php, variable <a href="docs/ActiveRecord/OciAdapter.html#var$DEFAULT_PORT">OciAdapter::$DEFAULT_PORT</a></dd>
+				<dt><b>$delegate</b></dt>
+		<dd>in file Model.php, variable <a href="docs/ActiveRecord/Model.html#var$delegate">Model::$delegate</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Delegates calls to a relationship.</dd>
+				<dt><b>$delimiter</b></dt>
+		<dd>in file Serialization.php, variable <a href="docs/ActiveRecord/CsvSerializer.html#var$delimiter">CsvSerializer::$delimiter</a></dd>
+				<dt><b>$dsn_params</b></dt>
+		<dd>in file OciAdapter.php, variable <a href="docs/ActiveRecord/OciAdapter.html#var$dsn_params">OciAdapter::$dsn_params</a></dd>
+				<dt><b>DatabaseException</b></dt>
+		<dd>in file Exceptions.php, class <a href="docs/ActiveRecord/DatabaseException.html">DatabaseException</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Thrown when there was an error performing a database operation.</dd>
+				<dt><b>DATE</b></dt>
+		<dd>in file Column.php, class constant <a href="docs/ActiveRecord/Column.html#constDATE">Column::DATE</a></dd>
+				<dt><b>DateTime</b></dt>
+		<dd>in file DateTime.php, class <a href="docs/ActiveRecord/DateTime.html">DateTime</a><br>&nbsp;&nbsp;&nbsp;&nbsp;An extension of PHP's DateTime class to provide dirty flagging and easier formatting options.</dd>
+				<dt><b>DATETIME</b></dt>
+		<dd>in file Column.php, class constant <a href="docs/ActiveRecord/Column.html#constDATETIME">Column::DATETIME</a></dd>
+				<dt><b></b></dt>
+		<dd></dd>
+				<dt><b>datetime_to_string</b></dt>
+		<dd>in file OciAdapter.php, method <a href="docs/ActiveRecord/OciAdapter.html#methoddatetime_to_string">OciAdapter::datetime_to_string()</a></dd>
+				<dt><b>datetime_to_string</b></dt>
+		<dd>in file Connection.php, method <a href="docs/ActiveRecord/Connection.html#methoddatetime_to_string">Connection::datetime_to_string()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Return a date time formatted into the database's datetime format.</dd>
+				<dt><b>date_to_string</b></dt>
+		<dd>in file OciAdapter.php, method <a href="docs/ActiveRecord/OciAdapter.html#methoddate_to_string">OciAdapter::date_to_string()</a></dd>
+				<dt><b>date_to_string</b></dt>
+		<dd>in file Connection.php, method <a href="docs/ActiveRecord/Connection.html#methoddate_to_string">Connection::date_to_string()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Return a date time formatted into the database's date format.</dd>
+				<dt><b>DECIMAL</b></dt>
+		<dd>in file Column.php, class constant <a href="docs/ActiveRecord/Column.html#constDECIMAL">Column::DECIMAL</a></dd>
+				<dt><b>delete</b></dt>
+		<dd>in file SQLBuilder.php, method <a href="docs/ActiveRecord/SQLBuilder.html#methoddelete">SQLBuilder::delete()</a></dd>
+				<dt><b>delete</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methoddelete">Model::delete()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Deletes this model from the database and returns true if successful.</dd>
+				<dt><b>delete</b></dt>
+		<dd>in file Table.php, method <a href="docs/ActiveRecord/Table.html#methoddelete">Table::delete()</a></dd>
+				<dt><b>delete_all</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methoddelete_all">Model::delete_all()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Deletes records matching conditions in $options</dd>
+				<dt><b>denamespace</b></dt>
+		<dd>in file Utils.php, function <a href="docs/ActiveRecord/_Utils.html#functiondenamespace">denamespace()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Strips a class name of any namespaces and namespace operator.</dd>
+				<dt><b>destroy</b></dt>
+		<dd>in file Reflections.php, method <a href="docs/ActiveRecord/Reflections.html#methoddestroy">Reflections::destroy()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Destroys the cached ReflectionClass.</dd>
+				<dt><b>dirty_attributes</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methoddirty_attributes">Model::dirty_attributes()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns hash of attributes that have been modified since loading the model.</dd>
+				<dt><b>drop_connection</b></dt>
+		<dd>in file ConnectionManager.php, method <a href="docs/ActiveRecord/ConnectionManager.html#methoddrop_connection">ConnectionManager::drop_connection()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Drops the connection from the connection manager. Does not actually close it since there  is no close method in PDO.</dd>
+			</dl>
+</div>
+<p><a href="#top">top</a></p>
+<div id="e">
+	<h3>e</h3>
+	<dl>
+				<dt><b>$enclosure</b></dt>
+		<dd>in file Serialization.php, variable <a href="docs/ActiveRecord/CsvSerializer.html#var$enclosure">CsvSerializer::$enclosure</a></dd>
+				<dt><b>$errors</b></dt>
+		<dd>in file Model.php, variable <a href="docs/ActiveRecord/Model.html#var$errors">Model::$errors</a><br>&nbsp;&nbsp;&nbsp;&nbsp;An instance of <a href="docs/ActiveRecord/Errors.html">Errors</a> and will be instantiated once a write method is called.</dd>
+				<dt><b>Errors</b></dt>
+		<dd>in file Validations.php, class <a href="docs/ActiveRecord/Errors.html">Errors</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Class that holds <a href="docs/ActiveRecord/Validations.html">Validations</a> errors.</dd>
+				<dt><b>escape</b></dt>
+		<dd>in file Connection.php, method <a href="docs/ActiveRecord/Connection.html#methodescape">Connection::escape()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Escapes quotes in a string.</dd>
+				<dt><b></b></dt>
+		<dd></dd>
+				<dt><b>exists</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodexists">Model::exists()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Determine if a record exists.</dd>
+				<dt><b>Expressions</b></dt>
+		<dd>in file Expressions.php, class <a href="docs/ActiveRecord/Expressions.html">Expressions</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Templating like class for building SQL statements.</dd>
+				<dt><b></b></dt>
+		<dd></dd>
+				<dt><b>ExpressionsException</b></dt>
+		<dd>in file Exceptions.php, class <a href="docs/ActiveRecord/ExpressionsException.html">ExpressionsException</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Thrown by <a href="docs/ActiveRecord/Expressions.html">Expressions</a>.</dd>
+				<dt><b>extract_and_validate_options</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodextract_and_validate_options">Model::extract_and_validate_options()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Pulls out the options hash from $array if any.</dd>
+				<dt><b>extract_options</b></dt>
+		<dd>in file Utils.php, method <a href="docs/ActiveRecord/Utils.html#methodextract_options">Utils::extract_options()</a></dd>
+			</dl>
+</div>
+<p><a href="#top">top</a></p>
+<div id="f">
+	<h3>f</h3>
+	<dl>
+				<dt><b>$foreign_key</b></dt>
+		<dd>in file Relationship.php, variable <a href="docs/ActiveRecord/AbstractRelationship.html#var$foreign_key">AbstractRelationship::$foreign_key</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Name of the foreign key.</dd>
+				<dt><b>$FORMATS</b></dt>
+		<dd>in file DateTime.php, variable <a href="docs/ActiveRecord/DateTime.html#var$FORMATS">DateTime::$FORMATS</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Pre-defined format strings.</dd>
+				<dt><b>find</b></dt>
+		<dd>in file Table.php, method <a href="docs/ActiveRecord/Table.html#methodfind">Table::find()</a></dd>
+				<dt><b>find</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodfind">Model::find()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Find records in the database.</dd>
+				<dt><b>find_by_pk</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodfind_by_pk">Model::find_by_pk()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Finder method which will find by a single or array of primary keys for this model.</dd>
+				<dt><b>find_by_sql</b></dt>
+		<dd>in file Table.php, method <a href="docs/ActiveRecord/Table.html#methodfind_by_sql">Table::find_by_sql()</a></dd>
+				<dt><b>find_by_sql</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodfind_by_sql">Model::find_by_sql()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Find using a raw SELECT query.</dd>
+				<dt><b>first</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodfirst">Model::first()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Alias for self::find('first').</dd>
+				<dt><b>flag_dirty</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodflag_dirty">Model::flag_dirty()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Flags an attribute as dirty.</dd>
+				<dt><b>flush</b></dt>
+		<dd>in file Memcache.php, method <a href="docs/default/Memcache.html#methodflush">Memcache::flush()</a></dd>
+				<dt><b>flush</b></dt>
+		<dd>in file Cache.php, method <a href="docs/default/Cache.html#methodflush">Cache::flush()</a></dd>
+				<dt><b>format</b></dt>
+		<dd>in file DateTime.php, method <a href="docs/ActiveRecord/DateTime.html#methodformat">DateTime::format()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Formats the DateTime to the specified format.</dd>
+				<dt><b>full_messages</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Errors.html#methodfull_messages">Errors::full_messages()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns all the error messages as an array.</dd>
+			</dl>
+</div>
+<p><a href="#top">top</a></p>
+<div id="g">
+	<h3>g</h3>
+	<dl>
+				<dt><b>get</b></dt>
+		<dd>in file Reflections.php, method <a href="docs/ActiveRecord/Reflections.html#methodget">Reflections::get()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get a cached ReflectionClass.</dd>
+				<dt><b>get</b></dt>
+		<dd>in file Cache.php, method <a href="docs/default/Cache.html#methodget">Cache::get()</a></dd>
+				<dt><b>getIterator</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Errors.html#methodgetIterator">Errors::getIterator()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns an iterator to the error messages.</dd>
+				<dt><b>get_callbacks</b></dt>
+		<dd>in file CallBack.php, method <a href="docs/ActiveRecord/CallBack.html#methodget_callbacks">CallBack::get_callbacks()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns all the callbacks registered for a callback type.</dd>
+				<dt><b>get_called_class</b></dt>
+		<dd>in file Singleton.php, method <a href="docs/ActiveRecord/Singleton.html#methodget_called_class">Singleton::get_called_class()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Similar to a get_called_class() for a child class to invoke.</dd>
+				<dt><b>get_column_by_inflected_name</b></dt>
+		<dd>in file Table.php, method <a href="docs/ActiveRecord/Table.html#methodget_column_by_inflected_name">Table::get_column_by_inflected_name()</a></dd>
+				<dt><b>get_connection</b></dt>
+		<dd>in file Expressions.php, method <a href="docs/ActiveRecord/Expressions.html#methodget_connection">Expressions::get_connection()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the connection object.</dd>
+				<dt><b>get_connection</b></dt>
+		<dd>in file ConnectionManager.php, method <a href="docs/ActiveRecord/ConnectionManager.html#methodget_connection">ConnectionManager::get_connection()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;If $name is null then the default connection will be returned.</dd>
+				<dt><b>get_connection</b></dt>
+		<dd>in file Config.php, method <a href="docs/ActiveRecord/Config.html#methodget_connection">Config::get_connection()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a connection string if found otherwise null.</dd>
+				<dt><b>get_connections</b></dt>
+		<dd>in file Config.php, method <a href="docs/ActiveRecord/Config.html#methodget_connections">Config::get_connections()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the connection strings array.</dd>
+				<dt><b>get_date_format</b></dt>
+		<dd>in file Config.php, method <a href="docs/ActiveRecord/Config.html#methodget_date_format">Config::get_date_format()</a></dd>
+				<dt><b>get_default_connection</b></dt>
+		<dd>in file Config.php, method <a href="docs/ActiveRecord/Config.html#methodget_default_connection">Config::get_default_connection()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the name of the default connection.</dd>
+				<dt><b>get_default_connection_string</b></dt>
+		<dd>in file Config.php, method <a href="docs/ActiveRecord/Config.html#methodget_default_connection_string">Config::get_default_connection_string()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the default connection string or null if there is none.</dd>
+				<dt><b>get_format</b></dt>
+		<dd>in file DateTime.php, method <a href="docs/ActiveRecord/DateTime.html#methodget_format">DateTime::get_format()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the format string.</dd>
+				<dt><b>get_fully_qualified_table_name</b></dt>
+		<dd>in file Table.php, method <a href="docs/ActiveRecord/Table.html#methodget_fully_qualified_table_name">Table::get_fully_qualified_table_name()</a></dd>
+				<dt><b>get_logger</b></dt>
+		<dd>in file Config.php, method <a href="docs/ActiveRecord/Config.html#methodget_logger">Config::get_logger()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the logger</dd>
+				<dt><b>get_logging</b></dt>
+		<dd>in file Config.php, method <a href="docs/ActiveRecord/Config.html#methodget_logging">Config::get_logging()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Return whether or not logging is on</dd>
+				<dt><b>get_model_directory</b></dt>
+		<dd>in file Config.php, method <a href="docs/ActiveRecord/Config.html#methodget_model_directory">Config::get_model_directory()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the model directory.</dd>
+				<dt><b>get_namespaces</b></dt>
+		<dd>in file Utils.php, function <a href="docs/ActiveRecord/_Utils.html#functionget_namespaces">get_namespaces()</a></dd>
+				<dt><b>get_next_sequence_value</b></dt>
+		<dd>in file OciAdapter.php, method <a href="docs/ActiveRecord/OciAdapter.html#methodget_next_sequence_value">OciAdapter::get_next_sequence_value()</a></dd>
+				<dt><b>get_primary_key</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodget_primary_key">Model::get_primary_key()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Retrieve the primary key name.</dd>
+				<dt><b>get_raw_errors</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Errors.html#methodget_raw_errors">Errors::get_raw_errors()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the internal errors object.</dd>
+				<dt><b>get_real_attribute_name</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodget_real_attribute_name">Model::get_real_attribute_name()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the actual attribute name if $name is aliased.</dd>
+				<dt><b>get_record</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Validations.html#methodget_record">Validations::get_record()</a></dd>
+				<dt><b>get_relationship</b></dt>
+		<dd>in file Table.php, method <a href="docs/ActiveRecord/Table.html#methodget_relationship">Table::get_relationship()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Retrieve a relationship object for this table. Strict as true will throw an error  if the relationship name does not exist.</dd>
+				<dt><b>get_sequence_name</b></dt>
+		<dd>in file Connection.php, method <a href="docs/ActiveRecord/Connection.html#methodget_sequence_name">Connection::get_sequence_name()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Return a default sequence name for the specified table.</dd>
+				<dt><b>get_sequence_name</b></dt>
+		<dd>in file PgsqlAdapter.php, method <a href="docs/ActiveRecord/PgsqlAdapter.html#methodget_sequence_name">PgsqlAdapter::get_sequence_name()</a></dd>
+				<dt><b>get_table</b></dt>
+		<dd>in file Relationship.php, method <a href="docs/ActiveRecord/AbstractRelationship.html#methodget_table">AbstractRelationship::get_table()</a></dd>
+				<dt><b>get_validation_rules</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodget_validation_rules">Model::get_validation_rules()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns array of validator data for this Model.</dd>
+				<dt><b>get_values_for</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodget_values_for">Model::get_values_for()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns an associative array containing values for all the attributes in $attributes</dd>
+				<dt><b>get_where_values</b></dt>
+		<dd>in file SQLBuilder.php, method <a href="docs/ActiveRecord/SQLBuilder.html#methodget_where_values">SQLBuilder::get_where_values()</a></dd>
+				<dt><b>group</b></dt>
+		<dd>in file SQLBuilder.php, method <a href="docs/ActiveRecord/SQLBuilder.html#methodgroup">SQLBuilder::group()</a></dd>
+			</dl>
+</div>
+<p><a href="#top">top</a></p>
+<div id="h">
+	<h3>h</h3>
+	<dl>
+				<dt><b>HasAndBelongsToMany</b></dt>
+		<dd>in file Relationship.php, class <a href="docs/ActiveRecord/HasAndBelongsToMany.html">HasAndBelongsToMany</a></dd>
+				<dt><b>HasMany</b></dt>
+		<dd>in file Relationship.php, class <a href="docs/ActiveRecord/HasMany.html">HasMany</a><br>&nbsp;&nbsp;&nbsp;&nbsp;One-to-many relationship.</dd>
+				<dt><b>HasManyThroughAssociationException</b></dt>
+		<dd>in file Exceptions.php, class <a href="docs/ActiveRecord/HasManyThroughAssociationException.html">HasManyThroughAssociationException</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Thrown for has many thru exceptions.</dd>
+				<dt><b>HasOne</b></dt>
+		<dd>in file Relationship.php, class <a href="docs/ActiveRecord/HasOne.html">HasOne</a><br>&nbsp;&nbsp;&nbsp;&nbsp;One-to-one relationship.</dd>
+				<dt><b>has_namespace</b></dt>
+		<dd>in file Utils.php, function <a href="docs/ActiveRecord/_Utils.html#functionhas_namespace">has_namespace()</a></dd>
+				<dt><b>has_relationship</b></dt>
+		<dd>in file Table.php, method <a href="docs/ActiveRecord/Table.html#methodhas_relationship">Table::has_relationship()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Does a given relationship exist?</dd>
+				<dt><b>having</b></dt>
+		<dd>in file SQLBuilder.php, method <a href="docs/ActiveRecord/SQLBuilder.html#methodhaving">SQLBuilder::having()</a></dd>
+				<dt><b>human_attribute</b></dt>
+		<dd>in file Utils.php, method <a href="docs/ActiveRecord/Utils.html#methodhuman_attribute">Utils::human_attribute()</a></dd>
+			</dl>
+</div>
+<p><a href="#top">top</a></p>
+<div id="i">
+	<h3>i</h3>
+	<dl>
+				<dt><b>$includes_with_class_name_element</b></dt>
+		<dd>in file Serialization.php, variable <a href="docs/ActiveRecord/Serialization.html#var$includes_with_class_name_element">Serialization::$includes_with_class_name_element</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set this to true if the serializer needs to create a nested array keyed  on the name of the included classes such as for xml serialization.</dd>
+				<dt><b>$include_root</b></dt>
+		<dd>in file Serialization.php, variable <a href="docs/ActiveRecord/ArraySerializer.html#var$include_root">ArraySerializer::$include_root</a></dd>
+				<dt><b>$include_root</b></dt>
+		<dd>in file Serialization.php, variable <a href="docs/ActiveRecord/JsonSerializer.html#var$include_root">JsonSerializer::$include_root</a></dd>
+				<dt><b>$inflected_name</b></dt>
+		<dd>in file Column.php, variable <a href="docs/ActiveRecord/Column.html#var$inflected_name">Column::$inflected_name</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The inflected name of this columns .. hyphens/spaces will be =&gt; _.</dd>
+				<dt><b>Inflector</b></dt>
+		<dd>in file Inflector.php, class <a href="docs/ActiveRecord/Inflector.html">Inflector</a></dd>
+				<dt><b></b></dt>
+		<dd></dd>
+				<dt><b>initialize</b></dt>
+		<dd>in file Cache.php, method <a href="docs/default/Cache.html#methodinitialize">Cache::initialize()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Initializes the cache.</dd>
+				<dt><b>initialize</b></dt>
+		<dd>in file Config.php, method <a href="docs/ActiveRecord/Config.html#methodinitialize">Config::initialize()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Allows config initialization using a closure.</dd>
+				<dt><b>insert</b></dt>
+		<dd>in file SQLBuilder.php, method <a href="docs/ActiveRecord/SQLBuilder.html#methodinsert">SQLBuilder::insert()</a></dd>
+				<dt><b>insert</b></dt>
+		<dd>in file Table.php, method <a href="docs/ActiveRecord/Table.html#methodinsert">Table::insert()</a></dd>
+				<dt><b>insert_id</b></dt>
+		<dd>in file Connection.php, method <a href="docs/ActiveRecord/Connection.html#methodinsert_id">Connection::insert_id()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Retrieve the insert id of the last model saved.</dd>
+				<dt><b>instance</b></dt>
+		<dd>in file Singleton.php, method <a href="docs/ActiveRecord/Singleton.html#methodinstance">Singleton::instance()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Static method for instantiating a singleton object.</dd>
+				<dt><b>instance</b></dt>
+		<dd>in file Inflector.php, method <a href="docs/ActiveRecord/Inflector.html#methodinstance">Inflector::instance()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get an instance of the <a href="docs/ActiveRecord/Inflector.html">Inflector</a> class.</dd>
+				<dt><b>instance</b></dt>
+		<dd>in file Connection.php, method <a href="docs/ActiveRecord/Connection.html#methodinstance">Connection::instance()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Retrieve a database connection.</dd>
+				<dt><b>INTEGER</b></dt>
+		<dd>in file Column.php, class constant <a href="docs/ActiveRecord/Column.html#constINTEGER">Column::INTEGER</a></dd>
+				<dt><b>InterfaceRelationship</b></dt>
+		<dd>in file Relationship.php, class <a href="docs/ActiveRecord/InterfaceRelationship.html">InterfaceRelationship</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Interface for a table relationship.</dd>
+				<dt><b>invoke</b></dt>
+		<dd>in file CallBack.php, method <a href="docs/ActiveRecord/CallBack.html#methodinvoke">CallBack::invoke()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Invokes a callback.</dd>
+				<dt><b>is_a</b></dt>
+		<dd>in file Utils.php, method <a href="docs/ActiveRecord/Utils.html#methodis_a">Utils::is_a()</a></dd>
+				<dt><b>is_blank</b></dt>
+		<dd>in file Utils.php, method <a href="docs/ActiveRecord/Utils.html#methodis_blank">Utils::is_blank()</a></dd>
+				<dt><b>is_dirty</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodis_dirty">Model::is_dirty()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns true if the model has been modified.</dd>
+				<dt><b>is_empty</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Errors.html#methodis_empty">Errors::is_empty()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns true if there are no error messages.</dd>
+				<dt><b>is_hash</b></dt>
+		<dd>in file Utils.php, function <a href="docs/ActiveRecord/_Utils.html#functionis_hash">is_hash()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Somewhat naive way to determine if an array is a hash.</dd>
+				<dt><b>is_invalid</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodis_invalid">Model::is_invalid()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Runs validations and returns true if invalid.</dd>
+				<dt><b>is_invalid</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Errors.html#methodis_invalid">Errors::is_invalid()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns true if the specified attribute had any error messages.</dd>
+				<dt><b>is_lower</b></dt>
+		<dd>in file Inflector.php, method <a href="docs/ActiveRecord/Inflector.html#methodis_lower">Inflector::is_lower()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Determines if a string contains all lowercase characters.</dd>
+				<dt><b>is_new_record</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodis_new_record">Model::is_new_record()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Determine if the model is a new record.</dd>
+				<dt><b>is_odd</b></dt>
+		<dd>in file Utils.php, method <a href="docs/ActiveRecord/Utils.html#methodis_odd">Utils::is_odd()</a></dd>
+				<dt><b>is_options_hash</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodis_options_hash">Model::is_options_hash()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Determines if the specified array is a valid ActiveRecord options array.</dd>
+				<dt><b>is_poly</b></dt>
+		<dd>in file Relationship.php, method <a href="docs/ActiveRecord/AbstractRelationship.html#methodis_poly">AbstractRelationship::is_poly()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;What is this relationship's cardinality?</dd>
+				<dt><b>is_readonly</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodis_readonly">Model::is_readonly()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Determine if the model is in read-only mode.</dd>
+				<dt><b>is_upper</b></dt>
+		<dd>in file Inflector.php, method <a href="docs/ActiveRecord/Inflector.html#methodis_upper">Inflector::is_upper()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Determines if a string contains all uppercase characters.</dd>
+				<dt><b>is_valid</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodis_valid">Model::is_valid()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Run validations on model and returns whether or not model passed validation.</dd>
+			</dl>
+</div>
+<p><a href="#top">top</a></p>
+<div id="j">
+	<h3>j</h3>
+	<dl>
+				<dt><b>joins</b></dt>
+		<dd>in file SQLBuilder.php, method <a href="docs/ActiveRecord/SQLBuilder.html#methodjoins">SQLBuilder::joins()</a></dd>
+				<dt><b>JsonSerializer</b></dt>
+		<dd>in file Serialization.php, class <a href="docs/ActiveRecord/JsonSerializer.html">JsonSerializer</a><br>&nbsp;&nbsp;&nbsp;&nbsp;JSON serializer.</dd>
+			</dl>
+</div>
+<p><a href="#top">top</a></p>
+<div id="k">
+	<h3>k</h3>
+	<dl>
+				<dt><b>keyify</b></dt>
+		<dd>in file Inflector.php, method <a href="docs/ActiveRecord/Inflector.html#methodkeyify">Inflector::keyify()</a></dd>
+			</dl>
+</div>
+<p><a href="#top">top</a></p>
+<div id="l">
+	<h3>l</h3>
+	<dl>
+				<dt><b>$last_query</b></dt>
+		<dd>in file Connection.php, variable <a href="docs/ActiveRecord/Connection.html#var$last_query">Connection::$last_query</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The last query run.</dd>
+				<dt><b>$last_sql</b></dt>
+		<dd>in file Table.php, variable <a href="docs/ActiveRecord/Table.html#var$last_sql">Table::$last_sql</a></dd>
+				<dt><b>$length</b></dt>
+		<dd>in file Column.php, variable <a href="docs/ActiveRecord/Column.html#var$length">Column::$length</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The maximum length of this column.</dd>
+				<dt><b>last</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodlast">Model::last()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Alias for self::find('last')</dd>
+				<dt><b>limit</b></dt>
+		<dd>in file SqliteAdapter.php, method <a href="docs/ActiveRecord/SqliteAdapter.html#methodlimit">SqliteAdapter::limit()</a></dd>
+				<dt><b>limit</b></dt>
+		<dd>in file PgsqlAdapter.php, method <a href="docs/ActiveRecord/PgsqlAdapter.html#methodlimit">PgsqlAdapter::limit()</a></dd>
+				<dt><b>limit</b></dt>
+		<dd>in file OciAdapter.php, method <a href="docs/ActiveRecord/OciAdapter.html#methodlimit">OciAdapter::limit()</a></dd>
+				<dt><b>limit</b></dt>
+		<dd>in file Connection.php, method <a href="docs/ActiveRecord/Connection.html#methodlimit">Connection::limit()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Adds a limit clause to the SQL query.</dd>
+				<dt><b>limit</b></dt>
+		<dd>in file MysqlAdapter.php, method <a href="docs/ActiveRecord/MysqlAdapter.html#methodlimit">MysqlAdapter::limit()</a></dd>
+				<dt><b>limit</b></dt>
+		<dd>in file SQLBuilder.php, method <a href="docs/ActiveRecord/SQLBuilder.html#methodlimit">SQLBuilder::limit()</a></dd>
+				<dt><b>load</b></dt>
+		<dd>in file Table.php, method <a href="docs/ActiveRecord/Table.html#methodload">Table::load()</a></dd>
+				<dt><b>load</b></dt>
+		<dd>in file Relationship.php, method <a href="docs/ActiveRecord/BelongsTo.html#methodload">BelongsTo::load()</a></dd>
+				<dt><b>load</b></dt>
+		<dd>in file Relationship.php, method <a href="docs/ActiveRecord/AbstractRelationship.html#methodload">AbstractRelationship::load()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This will load the related model data.</dd>
+				<dt><b>load</b></dt>
+		<dd>in file Relationship.php, method <a href="docs/ActiveRecord/HasAndBelongsToMany.html#methodload">HasAndBelongsToMany::load()</a></dd>
+				<dt><b>load</b></dt>
+		<dd>in file Relationship.php, method <a href="docs/ActiveRecord/HasMany.html#methodload">HasMany::load()</a></dd>
+				<dt><b>load_eagerly</b></dt>
+		<dd>in file Relationship.php, method <a href="docs/ActiveRecord/BelongsTo.html#methodload_eagerly">BelongsTo::load_eagerly()</a></dd>
+				<dt><b>load_eagerly</b></dt>
+		<dd>in file Relationship.php, method <a href="docs/ActiveRecord/HasMany.html#methodload_eagerly">HasMany::load_eagerly()</a></dd>
+			</dl>
+</div>
+<p><a href="#top">top</a></p>
+<div id="m">
+	<h3>m</h3>
+	<dl>
+				<dt><b>$model</b></dt>
+		<dd>in file Serialization.php, variable <a href="docs/ActiveRecord/Serialization.html#var$model">Serialization::$model</a></dd>
+				<dt><b></b></dt>
+		<dd></dd>
+				<dt><b></b></dt>
+		<dd></dd>
+				<dt><b>map_raw_type</b></dt>
+		<dd>in file Column.php, method <a href="docs/ActiveRecord/Column.html#methodmap_raw_type">Column::map_raw_type()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the $type member variable.</dd>
+				<dt><b>Memcache</b></dt>
+		<dd>in file Memcache.php, class <a href="docs/default/Memcache.html">Memcache</a></dd>
+				<dt><b>merge_association_options</b></dt>
+		<dd>in file Relationship.php, method <a href="docs/ActiveRecord/AbstractRelationship.html#methodmerge_association_options">AbstractRelationship::merge_association_options()</a></dd>
+				<dt><b>Model</b></dt>
+		<dd>in file Model.php, class <a href="docs/ActiveRecord/Model.html">Model</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The base class for your models.</dd>
+				<dt><b></b></dt>
+		<dd></dd>
+				<dt><b>ModelException</b></dt>
+		<dd>in file Exceptions.php, class <a href="docs/ActiveRecord/ModelException.html">ModelException</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Thrown by <a href="docs/ActiveRecord/Model.html">Model</a>.</dd>
+				<dt><b>MysqlAdapter</b></dt>
+		<dd>in file MysqlAdapter.php, class <a href="docs/ActiveRecord/MysqlAdapter.html">MysqlAdapter</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Adapter for MySQL.</dd>
+			</dl>
+</div>
+<p><a href="#top">top</a></p>
+<div id="n">
+	<h3>n</h3>
+	<dl>
+				<dt><b>$name</b></dt>
+		<dd>in file Column.php, variable <a href="docs/ActiveRecord/Column.html#var$name">Column::$name</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The true name of this column.</dd>
+				<dt><b>$nullable</b></dt>
+		<dd>in file Column.php, variable <a href="docs/ActiveRecord/Column.html#var$nullable">Column::$nullable</a><br>&nbsp;&nbsp;&nbsp;&nbsp;True if this column allows null.</dd>
+				<dt><b>native_database_types</b></dt>
+		<dd>in file PgsqlAdapter.php, method <a href="docs/ActiveRecord/PgsqlAdapter.html#methodnative_database_types">PgsqlAdapter::native_database_types()</a></dd>
+				<dt><b>native_database_types</b></dt>
+		<dd>in file SqliteAdapter.php, method <a href="docs/ActiveRecord/SqliteAdapter.html#methodnative_database_types">SqliteAdapter::native_database_types()</a></dd>
+				<dt><b>native_database_types</b></dt>
+		<dd>in file OciAdapter.php, method <a href="docs/ActiveRecord/OciAdapter.html#methodnative_database_types">OciAdapter::native_database_types()</a></dd>
+				<dt><b>native_database_types</b></dt>
+		<dd>in file MysqlAdapter.php, method <a href="docs/ActiveRecord/MysqlAdapter.html#methodnative_database_types">MysqlAdapter::native_database_types()</a></dd>
+				<dt><b>native_database_types</b></dt>
+		<dd>in file Connection.php, method <a href="docs/ActiveRecord/Connection.html#methodnative_database_types">Connection::native_database_types()</a></dd>
+				<dt><b>next_sequence_value</b></dt>
+		<dd>in file PgsqlAdapter.php, method <a href="docs/ActiveRecord/PgsqlAdapter.html#methodnext_sequence_value">PgsqlAdapter::next_sequence_value()</a></dd>
+				<dt><b>next_sequence_value</b></dt>
+		<dd>in file Connection.php, method <a href="docs/ActiveRecord/Connection.html#methodnext_sequence_value">Connection::next_sequence_value()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Return SQL for getting the next value in a sequence.</dd>
+				<dt><b>next_sequence_value</b></dt>
+		<dd>in file OciAdapter.php, method <a href="docs/ActiveRecord/OciAdapter.html#methodnext_sequence_value">OciAdapter::next_sequence_value()</a></dd>
+			</dl>
+</div>
+<p><a href="#top">top</a></p>
+<div id="o">
+	<h3>o</h3>
+	<dl>
+				<dt><b>$options</b></dt>
+		<dd>in file Cache.php, variable <a href="docs/default/Cache.html#var$options">Cache::$options</a></dd>
+				<dt><b>$options</b></dt>
+		<dd>in file Relationship.php, variable <a href="docs/ActiveRecord/AbstractRelationship.html#var$options">AbstractRelationship::$options</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Options of the relationship.</dd>
+				<dt><b>$options</b></dt>
+		<dd>in file Serialization.php, variable <a href="docs/ActiveRecord/Serialization.html#var$options">Serialization::$options</a></dd>
+				<dt><b></b></dt>
+		<dd></dd>
+				<dt><b>OciAdapter</b></dt>
+		<dd>in file OciAdapter.php, class <a href="docs/ActiveRecord/OciAdapter.html">OciAdapter</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Adapter for OCI (not completed yet).</dd>
+				<dt><b>offset</b></dt>
+		<dd>in file SQLBuilder.php, method <a href="docs/ActiveRecord/SQLBuilder.html#methodoffset">SQLBuilder::offset()</a></dd>
+				<dt><b>on</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Errors.html#methodon">Errors::on()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the error message(s) for the specified attribute or null if none.</dd>
+				<dt><b>options_to_a</b></dt>
+		<dd>in file Serialization.php, method <a href="docs/ActiveRecord/Serialization.html#methodoptions_to_a">Serialization::options_to_a()</a></dd>
+				<dt><b>options_to_sql</b></dt>
+		<dd>in file Table.php, method <a href="docs/ActiveRecord/Table.html#methodoptions_to_sql">Table::options_to_sql()</a></dd>
+				<dt><b>order</b></dt>
+		<dd>in file SQLBuilder.php, method <a href="docs/ActiveRecord/SQLBuilder.html#methodorder">SQLBuilder::order()</a></dd>
+			</dl>
+</div>
+<p><a href="#top">top</a></p>
+<div id="p">
+	<h3>p</h3>
+	<dl>
+				<dt><b>$PDO_OPTIONS</b></dt>
+		<dd>in file Connection.php, variable <a href="docs/ActiveRecord/Connection.html#var$PDO_OPTIONS">Connection::$PDO_OPTIONS</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Default PDO options to set for each connection.</dd>
+				<dt><b>$pk</b></dt>
+		<dd>in file Column.php, variable <a href="docs/ActiveRecord/Column.html#var$pk">Column::$pk</a><br>&nbsp;&nbsp;&nbsp;&nbsp;True if this column is a primary key.</dd>
+				<dt><b>$pk</b></dt>
+		<dd>in file Table.php, variable <a href="docs/ActiveRecord/Table.html#var$pk">Table::$pk</a></dd>
+				<dt><b>$poly_relationship</b></dt>
+		<dd>in file Relationship.php, variable <a href="docs/ActiveRecord/AbstractRelationship.html#var$poly_relationship">AbstractRelationship::$poly_relationship</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Is the relationship single or multi.</dd>
+				<dt><b>$primary_key</b></dt>
+		<dd>in file Relationship.php, variable <a href="docs/ActiveRecord/HasMany.html#var$primary_key">HasMany::$primary_key</a></dd>
+				<dt><b>$primary_key</b></dt>
+		<dd>in file Model.php, variable <a href="docs/ActiveRecord/Model.html#var$primary_key">Model::$primary_key</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set this to override the default primary key name if different from default name of &quot;id&quot;.</dd>
+				<dt><b>$protocol</b></dt>
+		<dd>in file Connection.php, variable <a href="docs/ActiveRecord/Connection.html#var$protocol">Connection::$protocol</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The name of the protocol that is used.</dd>
+				<dt><b></b></dt>
+		<dd></dd>
+				<dt><b>ParameterMarker</b></dt>
+		<dd>in file Expressions.php, class constant <a href="docs/ActiveRecord/Expressions.html#constParameterMarker">Expressions::ParameterMarker</a></dd>
+				<dt><b>parse_connection_url</b></dt>
+		<dd>in file Connection.php, method <a href="docs/ActiveRecord/Connection.html#methodparse_connection_url">Connection::parse_connection_url()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Use this for any adapters that can take connection info in the form below  to set the adapters connection info.</dd>
+				<dt><b>PgsqlAdapter</b></dt>
+		<dd>in file PgsqlAdapter.php, class <a href="docs/ActiveRecord/PgsqlAdapter.html">PgsqlAdapter</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Adapter for Postgres (not completed yet)</dd>
+				<dt><b>pk_conditions</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodpk_conditions">Model::pk_conditions()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a hash containing the names =&gt; values of the primary key.</dd>
+				<dt><b>pluralize</b></dt>
+		<dd>in file Utils.php, method <a href="docs/ActiveRecord/Utils.html#methodpluralize">Utils::pluralize()</a></dd>
+				<dt><b>pluralize_if</b></dt>
+		<dd>in file Utils.php, method <a href="docs/ActiveRecord/Utils.html#methodpluralize_if">Utils::pluralize_if()</a></dd>
+			</dl>
+</div>
+<p><a href="#top">top</a></p>
+<div id="q">
+	<h3>q</h3>
+	<dl>
+				<dt><b>$QUOTE_CHARACTER</b></dt>
+		<dd>in file OciAdapter.php, variable <a href="docs/ActiveRecord/OciAdapter.html#var$QUOTE_CHARACTER">OciAdapter::$QUOTE_CHARACTER</a></dd>
+				<dt><b>$QUOTE_CHARACTER</b></dt>
+		<dd>in file PgsqlAdapter.php, variable <a href="docs/ActiveRecord/PgsqlAdapter.html#var$QUOTE_CHARACTER">PgsqlAdapter::$QUOTE_CHARACTER</a></dd>
+				<dt><b>$QUOTE_CHARACTER</b></dt>
+		<dd>in file Connection.php, variable <a href="docs/ActiveRecord/Connection.html#var$QUOTE_CHARACTER">Connection::$QUOTE_CHARACTER</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The quote character for stuff like column and field names.</dd>
+				<dt><b>query</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodquery">Model::query()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Helper method to run arbitrary queries against the model's database connection.</dd>
+				<dt><b>query</b></dt>
+		<dd>in file Connection.php, method <a href="docs/ActiveRecord/Connection.html#methodquery">Connection::query()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Execute a raw SQL query on the database.</dd>
+				<dt><b>query_and_attach_related_models_eagerly</b></dt>
+		<dd>in file Relationship.php, method <a href="docs/ActiveRecord/AbstractRelationship.html#methodquery_and_attach_related_models_eagerly">AbstractRelationship::query_and_attach_related_models_eagerly()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Eagerly loads relationships for $models.</dd>
+				<dt><b>query_and_fetch</b></dt>
+		<dd>in file Connection.php, method <a href="docs/ActiveRecord/Connection.html#methodquery_and_fetch">Connection::query_and_fetch()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Execute a raw SQL query and fetch the results.</dd>
+				<dt><b>query_and_fetch_one</b></dt>
+		<dd>in file Connection.php, method <a href="docs/ActiveRecord/Connection.html#methodquery_and_fetch_one">Connection::query_and_fetch_one()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Execute a query that returns maximum of one row with one field and return it.</dd>
+				<dt><b>query_column_info</b></dt>
+		<dd>in file SqliteAdapter.php, method <a href="docs/ActiveRecord/SqliteAdapter.html#methodquery_column_info">SqliteAdapter::query_column_info()</a></dd>
+				<dt><b>query_column_info</b></dt>
+		<dd>in file PgsqlAdapter.php, method <a href="docs/ActiveRecord/PgsqlAdapter.html#methodquery_column_info">PgsqlAdapter::query_column_info()</a></dd>
+				<dt><b>query_column_info</b></dt>
+		<dd>in file MysqlAdapter.php, method <a href="docs/ActiveRecord/MysqlAdapter.html#methodquery_column_info">MysqlAdapter::query_column_info()</a></dd>
+				<dt><b>query_column_info</b></dt>
+		<dd>in file OciAdapter.php, method <a href="docs/ActiveRecord/OciAdapter.html#methodquery_column_info">OciAdapter::query_column_info()</a></dd>
+				<dt><b>query_column_info</b></dt>
+		<dd>in file Connection.php, method <a href="docs/ActiveRecord/Connection.html#methodquery_column_info">Connection::query_column_info()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Query for column meta info and return statement handle.</dd>
+				<dt><b>query_for_tables</b></dt>
+		<dd>in file SqliteAdapter.php, method <a href="docs/ActiveRecord/SqliteAdapter.html#methodquery_for_tables">SqliteAdapter::query_for_tables()</a></dd>
+				<dt><b>query_for_tables</b></dt>
+		<dd>in file PgsqlAdapter.php, method <a href="docs/ActiveRecord/PgsqlAdapter.html#methodquery_for_tables">PgsqlAdapter::query_for_tables()</a></dd>
+				<dt><b>query_for_tables</b></dt>
+		<dd>in file MysqlAdapter.php, method <a href="docs/ActiveRecord/MysqlAdapter.html#methodquery_for_tables">MysqlAdapter::query_for_tables()</a></dd>
+				<dt><b>query_for_tables</b></dt>
+		<dd>in file OciAdapter.php, method <a href="docs/ActiveRecord/OciAdapter.html#methodquery_for_tables">OciAdapter::query_for_tables()</a></dd>
+				<dt><b>query_for_tables</b></dt>
+		<dd>in file Connection.php, method <a href="docs/ActiveRecord/Connection.html#methodquery_for_tables">Connection::query_for_tables()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Query for all tables in the current database. The result must only  contain one column which has the name of the table.</dd>
+				<dt><b>quote_name</b></dt>
+		<dd>in file Connection.php, method <a href="docs/ActiveRecord/Connection.html#methodquote_name">Connection::quote_name()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Quote a name like table names and field names.</dd>
+			</dl>
+</div>
+<p><a href="#top">top</a></p>
+<div id="r">
+	<h3>r</h3>
+	<dl>
+				<dt><b>$raw_type</b></dt>
+		<dd>in file Column.php, variable <a href="docs/ActiveRecord/Column.html#var$raw_type">Column::$raw_type</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The raw database specific type.</dd>
+				<dt><b>read</b></dt>
+		<dd>in file Memcache.php, method <a href="docs/default/Memcache.html#methodread">Memcache::read()</a></dd>
+				<dt><b>readonly</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodreadonly">Model::readonly()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Flag model as readonly.</dd>
+				<dt><b>ReadOnlyException</b></dt>
+		<dd>in file Exceptions.php, class <a href="docs/ActiveRecord/ReadOnlyException.html">ReadOnlyException</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Thrown when attempting to perform a write operation on a <a href="docs/ActiveRecord/Model.html">Model</a> that is in read-only mode.</dd>
+				<dt><b>read_attribute</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodread_attribute">Model::read_attribute()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Retrieves an attribute's value or a relationship object based on the name passed. If the attribute  accessed is 'id' then it will return the model's primary key no matter what the actual attribute name is  for the primary key.</dd>
+				<dt><b>RecordNotFound</b></dt>
+		<dd>in file Exceptions.php, class <a href="docs/ActiveRecord/RecordNotFound.html">RecordNotFound</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Thrown when a record cannot be found.</dd>
+				<dt><b>reestablish_connection</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodreestablish_connection">Model::reestablish_connection()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Re-establishes the database connection with a new connection.</dd>
+				<dt><b>reestablish_connection</b></dt>
+		<dd>in file Table.php, method <a href="docs/ActiveRecord/Table.html#methodreestablish_connection">Table::reestablish_connection()</a></dd>
+				<dt><b>Reflections</b></dt>
+		<dd>in file Reflections.php, class <a href="docs/ActiveRecord/Reflections.html">Reflections</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Simple class that caches reflections of classes.</dd>
+				<dt><b></b></dt>
+		<dd></dd>
+				<dt><b>register</b></dt>
+		<dd>in file CallBack.php, method <a href="docs/ActiveRecord/CallBack.html#methodregister">CallBack::register()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Register a new callback.</dd>
+				<dt><b></b></dt>
+		<dd></dd>
+				<dt><b>RelationshipException</b></dt>
+		<dd>in file Exceptions.php, class <a href="docs/ActiveRecord/RelationshipException.html">RelationshipException</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Thrown for relationship exceptions.</dd>
+				<dt><b>reload</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodreload">Model::reload()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Reloads the attributes and relationships of this object from the database.</dd>
+				<dt><b>reset_dirty</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodreset_dirty">Model::reset_dirty()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Resets the dirty array.</dd>
+				<dt><b>reverse_order</b></dt>
+		<dd>in file SQLBuilder.php, method <a href="docs/ActiveRecord/SQLBuilder.html#methodreverse_order">SQLBuilder::reverse_order()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Reverses an order clause.</dd>
+				<dt><b>rollback</b></dt>
+		<dd>in file Connection.php, method <a href="docs/ActiveRecord/Connection.html#methodrollback">Connection::rollback()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Rollback a transaction.</dd>
+				<dt><b>rules</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Validations.html#methodrules">Validations::rules()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns validator data.</dd>
+			</dl>
+</div>
+<p><a href="#top">top</a></p>
+<div id="s">
+	<h3>s</h3>
+	<dl>
+				<dt><b>$sequence</b></dt>
+		<dd>in file Model.php, variable <a href="docs/ActiveRecord/Model.html#var$sequence">Model::$sequence</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set this to explicitly specify the sequence name for the table.</dd>
+				<dt><b>$sequence</b></dt>
+		<dd>in file Column.php, variable <a href="docs/ActiveRecord/Column.html#var$sequence">Column::$sequence</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Name of the sequence to use for this column if any.</dd>
+				<dt><b>$sequence</b></dt>
+		<dd>in file Table.php, variable <a href="docs/ActiveRecord/Table.html#var$sequence">Table::$sequence</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Name of the sequence for this table (optional). Defaults to {$table}_seq</dd>
+				<dt><b></b></dt>
+		<dd></dd>
+				<dt><b>save</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodsave">Model::save()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Save the model to the database.</dd>
+				<dt><b>select</b></dt>
+		<dd>in file SQLBuilder.php, method <a href="docs/ActiveRecord/SQLBuilder.html#methodselect">SQLBuilder::select()</a></dd>
+				<dt><b>Serialization</b></dt>
+		<dd>in file Serialization.php, class <a href="docs/ActiveRecord/Serialization.html">Serialization</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Base class for Model serializers.</dd>
+				<dt><b></b></dt>
+		<dd></dd>
+				<dt><b>setDate</b></dt>
+		<dd>in file DateTime.php, method <a href="docs/ActiveRecord/DateTime.html#methodsetDate">DateTime::setDate()</a></dd>
+				<dt><b>setISODate</b></dt>
+		<dd>in file DateTime.php, method <a href="docs/ActiveRecord/DateTime.html#methodsetISODate">DateTime::setISODate()</a></dd>
+				<dt><b>setTime</b></dt>
+		<dd>in file DateTime.php, method <a href="docs/ActiveRecord/DateTime.html#methodsetTime">DateTime::setTime()</a></dd>
+				<dt><b>setTimestamp</b></dt>
+		<dd>in file DateTime.php, method <a href="docs/ActiveRecord/DateTime.html#methodsetTimestamp">DateTime::setTimestamp()</a></dd>
+				<dt><b>set_attributes</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodset_attributes">Model::set_attributes()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Mass update the model with data from an attributes hash.</dd>
+				<dt><b>set_cache</b></dt>
+		<dd>in file Config.php, method <a href="docs/ActiveRecord/Config.html#methodset_cache">Config::set_cache()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the url for the cache server to enable query caching.</dd>
+				<dt><b>set_class_name</b></dt>
+		<dd>in file Relationship.php, method <a href="docs/ActiveRecord/AbstractRelationship.html#methodset_class_name">AbstractRelationship::set_class_name()</a></dd>
+				<dt><b>set_connection</b></dt>
+		<dd>in file Expressions.php, method <a href="docs/ActiveRecord/Expressions.html#methodset_connection">Expressions::set_connection()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the connection object. It is highly recommended to set this so we can  use the adapter's native escaping mechanism.</dd>
+				<dt><b>set_connections</b></dt>
+		<dd>in file Config.php, method <a href="docs/ActiveRecord/Config.html#methodset_connections">Config::set_connections()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the list of database connection strings.</dd>
+				<dt><b>set_date_format</b></dt>
+		<dd>in file Config.php, method <a href="docs/ActiveRecord/Config.html#methodset_date_format">Config::set_date_format()</a></dd>
+				<dt><b>set_default_connection</b></dt>
+		<dd>in file Config.php, method <a href="docs/ActiveRecord/Config.html#methodset_default_connection">Config::set_default_connection()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set the name of the default connection.</dd>
+				<dt><b>set_encoding</b></dt>
+		<dd>in file MysqlAdapter.php, method <a href="docs/ActiveRecord/MysqlAdapter.html#methodset_encoding">MysqlAdapter::set_encoding()</a></dd>
+				<dt><b>set_encoding</b></dt>
+		<dd>in file PgsqlAdapter.php, method <a href="docs/ActiveRecord/PgsqlAdapter.html#methodset_encoding">PgsqlAdapter::set_encoding()</a></dd>
+				<dt><b>set_encoding</b></dt>
+		<dd>in file OciAdapter.php, method <a href="docs/ActiveRecord/OciAdapter.html#methodset_encoding">OciAdapter::set_encoding()</a></dd>
+				<dt><b>set_encoding</b></dt>
+		<dd>in file SqliteAdapter.php, method <a href="docs/ActiveRecord/SqliteAdapter.html#methodset_encoding">SqliteAdapter::set_encoding()</a></dd>
+				<dt><b>set_encoding</b></dt>
+		<dd>in file Connection.php, method <a href="docs/ActiveRecord/Connection.html#methodset_encoding">Connection::set_encoding()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Executes query to specify the character set for this connection.</dd>
+				<dt><b>set_inferred_class_name</b></dt>
+		<dd>in file Relationship.php, method <a href="docs/ActiveRecord/AbstractRelationship.html#methodset_inferred_class_name">AbstractRelationship::set_inferred_class_name()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Infers the $this-&gt;class_name based on $this-&gt;attribute_name.</dd>
+				<dt><b>set_keys</b></dt>
+		<dd>in file Relationship.php, method <a href="docs/ActiveRecord/HasMany.html#methodset_keys">HasMany::set_keys()</a></dd>
+				<dt><b>set_logger</b></dt>
+		<dd>in file Config.php, method <a href="docs/ActiveRecord/Config.html#methodset_logger">Config::set_logger()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the logger object for future SQL logging</dd>
+				<dt><b>set_logging</b></dt>
+		<dd>in file Config.php, method <a href="docs/ActiveRecord/Config.html#methodset_logging">Config::set_logging()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Turn on/off logging</dd>
+				<dt><b>set_model_directory</b></dt>
+		<dd>in file Config.php, method <a href="docs/ActiveRecord/Config.html#methodset_model_directory">Config::set_model_directory()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the directory where models are located.</dd>
+				<dt><b>set_relationship_from_eager_load</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodset_relationship_from_eager_load">Model::set_relationship_from_eager_load()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Add a model to the given named ($name) relationship.</dd>
+				<dt><b>set_timestamps</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodset_timestamps">Model::set_timestamps()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Updates a model's timestamps.</dd>
+				<dt><b>Singleton</b></dt>
+		<dd>in file Singleton.php, class <a href="docs/ActiveRecord/Singleton.html">Singleton</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This implementation of the singleton pattern does not conform to the strong definition  given by the &quot;Gang of Four.&quot; The __construct() method has not be privatized so that  a singleton pattern is capable of being achieved; however, multiple instantiations are also  possible. This allows the user more freedom with this pattern.</dd>
+				<dt><b></b></dt>
+		<dd></dd>
+				<dt><b>singularize</b></dt>
+		<dd>in file Utils.php, method <a href="docs/ActiveRecord/Utils.html#methodsingularize">Utils::singularize()</a></dd>
+				<dt><b>size</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Errors.html#methodsize">Errors::size()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the number of error messages there are.</dd>
+				<dt><b>SQLBuilder</b></dt>
+		<dd>in file SQLBuilder.php, class <a href="docs/ActiveRecord/SQLBuilder.html">SQLBuilder</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Helper class for building sql statements progmatically.</dd>
+				<dt><b></b></dt>
+		<dd></dd>
+				<dt><b>SqliteAdapter</b></dt>
+		<dd>in file SqliteAdapter.php, class <a href="docs/ActiveRecord/SqliteAdapter.html">SqliteAdapter</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Adapter for SQLite.</dd>
+				<dt><b>squeeze</b></dt>
+		<dd>in file Utils.php, method <a href="docs/ActiveRecord/Utils.html#methodsqueeze">Utils::squeeze()</a></dd>
+				<dt><b>StandardInflector</b></dt>
+		<dd>in file Inflector.php, class <a href="docs/ActiveRecord/StandardInflector.html">StandardInflector</a></dd>
+				<dt><b>STRING</b></dt>
+		<dd>in file Column.php, class constant <a href="docs/ActiveRecord/Column.html#constSTRING">Column::STRING</a></dd>
+				<dt><b>string_to_datetime</b></dt>
+		<dd>in file OciAdapter.php, method <a href="docs/ActiveRecord/OciAdapter.html#methodstring_to_datetime">OciAdapter::string_to_datetime()</a></dd>
+				<dt><b>string_to_datetime</b></dt>
+		<dd>in file Connection.php, method <a href="docs/ActiveRecord/Connection.html#methodstring_to_datetime">Connection::string_to_datetime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Converts a string representation of a datetime into a DateTime object.</dd>
+				<dt><b>supports_sequences</b></dt>
+		<dd>in file OciAdapter.php, method <a href="docs/ActiveRecord/OciAdapter.html#methodsupports_sequences">OciAdapter::supports_sequences()</a></dd>
+				<dt><b>supports_sequences</b></dt>
+		<dd>in file PgsqlAdapter.php, method <a href="docs/ActiveRecord/PgsqlAdapter.html#methodsupports_sequences">PgsqlAdapter::supports_sequences()</a></dd>
+				<dt><b>supports_sequences</b></dt>
+		<dd>in file Connection.php, method <a href="docs/ActiveRecord/Connection.html#methodsupports_sequences">Connection::supports_sequences()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Tells you if this adapter supports sequences or not.</dd>
+			</dl>
+</div>
+<p><a href="#top">top</a></p>
+<div id="t">
+	<h3>t</h3>
+	<dl>
+				<dt><b>$table</b></dt>
+		<dd>in file Table.php, variable <a href="docs/ActiveRecord/Table.html#var$table">Table::$table</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Name of the table.</dd>
+				<dt><b>$table_name</b></dt>
+		<dd>in file Model.php, variable <a href="docs/ActiveRecord/Model.html#var$table_name">Model::$table_name</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set this to explicitly specify the model's table name if different from inferred name.</dd>
+				<dt><b>$type</b></dt>
+		<dd>in file Column.php, variable <a href="docs/ActiveRecord/Column.html#var$type">Column::$type</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The type of this column: STRING, INTEGER, ...</dd>
+				<dt><b>$TYPE_MAPPING</b></dt>
+		<dd>in file Column.php, variable <a href="docs/ActiveRecord/Column.html#var$TYPE_MAPPING">Column::$TYPE_MAPPING</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Map a type to an column type.</dd>
+				<dt><b>Table</b></dt>
+		<dd>in file Table.php, class <a href="docs/ActiveRecord/Table.html">Table</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Manages reading and writing to a database table.</dd>
+				<dt><b>table</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodtable">Model::table()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the <a href="docs/ActiveRecord/Table.html">Table</a> object for this model.</dd>
+				<dt><b></b></dt>
+		<dd></dd>
+				<dt><b>tableize</b></dt>
+		<dd>in file Inflector.php, method <a href="docs/ActiveRecord/StandardInflector.html#methodtableize">StandardInflector::tableize()</a></dd>
+				<dt><b>tables</b></dt>
+		<dd>in file Connection.php, method <a href="docs/ActiveRecord/Connection.html#methodtables">Connection::tables()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns all tables for the current database.</dd>
+				<dt><b>table_name</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodtable_name">Model::table_name()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Retrieves the name of the table for this Model.</dd>
+				<dt><b>TIME</b></dt>
+		<dd>in file Column.php, class constant <a href="docs/ActiveRecord/Column.html#constTIME">Column::TIME</a></dd>
+				<dt><b>to_a</b></dt>
+		<dd>in file Serialization.php, method <a href="docs/ActiveRecord/Serialization.html#methodto_a">Serialization::to_a()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the attributes array.</dd>
+				<dt><b>to_array</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodto_array">Model::to_array()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns an Array representation of this model.</dd>
+				<dt><b>to_array</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Errors.html#methodto_array">Errors::to_array()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns all the error messages as an array, including error key.</dd>
+				<dt><b>to_csv</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodto_csv">Model::to_csv()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns an CSV representation of this model.</dd>
+				<dt><b>to_json</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodto_json">Model::to_json()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a JSON representation of this model.</dd>
+				<dt><b>to_s</b></dt>
+		<dd>in file SQLBuilder.php, method <a href="docs/ActiveRecord/SQLBuilder.html#methodto_s">SQLBuilder::to_s()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the SQL string.</dd>
+				<dt><b>to_s</b></dt>
+		<dd>in file Expressions.php, method <a href="docs/ActiveRecord/Expressions.html#methodto_s">Expressions::to_s()</a></dd>
+				<dt><b>to_s</b></dt>
+		<dd>in file Serialization.php, method <a href="docs/ActiveRecord/CsvSerializer.html#methodto_s">CsvSerializer::to_s()</a></dd>
+				<dt><b>to_s</b></dt>
+		<dd>in file Serialization.php, method <a href="docs/ActiveRecord/XmlSerializer.html#methodto_s">XmlSerializer::to_s()</a></dd>
+				<dt><b>to_s</b></dt>
+		<dd>in file Serialization.php, method <a href="docs/ActiveRecord/JsonSerializer.html#methodto_s">JsonSerializer::to_s()</a></dd>
+				<dt><b>to_s</b></dt>
+		<dd>in file Serialization.php, method <a href="docs/ActiveRecord/Serialization.html#methodto_s">Serialization::to_s()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Performs the serialization.</dd>
+				<dt><b>to_s</b></dt>
+		<dd>in file Serialization.php, method <a href="docs/ActiveRecord/ArraySerializer.html#methodto_s">ArraySerializer::to_s()</a></dd>
+				<dt><b>to_xml</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodto_xml">Model::to_xml()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns an XML representation of this model.</dd>
+				<dt><b>transaction</b></dt>
+		<dd>in file Connection.php, method <a href="docs/ActiveRecord/Connection.html#methodtransaction">Connection::transaction()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Starts a transaction.</dd>
+				<dt><b>transaction</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodtransaction">Model::transaction()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Executes a block of code inside a database transaction.</dd>
+			</dl>
+</div>
+<p><a href="#top">top</a></p>
+<div id="u">
+	<h3>u</h3>
+	<dl>
+				<dt><b>uncamelize</b></dt>
+		<dd>in file Inflector.php, method <a href="docs/ActiveRecord/Inflector.html#methoduncamelize">Inflector::uncamelize()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Convert a camelized string to a lowercase, underscored string.</dd>
+				<dt><b>UndefinedPropertyException</b></dt>
+		<dd>in file Exceptions.php, class <a href="docs/ActiveRecord/UndefinedPropertyException.html">UndefinedPropertyException</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Thrown when attempting to access an invalid property on a <a href="docs/ActiveRecord/Model.html">Model</a>.</dd>
+				<dt><b>underscorify</b></dt>
+		<dd>in file Inflector.php, method <a href="docs/ActiveRecord/Inflector.html#methodunderscorify">Inflector::underscorify()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Convert a string with space into a underscored equivalent.</dd>
+				<dt><b>unset_non_finder_options</b></dt>
+		<dd>in file Relationship.php, method <a href="docs/ActiveRecord/AbstractRelationship.html#methodunset_non_finder_options">AbstractRelationship::unset_non_finder_options()</a></dd>
+				<dt><b>update</b></dt>
+		<dd>in file SQLBuilder.php, method <a href="docs/ActiveRecord/SQLBuilder.html#methodupdate">SQLBuilder::update()</a></dd>
+				<dt><b>update</b></dt>
+		<dd>in file Table.php, method <a href="docs/ActiveRecord/Table.html#methodupdate">Table::update()</a></dd>
+				<dt><b>update_all</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodupdate_all">Model::update_all()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Updates records using set in $options</dd>
+				<dt><b>update_attribute</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodupdate_attribute">Model::update_attribute()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Updates a single attribute and saves the record without going through the normal validation procedure.</dd>
+				<dt><b>update_attributes</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodupdate_attributes">Model::update_attributes()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Mass update the model with an array of attribute data and saves to the database.</dd>
+				<dt><b>Utils</b></dt>
+		<dd>in file Utils.php, class <a href="docs/ActiveRecord/Utils.html">Utils</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Some internal utility functions.</dd>
+				<dt><b></b></dt>
+		<dd></dd>
+			</dl>
+</div>
+<p><a href="#top">top</a></p>
+<div id="v">
+	<h3>v</h3>
+	<dl>
+				<dt><b>$valid_association_options</b></dt>
+		<dd>in file Relationship.php, variable <a href="docs/ActiveRecord/AbstractRelationship.html#var$valid_association_options">AbstractRelationship::$valid_association_options</a><br>&nbsp;&nbsp;&nbsp;&nbsp;List of valid options for relationships.</dd>
+				<dt><b>$valid_association_options</b></dt>
+		<dd>in file Relationship.php, variable <a href="docs/ActiveRecord/HasMany.html#var$valid_association_options">HasMany::$valid_association_options</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Valid options to use for a <a href="docs/ActiveRecord/HasMany.html">HasMany</a> relationship.</dd>
+				<dt><b>$VALID_CALLBACKS</b></dt>
+		<dd>in file CallBack.php, variable <a href="docs/ActiveRecord/CallBack.html#var$VALID_CALLBACKS">CallBack::$VALID_CALLBACKS</a><br>&nbsp;&nbsp;&nbsp;&nbsp;List of available callbacks.</dd>
+				<dt><b>$VALID_OPTIONS</b></dt>
+		<dd>in file Model.php, variable <a href="docs/ActiveRecord/Model.html#var$VALID_OPTIONS">Model::$VALID_OPTIONS</a><br>&nbsp;&nbsp;&nbsp;&nbsp;A list of valid finder options.</dd>
+				<dt><b>validate</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Validations.html#methodvalidate">Validations::validate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Runs the validators.</dd>
+				<dt><b>validates_exclusion_of</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Validations.html#methodvalidates_exclusion_of">Validations::validates_exclusion_of()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is the opposite of validates_include_of.</dd>
+				<dt><b>validates_format_of</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Validations.html#methodvalidates_format_of">Validations::validates_format_of()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Validates that a value is matches a regex.</dd>
+				<dt><b>validates_inclusion_of</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Validations.html#methodvalidates_inclusion_of">Validations::validates_inclusion_of()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Validates that a value is included the specified array.</dd>
+				<dt><b>validates_inclusion_or_exclusion_of</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Validations.html#methodvalidates_inclusion_or_exclusion_of">Validations::validates_inclusion_or_exclusion_of()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Validates that a value is in or out of a specified list of values.</dd>
+				<dt><b>validates_length_of</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Validations.html#methodvalidates_length_of">Validations::validates_length_of()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Validates the length of a value.</dd>
+				<dt><b>validates_numericality_of</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Validations.html#methodvalidates_numericality_of">Validations::validates_numericality_of()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Validates that a value is numeric.</dd>
+				<dt><b>validates_presence_of</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Validations.html#methodvalidates_presence_of">Validations::validates_presence_of()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Validates a field is not null and not blank.</dd>
+				<dt><b>validates_size_of</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Validations.html#methodvalidates_size_of">Validations::validates_size_of()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Alias of <a href="docs/ActiveRecord/Validations.html#methodvalidates_length_of">validates_length_of</a></dd>
+				<dt><b>validates_uniqueness_of</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Validations.html#methodvalidates_uniqueness_of">Validations::validates_uniqueness_of()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Validates the uniqueness of a value.</dd>
+				<dt><b>Validations</b></dt>
+		<dd>in file Validations.php, class <a href="docs/ActiveRecord/Validations.html">Validations</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Manages validations for a <a href="docs/ActiveRecord/Model.html">Model</a>.</dd>
+				<dt><b></b></dt>
+		<dd></dd>
+				<dt><b>ValidationsArgumentError</b></dt>
+		<dd>in file Exceptions.php, class <a href="docs/ActiveRecord/ValidationsArgumentError.html">ValidationsArgumentError</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Thrown for validations exceptions.</dd>
+				<dt><b>values</b></dt>
+		<dd>in file Expressions.php, method <a href="docs/ActiveRecord/Expressions.html#methodvalues">Expressions::values()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns all the values currently bound.</dd>
+				<dt><b>values_for</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodvalues_for">Model::values_for()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Helper to return a hash of values for the specified attributes.</dd>
+				<dt><b>values_for_pk</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#methodvalues_for_pk">Model::values_for_pk()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Helper that creates an array of values for the primary key(s).</dd>
+				<dt><b>variablize</b></dt>
+		<dd>in file Inflector.php, method <a href="docs/ActiveRecord/StandardInflector.html#methodvariablize">StandardInflector::variablize()</a></dd>
+				<dt><b>variablize</b></dt>
+		<dd>in file Inflector.php, method <a href="docs/ActiveRecord/Inflector.html#methodvariablize">Inflector::variablize()</a></dd>
+			</dl>
+</div>
+<p><a href="#top">top</a></p>
+<div id="w">
+	<h3>w</h3>
+	<dl>
+				<dt><b>where</b></dt>
+		<dd>in file SQLBuilder.php, method <a href="docs/ActiveRecord/SQLBuilder.html#methodwhere">SQLBuilder::where()</a></dd>
+				<dt><b>wrap_strings_in_arrays</b></dt>
+		<dd>in file Utils.php, function <a href="docs/ActiveRecord/_Utils.html#functionwrap_strings_in_arrays">wrap_strings_in_arrays()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Wrap string definitions (if any) into arrays.</dd>
+				<dt><b>write</b></dt>
+		<dd>in file Memcache.php, method <a href="docs/default/Memcache.html#methodwrite">Memcache::write()</a></dd>
+			</dl>
+</div>
+<p><a href="#top">top</a></p>
+<div id="x">
+	<h3>x</h3>
+	<dl>
+				<dt><b>XmlSerializer</b></dt>
+		<dd>in file Serialization.php, class <a href="docs/ActiveRecord/XmlSerializer.html">XmlSerializer</a><br>&nbsp;&nbsp;&nbsp;&nbsp;XML serializer.</dd>
+			</dl>
+</div>
+<p><a href="#top">top</a></p>
+<div id="_">
+	<h3>_</h3>
+	<dl>
+				<dt><b>__call</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#method__call">Model::__call()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Enables the use of build|create for associations.</dd>
+				<dt><b>__callStatic</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#method__callStatic">Model::__callStatic()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Enables the use of dynamic finders.</dd>
+				<dt><b>__clone</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#method__clone">Model::__clone()</a></dd>
+				<dt><b>__construct</b></dt>
+		<dd>in file Relationship.php, method <a href="docs/ActiveRecord/HasMany.html#method__construct">HasMany::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Constructs a <a href="docs/ActiveRecord/HasMany.html">HasMany</a> relationship.</dd>
+				<dt><b>__construct</b></dt>
+		<dd>in file Relationship.php, method <a href="docs/ActiveRecord/HasAndBelongsToMany.html#method__construct">HasAndBelongsToMany::__construct()</a></dd>
+				<dt><b>__construct</b></dt>
+		<dd>in file Relationship.php, method <a href="docs/ActiveRecord/AbstractRelationship.html#method__construct">AbstractRelationship::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Constructs a relationship.</dd>
+				<dt><b>__construct</b></dt>
+		<dd>in file Relationship.php, method <a href="docs/ActiveRecord/BelongsTo.html#method__construct">BelongsTo::__construct()</a></dd>
+				<dt><b>__construct</b></dt>
+		<dd>in file Relationship.php, method <a href="docs/ActiveRecord/InterfaceRelationship.html#method__construct">InterfaceRelationship::__construct()</a></dd>
+				<dt><b>__construct</b></dt>
+		<dd>in file Serialization.php, method <a href="docs/ActiveRecord/Serialization.html#method__construct">Serialization::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Constructs a <a href="docs/ActiveRecord/Serialization.html">Serialization</a> object.</dd>
+				<dt><b>__construct</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Errors.html#method__construct">Errors::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Constructs an <a href="docs/ActiveRecord/Errors.html">Errors</a> object.</dd>
+				<dt><b>__construct</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Validations.html#method__construct">Validations::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Constructs a <a href="docs/ActiveRecord/Validations.html">Validations</a> object.</dd>
+				<dt><b>__construct</b></dt>
+		<dd>in file Table.php, method <a href="docs/ActiveRecord/Table.html#method__construct">Table::__construct()</a></dd>
+				<dt><b>__construct</b></dt>
+		<dd>in file SqliteAdapter.php, method <a href="docs/ActiveRecord/SqliteAdapter.html#method__construct">SqliteAdapter::__construct()</a></dd>
+				<dt><b>__construct</b></dt>
+		<dd>in file Serialization.php, method <a href="docs/ActiveRecord/XmlSerializer.html#method__construct">XmlSerializer::__construct()</a></dd>
+				<dt><b>__construct</b></dt>
+		<dd>in file SQLBuilder.php, method <a href="docs/ActiveRecord/SQLBuilder.html#method__construct">SQLBuilder::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Constructor.</dd>
+				<dt><b>__construct</b></dt>
+		<dd>in file CallBack.php, method <a href="docs/ActiveRecord/CallBack.html#method__construct">CallBack::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates a CallBack.</dd>
+				<dt><b>__construct</b></dt>
+		<dd>in file OciAdapter.php, method <a href="docs/ActiveRecord/OciAdapter.html#method__construct">OciAdapter::__construct()</a></dd>
+				<dt><b>__construct</b></dt>
+		<dd>in file Exceptions.php, method <a href="docs/ActiveRecord/UndefinedPropertyException.html#method__construct">UndefinedPropertyException::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the exception message to show the undefined property's name.</dd>
+				<dt><b>__construct</b></dt>
+		<dd>in file Exceptions.php, method <a href="docs/ActiveRecord/ReadOnlyException.html#method__construct">ReadOnlyException::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the exception message to show the undefined property's name.</dd>
+				<dt><b>__construct</b></dt>
+		<dd>in file Exceptions.php, method <a href="docs/ActiveRecord/DatabaseException.html#method__construct">DatabaseException::__construct()</a></dd>
+				<dt><b>__construct</b></dt>
+		<dd>in file Connection.php, method <a href="docs/ActiveRecord/Connection.html#method__construct">Connection::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Class Connection is a singleton. Access it via instance().</dd>
+				<dt><b>__construct</b></dt>
+		<dd>in file Memcache.php, method <a href="docs/default/Memcache.html#method__construct">Memcache::__construct()</a></dd>
+				<dt><b>__construct</b></dt>
+		<dd>in file Expressions.php, method <a href="docs/ActiveRecord/Expressions.html#method__construct">Expressions::__construct()</a></dd>
+				<dt><b>__construct</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#method__construct">Model::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Constructs a model.</dd>
+				<dt><b>__get</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Errors.html#method__get">Errors::__get()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Retrieve error messages for an attribute.</dd>
+				<dt><b>__get</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#method__get">Model::__get()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Magic method which delegates to read_attribute(). This handles firing off getter methods,  as they are not checked/invoked inside of read_attribute(). This circumvents the problem with  a getter being accessed with the same name as an actual attribute.</dd>
+				<dt><b>__isset</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#method__isset">Model::__isset()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Determines if an attribute exists for this <a href="docs/ActiveRecord/Model.html">Model</a>.</dd>
+				<dt><b>__set</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#method__set">Model::__set()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Magic allows un-defined attributes to set via $attributes.</dd>
+				<dt><b>__toString</b></dt>
+		<dd>in file Validations.php, method <a href="docs/ActiveRecord/Errors.html#method__toString">Errors::__toString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Convert all error messages to a String.</dd>
+				<dt><b>__toString</b></dt>
+		<dd>in file DateTime.php, method <a href="docs/ActiveRecord/DateTime.html#method__toString">DateTime::__toString()</a></dd>
+				<dt><b>__toString</b></dt>
+		<dd>in file Serialization.php, method <a href="docs/ActiveRecord/Serialization.html#method__toString">Serialization::__toString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the serialized object as a string.</dd>
+				<dt><b>__toString</b></dt>
+		<dd>in file SQLBuilder.php, method <a href="docs/ActiveRecord/SQLBuilder.html#method__toString">SQLBuilder::__toString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the SQL string.</dd>
+				<dt><b>__wakeup</b></dt>
+		<dd>in file Model.php, method <a href="docs/ActiveRecord/Model.html#method__wakeup">Model::__wakeup()</a></dd>
+			</dl>
+</div>
+<p><a href="#top">top</a></p>
+
+				
+			</div>
+
+			<div id="sidebar" class="span-7 last">
+				<div class="r-button" id="stable-build">
+					<a href="download.html">Get Stable Build - <em>v1.0</em><p>June 27 2010</p></a>
+				</div>
+				<div class="r-button" id="nightly-build">
+					<a href="download.html">Get Nightly Build <p>April 16, 2013</p></a>
+				</div>
+		
+				
+
+				<h2 id="news-header">
+	<a href="news.html">Latest News</a>
+	<a class="feed" href="projects/main/news.atom"><img src="images/feed-icon-14x14.png"/></a>
+</h2>
+
+<ul id="news-summary" class="icon-list">
+	
+	<li class="article">
+		<a href="news/6-website-downtime.html">Website Downtime</a>
+		
+		<div class="meta">
+			<em class="relative" title="2011-09-26T16:43:49Z">Mon Sep 26 12:43:49 -0400 2011</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="news/5-did-you-know-php-ar-has-eager-loading.html">Did you know? PHP-AR has Eager Loading</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-08-31T23:31:08Z">Tue Aug 31 19:31:08 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="news/4-php-activerecord-1-0-released.html">php-activerecord 1.0 released!</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-06-28T00:02:55Z">Sun Jun 27 20:02:55 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="news/3-website-updated-with-forums-and-wiki.html">Website updated with forums and wiki</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-06-18T21:37:23Z">Fri Jun 18 17:37:23 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="news/2-php-activerecord-1-0-rc1-released.html">php-activerecord 1.0 RC1 released!</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-04-07T00:00:15Z">Tue Apr 06 20:00:15 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+</ul>
+
+
+
+
+				<h2><a href="projects/main/activity.html">Recent Activity</a></h2>
+<ul id="recent-activity" class="icon-list">
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/1/topics/2069-re-support-for-multi-row-inserts-and-insert-ignore">Encotrei uma solução alternativa para varias inserções.
+
+Model::query(&#39;inse...</a>
+		
+		<div class="author">
+			by <a href="users/3231.html">renan henrique constancio</a>
+			<em class="relative" title="2017-03-17T14:08:17Z">Fri Mar 17 10:08:17 -0400 2017</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/4/topics/2068-re-can-t-get-groupname-using-associations">I have the same question, have you find the answer?</a>
+		
+		<div class="author">
+			by <a href="users/3194.html">Israel Sousa</a>
+			<em class="relative" title="2017-03-03T19:52:52Z">Fri Mar 03 14:52:52 -0500 2017</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/4/topics/2067-cannot-change-primary_key">Hi, 
+I cannot change  $primary_key of entity.
+After save is still in database o...</a>
+		
+		<div class="author">
+			by <a href="users/2785.html">Vasek Keberdle</a>
+			<em class="relative" title="2017-01-03T17:20:13Z">Tue Jan 03 12:20:13 -0500 2017</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/4/topics/2066-re-saving-date-to-mysql-problem">That static property is not available anymore in stable build 1.0, so that won&#39;t ...</a>
+		
+		<div class="author">
+			by <a href="users/3038.html">Jos Faber</a>
+			<em class="relative" title="2016-12-07T13:21:47Z">Wed Dec 07 08:21:47 -0500 2016</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/4/topics/2065-re-can-t-get-groupname-using-associations">Project is dead?</a>
+		
+		<div class="author">
+			by <a href="users/2948.html">McLotos McLotos</a>
+			<em class="relative" title="2016-09-28T09:58:57Z">Wed Sep 28 05:58:57 -0400 2016</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/96100175f2c268648a6b9fad3157620a6a6649d1">Merge pull request #284 from fetch/test-require-fix
+
+Using __DIR__ in require_onc...</a>
+		
+		<div class="author">
+			by <a href="users/3.html">Jacques Fuentes</a>
+			<em class="relative" title="2013-04-15T13:09:16Z">Mon Apr 15 09:09:16 -0400 2013</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/f8220bfaaf820f53d99e3c97b97b4a5ee2a0adfe">absolute path require_once</a>
+		
+		<div class="author">
+			by <a href="users/1660.html">Koen Punt</a>
+			<em class="relative" title="2013-04-15T08:07:39Z">Mon Apr 15 04:07:39 -0400 2013</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/17eb9c6155ae3fb8ac144ab07ee828a19a8be9c1">Re #282, pointing phpunit at the tests...</a>
+		
+		<div class="author">
+			by <a href="users/show/David%20Rogers%20.html">David Rogers </a>
+			<em class="relative" title="2013-04-11T20:39:30Z">Thu Apr 11 16:39:30 -0400 2013</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/ec53c90187577c9671fd16a1a96979aed067b8cf">Driving tests with phpunit.xml re #282</a>
+		
+		<div class="author">
+			by <a href="users/show/David%20Rogers%20.html">David Rogers </a>
+			<em class="relative" title="2013-04-11T20:26:29Z">Thu Apr 11 16:26:29 -0400 2013</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/d8c90b6a640da93539ec0e758e60800fcee9bc8a">Create .travis.yml to drive Travis CI build</a>
+		
+		<div class="author">
+			by <a href="users/show/David%20Rogers%20.html">David Rogers </a>
+			<em class="relative" title="2013-04-11T19:39:42Z">Thu Apr 11 15:39:42 -0400 2013</em>
+		</div>
+	</li>
+	</ul>
+
+
+				
+				
+			</div>
+		</div>
+	</div>
+
+	<div id="ajax-indicator" style="display:none;"><span>Loading...</span></div>
+
+	<div id="footer">
+	    <div class="container">
+	        <div class="span-24 last">
+			    <ul class="horizontal">
+	<li><a href="index.html">Home</a></li>
+	<li><a href="download/index/main.html">Download</a></li>
+	<li><a href="projects/main/wiki.html">Wiki</a></li>
+	<li><a href="docs.html">Documentation</a></li>
+	<li><a href="http://github.com/kla/php-activerecord/issues">Issues</a></li
+	<li><a href="news.html">News</a></li>
+	<li><a href="projects/main/boards.html">Forums</a></li>
+	<li class="last"><a href="welcome/about.html">About Us</a></li>
+</ul>
+<p>
+	<a href="http://www.phpactiverecord.org/" target="_top">phpactiverecord.org - An easy to use ORM for PHP</a><br/>
+	<a href="http://www.opensource.org/licenses/mit-license.php">MIT License</a>
+</p>
+
+	        </div>
+	    </div>
+	</div>
+</div>
+
+
+<script src="assets/core35c2.js?1366183229" type="text/javascript"></script>
+
+
+<script type="text/javascript">var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));</script>
+<script type="text/javascript">try { var pageTracker = _gat._getTracker("UA-10078176-1"); pageTracker._trackPageview();} catch(err) {}</script>
+
+
+
+</body>
+
+<!-- Mirrored from www.phpactiverecord.com/docs by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 May 2017 20:17:00 GMT -->
+</html>

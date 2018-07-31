@@ -1,0 +1,560 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+	
+<!-- Mirrored from www.phpactiverecord.com/projects/main/wiki/Associations?version=1 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 May 2017 20:17:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+		<title>PHP ActiveRecord - Associations - An easy to use ORM for PHP</title>
+		<link rel="canonical" href="http://www.phpactiverecord.org/projects/main/wiki/Associations"/>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="issue,bug,tracker" />
+		<meta name="description" content="Redmine" />
+		<meta name="googlebot" content="NOODP" />
+		<meta name="robots" content="index,follow,noodp,noydir" />
+		<link href="../../../stylesheets/blueprint/screen35c2.css?1366183229" media="screen" rel="stylesheet" type="text/css" />
+		<link href="../../../stylesheets/blueprint/print35c2.css?1366183229" media="print" rel="stylesheet" type="text/css" />
+		<!--[if lt IE 8]><link href="/stylesheets/blueprint/ie.css?1366183229" media="screen" rel="stylesheet" type="text/css" /><![endif]-->
+		<link href="../../../themes/basecamp/stylesheets/application3445.css?1366183196" media="screen" rel="stylesheet" type="text/css" />
+		<link href="../../../stylesheets/jstoolbar35c2.css?1366183229" media="screen" rel="stylesheet" type="text/css" />
+		<!--[if IE]>
+		    <style type="text/css">
+		      * html body{ width: expression( document.documentElement.clientWidth < 900 ? '900px' : '100%' ); }
+		      body {behavior: url(/stylesheets/csshover.htc?1366183229);}
+		    </style>
+		<![endif]-->
+		
+		<!-- page specific tags -->
+		
+  <link href="../../../stylesheets/scm35c2.css?1366183229" media="screen" rel="stylesheet" type="text/css" />
+		<link href="../../../themes/basecamp/stylesheets/main3445.css?1366183196" media="screen" rel="stylesheet" type="text/css" />
+	</head>
+<body>
+	
+<div id="wrapper">
+	<div id="header">
+	    <div class="container">
+	        <div class="span-7">
+	            <h1><a href="http://www.phpactiverecord.org/" target="_top">php.activerecord</a></h1>
+	        </div>
+	        <div class="span-13" id="main-nav">
+		        <ul class="horizontal"><li><a href="../../../download/index/main.html" class="download">Download</a></li>
+<li><a href="Associations.html" class="guides">Wiki</a></li>
+<li><a href="../../../docs/index/main.html" class="docs">Docs</a></li>
+<li><a href="../../../news/index/mainddf6.html?project_id=main" class="news">News</a></li>
+<li><a href="../boards.html" class="boards">Forums</a></li>
+<li><a href="../../../welcome/about/main.html" class="about-us">About us</a></li></ul>	        </div>
+          <div class="span-4 last" id="account-menu">
+		        <ul class="horizontal"><li><a href="../../../login.html" class="login">Sign in</a></li>
+<li><a href="../../../account/register.html" class="register">Register</a></li></ul>          </div>
+	    </div>
+	</div>
+
+	<div id="main-frame">
+		<div id="breadcrumbs" class="container">
+			<ul class="span-24 last">
+				<li><a href="../../../index.html">Home</a></li><li><a href="../wiki.html">Wiki</a></li><li class="last"><a href="Associations.html">Associations</a></li>
+			</ul>
+		</div>
+
+		<div id="main" class="container">
+			<div id="content" class="span-16 colborder">
+				
+				<div class="contextual">
+
+
+<span id="watcher"></span>
+
+
+
+
+
+
+<a href="Associations/history.html" class="icon icon-history">History</a>
+</div>
+
+
+
+
+    <p>    
+    
+    Version 1/11
+     - 
+    <a href="Associations67d9.html?version=2">Next &#187;</a> - 
+    <a href="Associations.html">Current version</a>
+    <br />
+    <em>Kien La, 2010-06-19 06:32 PM </em><br />
+    
+    </p>
+    <hr />
+
+
+<div class="wiki">
+  <h2 id="Associations">Associations<a href="#Associations" class="wiki-anchor">&para;</a></h2>
+
+
+	<ul id="topic-list">
+	<li>Common options</li>
+		<li><a href="Associations.html#has_many">has_many</a></li>
+		<li><a href="Associations.html#belongs_to">belongs_to</a></li>
+		<li><a href="Associations.html#has_one">has_one</a></li>
+		<li><a href="Associations.html#self-referential">Self-referential</a></li>
+	</ul>
+
+
+	<p>What are associations? By declaring associations on your models, you allow them to communicate with each other. These associations should match the way data in your tables relate to each other.</p>
+
+
+	<p>Common options</p>
+
+
+	<p>These are available amongst each type of association.</p>
+
+
+	<p><strong>conditions</strong>: string/array of <a href="Finders.html#conditions">finder conditions</a><br /><strong>readonly</strong>: whether associated objects can be <a href="Finders.html#read-only">saved/destroyed</a><br /><strong>select</strong>: specify fields in the <a href="Finders.html#select">select clause</a><br /><strong>class_name</strong>: the class name of the associated model<br /><strong>foreign_key</strong>: name of foreign_key</p>
+
+
+	<p>Let's take a look at these options with a few different association types</p>
+
+
+	<p>h5 conditions</p>
+
+
+	<p>Below, we specify that associated payments of an order object should not be void.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="r">class</span> <span class="cl">Order</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no">2</span>   <span class="r">static</span> <span class="lv">$has_many</span> = <span class="pd">array</span>(
+<span class="no">3</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">payments</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">conditions</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">void = ?</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="i">0</span>)))
+<span class="no">4</span>   );
+<span class="no">5</span> }
+</span></code></pre>
+
+	<h5>readonly</h5>
+
+
+	<p>If you add a readonly option to your association, then the associatied object cannot be saved, although, the base object can still be saved.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">Payment</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 2</span>   <span class="r">static</span> <span class="lv">$belongs_to</span> = <span class="pd">array</span>(
+<span class="no"> 3</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">user</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">readonly</span><span class="dl">'</span></span> =&gt; <span class="pc">true</span>)
+<span class="no"> 4</span>   );
+<span class="no"> 5</span> }
+<span class="no"> 6</span> 
+<span class="no"> 7</span> <span class="lv">$payment</span> = <span class="co">Payment</span>::first();
+<span class="no"> 8</span> <span class="lv">$payment</span>-&gt;paid = <span class="i">1</span>;
+<span class="no"> 9</span> <span class="lv">$payment</span>-&gt;save(); <span class="c"># this will save just fine</span>
+<span class="no"><strong>10</strong></span> 
+<span class="no">11</span> <span class="lv">$payment</span>-&gt;user-&gt;first_name = <span class="s"><span class="dl">'</span><span class="k">John</span><span class="dl">'</span></span>;
+<span class="no">12</span> <span class="lv">$payment</span>-&gt;user-&gt;save(); <span class="c"># this will throw a ReadOnlyException</span>
+</span></code></pre>
+
+	<h5>select</h5>
+
+
+	<p>Sometimes you may not need all of the fields back from one of your associations (e.g. it may be a ridiculously large table) and so you can specify the particular fields you want.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="r">class</span> <span class="cl">Payment</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no">2</span>   <span class="r">static</span> <span class="lv">$belongs_to</span> = <span class="pd">array</span>(
+<span class="no">3</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">person</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">select</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">id, first_name, last_name</span><span class="dl">'</span></span>)
+<span class="no">4</span>   );
+<span class="no">5</span> }
+</span></code></pre>
+
+	<h5>class_name</h5>
+
+
+	<p>In this example payment has a one-to-one relationship with a user, but we want to access the association thru "person." Thus, we have to provide the class name of the associated model; otherwise, ActiveRecord would try to look for a "Person" class.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="r">class</span> <span class="cl">Payment</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no">2</span>   <span class="r">static</span> <span class="lv">$belongs_to</span> = <span class="pd">array</span>(
+<span class="no">3</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">person</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">class_name</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">User</span><span class="dl">'</span></span>)
+<span class="no">4</span>   );
+<span class="no">5</span> }
+</span></code></pre>
+
+	<h5>has_many</h5>
+
+
+	<p>A one-to-many relationship. You should use a pluralized form of the associated model when declaring a has_many association, unless you want to use the class_name option.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="c"># one-to-many association with the model &quot;Payment&quot; </span>
+<span class="no"> 2</span> <span class="r">class</span> <span class="cl">User</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 3</span>   <span class="r">static</span> <span class="lv">$has_many</span> = <span class="pd">array</span>(
+<span class="no"> 4</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">payments</span><span class="dl">'</span></span>)
+<span class="no"> 5</span>   );
+<span class="no"> 6</span> }
+<span class="no"> 7</span> 
+<span class="no"> 8</span> <span class="lv">$user</span> = <span class="co">User</span>::first();
+<span class="no"> 9</span> <span class="pd">print_r</span>(<span class="lv">$user</span>-&gt;payments); <span class="c"># =&gt; will print an array of Payment objects</span>
+</span></code></pre> 
+
+	<p>Options (not part of common options)</p>
+
+
+	<p>limit/offset: limit the number of records<br />primary_key: name of the primary_key of the association (assumed to be "id")<br />group: GROUP BY clause<br />order: ORDER BY clause<br />through: the association used to go "through"</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="r">class</span> <span class="cl">Order</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no">2</span>   <span class="r">static</span> <span class="lv">$has_many</span> = <span class="pd">array</span>(
+<span class="no">3</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">payments</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">limit</span><span class="dl">'</span></span> =&gt; <span class="i">5</span>),
+<span class="no">4</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">items</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">order</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">name asc</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">group</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">type</span><span class="dl">'</span></span>)
+<span class="no">5</span>   );
+<span class="no">6</span> }
+</span></code></pre>
+
+	<p>has_many through</p>
+
+
+	<p>This is a convenient way to configure a many-to-many association. In this example an order is associated with users by going the its payments association.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">Order</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 2</span>   <span class="r">static</span> <span class="lv">$has_many</span> = <span class="pd">array</span>(
+<span class="no"> 3</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">payments</span><span class="dl">'</span></span>),
+<span class="no"> 4</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">users</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">through</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">payments</span><span class="dl">'</span></span>)
+<span class="no"> 5</span>   );
+<span class="no"> 6</span> }
+<span class="no"> 7</span> 
+<span class="no"> 8</span> <span class="r">class</span> <span class="cl">Payment</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 9</span>   <span class="r">static</span> <span class="lv">$belongs_to</span> = <span class="pd">array</span>(
+<span class="no"><strong>10</strong></span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">user</span><span class="dl">'</span></span>),
+<span class="no">11</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">order</span><span class="dl">'</span></span>)
+<span class="no">12</span>   );
+<span class="no">13</span> }
+<span class="no">14</span> 
+<span class="no">15</span> <span class="r">class</span> <span class="cl">User</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no">16</span>   <span class="r">static</span> <span class="lv">$has_many</span> = <span class="pd">array</span>(
+<span class="no">17</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">payments</span><span class="dl">'</span></span>)
+<span class="no">18</span>   );
+<span class="no">19</span> }
+<span class="no"><strong>20</strong></span> 
+<span class="no">21</span> <span class="lv">$order</span> = <span class="co">Order</span>::first();
+<span class="no">22</span> <span class="c"># direct access to users</span>
+<span class="no">23</span> <span class="pd">print_r</span>(<span class="lv">$order</span>-&gt;users); <span class="c"># will print an array of User object</span>
+</span></code></pre>
+
+	<p>belongs_to</p>
+
+
+	<p>This indicates a one-to-one relationship. Its difference from has_one is that the foreign key will be on the table which declares a belongs_to association. You should use a singular form of the associated model when declaring this association, unless you want to use the class_name option.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="r">class</span> <span class="cl">Payment</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no">2</span>   <span class="r">static</span> <span class="lv">$belongs_to</span> = <span class="pd">array</span>(
+<span class="no">3</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">user</span><span class="dl">'</span></span>)
+<span class="no">4</span>   );
+<span class="no">5</span> }
+<span class="no">6</span> 
+<span class="no">7</span> <span class="lv">$payment</span> = <span class="co">Payment</span>::first();
+<span class="no">8</span> <span class="pd">echo</span> <span class="lv">$payment</span>-&gt;user-&gt;first_name; <span class="c"># first_name of associated User object</span>
+</span></code></pre> 
+
+	<p>Options (not part of common options)</p>
+
+
+	<p>primary_key: name of the primary_key of the association (assumed to be "id")<br />has_one</p>
+
+
+	<p>This indicates a one-to-one relationship. A has_one will have the foreign key on the associated table unlike belongs_to. You should use a singular form of the associated model when declaring this association, unless you want to use the class_name option.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="r">class</span> <span class="cl">Payment</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no">2</span>   <span class="r">static</span> <span class="lv">$has_one</span> = <span class="pd">array</span>(
+<span class="no">3</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">receipt</span><span class="dl">'</span></span>)
+<span class="no">4</span>   );
+<span class="no">5</span> }
+</span></code></pre> 
+
+	<p>Options (not part of common options)</p>
+
+
+	<p>primary_key: name of the primary_key of the association (assumed to be "id")<br />through: the association used to go "through" <br />has_one through</p>
+
+
+	<p>A one-to-one association. In this example, an owner has a quarter_back by going through its team association.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">Owner</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 2</span>   <span class="r">static</span> <span class="lv">$has_one</span> = <span class="pd">array</span>(
+<span class="no"> 3</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">team</span><span class="dl">'</span></span>),
+<span class="no"> 4</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">quarter_back</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">through</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">team</span><span class="dl">'</span></span>)
+<span class="no"> 5</span>   );
+<span class="no"> 6</span> }
+<span class="no"> 7</span> 
+<span class="no"> 8</span> <span class="r">class</span> <span class="cl">Team</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 9</span>   <span class="r">static</span> <span class="lv">$belongs_to</span> = <span class="pd">array</span>(
+<span class="no"><strong>10</strong></span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">owner</span><span class="dl">'</span></span>)
+<span class="no">11</span>   );
+<span class="no">12</span> 
+<span class="no">13</span>   <span class="r">static</span> <span class="lv">$has_one</span> = <span class="pd">array</span>(
+<span class="no">14</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">quarter_back</span><span class="dl">'</span></span>)
+<span class="no">15</span>   );
+<span class="no">16</span> }
+<span class="no">17</span> 
+<span class="no">18</span> <span class="r">class</span> <span class="cl">QuarterBack</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no">19</span>   <span class="r">static</span> <span class="lv">$belongs_to</span> = <span class="pd">array</span>(
+<span class="no"><strong>20</strong></span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">team</span><span class="dl">'</span></span>)
+<span class="no">21</span>   );
+<span class="no">22</span> }
+</span></code></pre>
+
+	<p>Self-referential</p>
+
+
+	<p>Model's can declare associations to themselves. This can be helpful for table auditing, or in the example below, where a post would need to know about its parent.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="r">class</span> <span class="cl">Post</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no">2</span>   <span class="r">static</span> <span class="lv">$belongs_to</span> = <span class="pd">array</span>(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">parent_post</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">class_name</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">Post</span><span class="dl">'</span></span>));
+<span class="no">3</span> }
+</span></code></pre>
+</div>
+
+
+
+
+
+
+<p class="other-formats">Also available in:
+	<span><a href="Associationsa004.html?format=html&amp;version=1" class="html" rel="nofollow">HTML</a></span>
+	<span><a href="Associations854f.html?format=txt&amp;version=1" class="txt" rel="nofollow">TXT</a></span>
+</p>
+
+
+
+
+
+
+
+				
+			</div>
+
+			<div id="sidebar" class="span-7 last">
+				<div class="r-button" id="stable-build">
+					<a href="../../../download.html">Get Stable Build - <em>v1.0</em><p>June 27 2010</p></a>
+				</div>
+				<div class="r-button" id="nightly-build">
+					<a href="../../../download.html">Get Nightly Build <p>April 16, 2013</p></a>
+				</div>
+		
+				
+
+				<h2 id="news-header">
+	<a href="../../../news.html">Latest News</a>
+	<a class="feed" href="../news.atom"><img src="../../../images/feed-icon-14x14.png"/></a>
+</h2>
+
+<ul id="news-summary" class="icon-list">
+	
+	<li class="article">
+		<a href="../../../news/6-website-downtime.html">Website Downtime</a>
+		
+		<div class="meta">
+			<em class="relative" title="2011-09-26T16:43:49Z">Mon Sep 26 12:43:49 -0400 2011</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="../../../news/5-did-you-know-php-ar-has-eager-loading.html">Did you know? PHP-AR has Eager Loading</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-08-31T23:31:08Z">Tue Aug 31 19:31:08 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="../../../news/4-php-activerecord-1-0-released.html">php-activerecord 1.0 released!</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-06-28T00:02:55Z">Sun Jun 27 20:02:55 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="../../../news/3-website-updated-with-forums-and-wiki.html">Website updated with forums and wiki</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-06-18T21:37:23Z">Fri Jun 18 17:37:23 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="../../../news/2-php-activerecord-1-0-rc1-released.html">php-activerecord 1.0 RC1 released!</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-04-07T00:00:15Z">Tue Apr 06 20:00:15 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+</ul>
+
+
+
+
+				<h2><a href="../activity.html">Recent Activity</a></h2>
+<ul id="recent-activity" class="icon-list">
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/1/topics/2069-re-support-for-multi-row-inserts-and-insert-ignore">Encotrei uma solução alternativa para varias inserções.
+
+Model::query(&#39;inse...</a>
+		
+		<div class="author">
+			by <a href="../../../users/3231.html">renan henrique constancio</a>
+			<em class="relative" title="2017-03-17T14:08:17Z">Fri Mar 17 10:08:17 -0400 2017</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/4/topics/2068-re-can-t-get-groupname-using-associations">I have the same question, have you find the answer?</a>
+		
+		<div class="author">
+			by <a href="../../../users/3194.html">Israel Sousa</a>
+			<em class="relative" title="2017-03-03T19:52:52Z">Fri Mar 03 14:52:52 -0500 2017</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/4/topics/2067-cannot-change-primary_key">Hi, 
+I cannot change  $primary_key of entity.
+After save is still in database o...</a>
+		
+		<div class="author">
+			by <a href="../../../users/2785.html">Vasek Keberdle</a>
+			<em class="relative" title="2017-01-03T17:20:13Z">Tue Jan 03 12:20:13 -0500 2017</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/4/topics/2066-re-saving-date-to-mysql-problem">That static property is not available anymore in stable build 1.0, so that won&#39;t ...</a>
+		
+		<div class="author">
+			by <a href="../../../users/3038.html">Jos Faber</a>
+			<em class="relative" title="2016-12-07T13:21:47Z">Wed Dec 07 08:21:47 -0500 2016</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/4/topics/2065-re-can-t-get-groupname-using-associations">Project is dead?</a>
+		
+		<div class="author">
+			by <a href="../../../users/2948.html">McLotos McLotos</a>
+			<em class="relative" title="2016-09-28T09:58:57Z">Wed Sep 28 05:58:57 -0400 2016</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/96100175f2c268648a6b9fad3157620a6a6649d1">Merge pull request #284 from fetch/test-require-fix
+
+Using __DIR__ in require_onc...</a>
+		
+		<div class="author">
+			by <a href="../../../users/3.html">Jacques Fuentes</a>
+			<em class="relative" title="2013-04-15T13:09:16Z">Mon Apr 15 09:09:16 -0400 2013</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/f8220bfaaf820f53d99e3c97b97b4a5ee2a0adfe">absolute path require_once</a>
+		
+		<div class="author">
+			by <a href="../../../users/1660.html">Koen Punt</a>
+			<em class="relative" title="2013-04-15T08:07:39Z">Mon Apr 15 04:07:39 -0400 2013</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/17eb9c6155ae3fb8ac144ab07ee828a19a8be9c1">Re #282, pointing phpunit at the tests...</a>
+		
+		<div class="author">
+			by <a href="../../../users/show/David%20Rogers%20.html">David Rogers </a>
+			<em class="relative" title="2013-04-11T20:39:30Z">Thu Apr 11 16:39:30 -0400 2013</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/ec53c90187577c9671fd16a1a96979aed067b8cf">Driving tests with phpunit.xml re #282</a>
+		
+		<div class="author">
+			by <a href="../../../users/show/David%20Rogers%20.html">David Rogers </a>
+			<em class="relative" title="2013-04-11T20:26:29Z">Thu Apr 11 16:26:29 -0400 2013</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/d8c90b6a640da93539ec0e758e60800fcee9bc8a">Create .travis.yml to drive Travis CI build</a>
+		
+		<div class="author">
+			by <a href="../../../users/show/David%20Rogers%20.html">David Rogers </a>
+			<em class="relative" title="2013-04-11T19:39:42Z">Thu Apr 11 15:39:42 -0400 2013</em>
+		</div>
+	</li>
+	</ul>
+
+
+				
+  
+<h3>Wiki</h3>
+
+<a href="../wiki.html">Start page</a><br />
+<a href="Page_index.html">Index by title</a><br />
+<a href="Date_index.html">Index by date</a><br />
+
+
+				
+			</div>
+		</div>
+	</div>
+
+	<div id="ajax-indicator" style="display:none;"><span>Loading...</span></div>
+
+	<div id="footer">
+	    <div class="container">
+	        <div class="span-24 last">
+			    <ul class="horizontal">
+	<li><a href="../../../index.html">Home</a></li>
+	<li><a href="../../../download/index/main.html">Download</a></li>
+	<li><a href="Associations.html">Wiki</a></li>
+	<li><a href="../../../docs.html">Documentation</a></li>
+	<li><a href="http://github.com/kla/php-activerecord/issues">Issues</a></li
+	<li><a href="../../../news.html">News</a></li>
+	<li><a href="../boards.html">Forums</a></li>
+	<li class="last"><a href="../../../welcome/about.html">About Us</a></li>
+</ul>
+<p>
+	<a href="http://www.phpactiverecord.org/" target="_top">phpactiverecord.org - An easy to use ORM for PHP</a><br/>
+	<a href="http://www.opensource.org/licenses/mit-license.php">MIT License</a>
+</p>
+
+	        </div>
+	    </div>
+	</div>
+</div>
+
+
+<script src="../../../assets/core35c2.js?1366183229" type="text/javascript"></script>
+
+
+<script type="text/javascript">var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));</script>
+<script type="text/javascript">try { var pageTracker = _gat._getTracker("UA-10078176-1"); pageTracker._trackPageview();} catch(err) {}</script>
+
+
+
+</body>
+
+<!-- Mirrored from www.phpactiverecord.com/projects/main/wiki/Associations?version=1 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 May 2017 20:17:04 GMT -->
+</html>

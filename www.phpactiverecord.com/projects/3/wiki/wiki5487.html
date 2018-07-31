@@ -1,0 +1,1921 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.phpactiverecord.com/projects/3/wiki/export?format=html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 May 2017 20:19:08 GMT -->
+<head>
+<title>PHP ActiveRecord</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<style>
+body { font:80% Verdana,Tahoma,Arial,sans-serif; }
+h1, h2, h3, h4 {  font-family: "Trebuchet MS",Georgia,"Times New Roman",serif; }
+ul.toc { padding: 4px; margin-left: 0; }
+ul.toc li { list-style-type:none; }
+ul.toc li.heading2 { margin-left: 1em; }
+ul.toc li.heading3 { margin-left: 2em; }
+a.wiki-anchor { display: none; margin-left: 6px; text-decoration: none; }
+a.wiki-anchor:hover { color: #aaa !important; text-decoration: none; }
+h1:hover a.wiki-anchor, h2:hover a.wiki-anchor, h3:hover a.wiki-anchor { display: inline; color: #ddd; }
+</style>
+</head>
+<body>
+
+<strong>Index by title</strong>
+<ul>
+
+    <li><a href="#Associations">Associations</a></li>
+
+    <li><a href="#Basic_CRUD">Basic CRUD</a></li>
+
+    <li><a href="#Callbacks">Callbacks</a></li>
+
+    <li><a href="#Configuration__Setup">Configuration  Setup</a></li>
+
+    <li><a href="#Conventions">Conventions</a></li>
+
+    <li><a href="#Finders">Finders</a></li>
+
+    <li><a href="#Frameworks">Frameworks</a></li>
+
+    <li><a href="#Guides">Guides</a></li>
+
+    <li><a href="#Quick_Start">Quick Start</a></li>
+
+    <li><a href="#SQLBuilder">SQLBuilder</a></li>
+
+    <li><a href="#Utilities">Utilities</a></li>
+
+    <li><a href="#Validations">Validations</a></li>
+
+    <li><a href="#Wiki">Wiki</a></li>
+
+</ul>
+
+
+<hr />
+<a name="Associations" />
+<h2 id="Associations">Associations<a href="#Associations" class="wiki-anchor">&para;</a></h2>
+
+
+	<ul id="topic-list">
+	<li><a href="../../main/wiki/Associations.html#common-options">Common options</a></li>
+		<li><a href="../../main/wiki/Associations.html#has_many">has_many</a></li>
+		<li><a href="../../main/wiki/Associations.html#has_many_through" title="many to many">has_many through</a></li>
+		<li><a href="../../main/wiki/Associations.html#belongs_to">belongs_to</a></li>
+		<li><a href="../../main/wiki/Associations.html#has_one">has_one</a></li>
+		<li><a href="../../main/wiki/Associations.html#self-referential">Self-referential</a></li>
+	</ul>
+
+
+	<p>What are associations? By declaring associations on your models, you allow them to communicate with each other. These associations should match the way data in your tables relate to each other.</p>
+
+
+	<h4 id="common-options">Common options</h4>
+
+
+	<p>These are available amongst each type of association.</p>
+
+
+	<p><strong>conditions</strong>: string/array of <a href="../../main/wiki/Finders.html#conditions">finder conditions</a><br /><strong>readonly</strong>: whether associated objects can be <a href="../../main/wiki/Finders.html#read-only">saved/destroyed</a><br /><strong>select</strong>: specify fields in the <a href="../../main/wiki/Finders.html#select">select clause</a><br /><strong>class_name</strong>: the class name of the associated model<br /><strong>foreign_key</strong>: name of foreign_key</p>
+
+
+	<p>Let's take a look at these options with a few different association types</p>
+
+
+	<h5>conditions</h5>
+
+
+	<p>Below, we specify that associated payments of an order object should not be void.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="r">class</span> <span class="cl">Order</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no">2</span>   <span class="r">static</span> <span class="lv">$has_many</span> = <span class="pd">array</span>(
+<span class="no">3</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">payments</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">conditions</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">void = ?</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="i">0</span>)))
+<span class="no">4</span>   );
+<span class="no">5</span> }
+</span></code></pre>
+
+	<h5>readonly</h5>
+
+
+	<p>If you add a readonly option to your association, then the associatied object cannot be saved, although, the base object can still be saved.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">Payment</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 2</span>   <span class="r">static</span> <span class="lv">$belongs_to</span> = <span class="pd">array</span>(
+<span class="no"> 3</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">user</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">readonly</span><span class="dl">'</span></span> =&gt; <span class="pc">true</span>)
+<span class="no"> 4</span>   );
+<span class="no"> 5</span> }
+<span class="no"> 6</span> 
+<span class="no"> 7</span> <span class="lv">$payment</span> = <span class="co">Payment</span>::first();
+<span class="no"> 8</span> <span class="lv">$payment</span>-&gt;paid = <span class="i">1</span>;
+<span class="no"> 9</span> <span class="lv">$payment</span>-&gt;save(); <span class="c"># this will save just fine</span>
+<span class="no"><strong>10</strong></span> 
+<span class="no">11</span> <span class="lv">$payment</span>-&gt;user-&gt;first_name = <span class="s"><span class="dl">'</span><span class="k">John</span><span class="dl">'</span></span>;
+<span class="no">12</span> <span class="lv">$payment</span>-&gt;user-&gt;save(); <span class="c"># this will throw a ReadOnlyException</span>
+</span></code></pre>
+
+	<h5>select</h5>
+
+
+	<p>Sometimes you may not need all of the fields back from one of your associations (e.g. it may be a ridiculously large table) and so you can specify the particular fields you want.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="r">class</span> <span class="cl">Payment</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no">2</span>   <span class="r">static</span> <span class="lv">$belongs_to</span> = <span class="pd">array</span>(
+<span class="no">3</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">person</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">select</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">id, first_name, last_name</span><span class="dl">'</span></span>)
+<span class="no">4</span>   );
+<span class="no">5</span> }
+</span></code></pre>
+
+	<h5 id="class_name">class_name</h5>
+
+
+	<p>In this example payment has a one-to-one relationship with a user, but we want to access the association thru "person." Thus, we have to provide the class name of the associated model; otherwise, ActiveRecord would try to look for a "Person" class.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="r">class</span> <span class="cl">Payment</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no">2</span>   <span class="r">static</span> <span class="lv">$belongs_to</span> = <span class="pd">array</span>(
+<span class="no">3</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">person</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">class_name</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">User</span><span class="dl">'</span></span>)
+<span class="no">4</span>   );
+<span class="no">5</span> }
+</span></code></pre>
+
+	<h4 id="has_many">has_many</h4>
+
+
+	<p>A one-to-many relationship. You should use a pluralized form of the associated model when declaring a has_many association, unless you want to use the <a href="../../main/wiki/Associations.html#class_name">class_name</a> option.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="c"># one-to-many association with the model &quot;Payment&quot; </span>
+<span class="no"> 2</span> <span class="r">class</span> <span class="cl">User</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 3</span>   <span class="r">static</span> <span class="lv">$has_many</span> = <span class="pd">array</span>(
+<span class="no"> 4</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">payments</span><span class="dl">'</span></span>)
+<span class="no"> 5</span>   );
+<span class="no"> 6</span> }
+<span class="no"> 7</span> 
+<span class="no"> 8</span> <span class="lv">$user</span> = <span class="co">User</span>::first();
+<span class="no"> 9</span> <span class="pd">print_r</span>(<span class="lv">$user</span>-&gt;payments); <span class="c"># =&gt; will print an array of Payment objects</span>
+<span class="no"><strong>10</strong></span> 
+<span class="no">11</span> <span class="lv">$payment</span> = <span class="lv">$user</span>-&gt;create_payment(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">amount</span><span class="dl">'</span></span> =&gt; <span class="i">1</span>)); <span class="c"># build|create for associations.</span>
+</span></code></pre>
+
+	<p><img src="../../../images/guides/has_many.png" alt="" /></p>
+
+
+	<p>Options (not part of <a href="../../main/wiki/Associations.html#common-options">common options</a>)</p>
+
+
+	<p><strong>limit/offset</strong>: limit the number of records<br /><strong>primary_key</strong>: name of the primary_key of the association (assumed to be "id")<br /><strong>group</strong>: GROUP BY clause<br /><strong>order</strong>: ORDER BY clause<br /><strong>through</strong>: the association used to go "through"</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="r">class</span> <span class="cl">Order</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no">2</span>   <span class="r">static</span> <span class="lv">$has_many</span> = <span class="pd">array</span>(
+<span class="no">3</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">payments</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">limit</span><span class="dl">'</span></span> =&gt; <span class="i">5</span>),
+<span class="no">4</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">items</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">order</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">name asc</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">group</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">type</span><span class="dl">'</span></span>)
+<span class="no">5</span>   );
+<span class="no">6</span> }
+</span></code></pre>
+
+	<h5 id="has_many_through">has_many through (many to many)</h5>
+
+
+	<p>This is a convenient way to configure a many-to-many association. In this example an order is associated with users by going the its payments association.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">Order</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 2</span>   <span class="r">static</span> <span class="lv">$has_many</span> = <span class="pd">array</span>(
+<span class="no"> 3</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">payments</span><span class="dl">'</span></span>),
+<span class="no"> 4</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">users</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">through</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">payments</span><span class="dl">'</span></span>)
+<span class="no"> 5</span>   );
+<span class="no"> 6</span> }
+<span class="no"> 7</span> 
+<span class="no"> 8</span> <span class="r">class</span> <span class="cl">Payment</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 9</span>   <span class="r">static</span> <span class="lv">$belongs_to</span> = <span class="pd">array</span>(
+<span class="no"><strong>10</strong></span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">user</span><span class="dl">'</span></span>),
+<span class="no">11</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">order</span><span class="dl">'</span></span>)
+<span class="no">12</span>   );
+<span class="no">13</span> }
+<span class="no">14</span> 
+<span class="no">15</span> <span class="r">class</span> <span class="cl">User</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no">16</span>   <span class="r">static</span> <span class="lv">$has_many</span> = <span class="pd">array</span>(
+<span class="no">17</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">payments</span><span class="dl">'</span></span>)
+<span class="no">18</span>   );
+<span class="no">19</span> }
+<span class="no"><strong>20</strong></span> 
+<span class="no">21</span> <span class="lv">$order</span> = <span class="co">Order</span>::first();
+<span class="no">22</span> <span class="c"># direct access to users</span>
+<span class="no">23</span> <span class="pd">print_r</span>(<span class="lv">$order</span>-&gt;users); <span class="c"># will print an array of User object</span>
+</span></code></pre>
+
+	<p><img src="../../../images/guides/has_many_through.png" alt="" /></p>
+
+
+	<h4 id="belongs_to">belongs_to</h4>
+
+
+	<p>This indicates a one-to-one relationship. Its difference from <a href="../../main/wiki/Associations.html#has_one">has_one</a> is that the foreign key will be on the table which declares a belongs_to association. You should use a singular form of the associated model when declaring this association, unless you want to use the <a href="../../main/wiki/Associations.html#class_name">class_name</a> option.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="r">class</span> <span class="cl">Payment</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no">2</span>   <span class="r">static</span> <span class="lv">$belongs_to</span> = <span class="pd">array</span>(
+<span class="no">3</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">user</span><span class="dl">'</span></span>)
+<span class="no">4</span>   );
+<span class="no">5</span> }
+<span class="no">6</span> 
+<span class="no">7</span> <span class="lv">$payment</span> = <span class="co">Payment</span>::first();
+<span class="no">8</span> <span class="pd">echo</span> <span class="lv">$payment</span>-&gt;user-&gt;first_name; <span class="c"># first_name of associated User object</span>
+</span></code></pre> 
+
+	<p><img src="../../../images/guides/belongs_to.png" alt="" /></p>
+
+
+	<p>Options (not part of <a href="../../main/wiki/Associations.html#common-options">common options</a>)</p>
+
+
+	<p><strong>primary_key</strong>: name of the primary_key of the association (assumed to be "id")</p>
+
+
+	<h4 id="has_one">has_one</h4>
+
+
+	<p>This indicates a one-to-one relationship. A has_one will have the foreign key on the associated table unlike <a href="../../main/wiki/Associations.html#belongs_to">belongs_to</a>. You should use a singular form of the associated model when declaring this association, unless you want to use the <a href="../../main/wiki/Associations.html#class_name">class_name</a> option.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="r">class</span> <span class="cl">Payment</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no">2</span>   <span class="r">static</span> <span class="lv">$has_one</span> = <span class="pd">array</span>(
+<span class="no">3</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">receipt</span><span class="dl">'</span></span>)
+<span class="no">4</span>   );
+<span class="no">5</span> }
+</span></code></pre>
+
+	<p><img src="../../../images/guides/has_one.png" alt="" /></p>
+
+
+	<p>Options (not part of <a href="../../main/wiki/Associations.html#common-options">common options</a>)</p>
+
+
+	<p><strong>primary_key</strong>: name of the primary_key of the association (assumed to be "id")<br /><strong>through</strong>: the association used to go "through"</p>
+
+
+	<h5>has_one through</h5>
+
+
+	<p>A one-to-one association. In this example, an owner has a quarter_back by going through its team association.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">Owner</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 2</span>   <span class="r">static</span> <span class="lv">$has_one</span> = <span class="pd">array</span>(
+<span class="no"> 3</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">team</span><span class="dl">'</span></span>),
+<span class="no"> 4</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">quarter_back</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">through</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">team</span><span class="dl">'</span></span>)
+<span class="no"> 5</span>   );
+<span class="no"> 6</span> }
+<span class="no"> 7</span> 
+<span class="no"> 8</span> <span class="r">class</span> <span class="cl">Team</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 9</span>   <span class="r">static</span> <span class="lv">$belongs_to</span> = <span class="pd">array</span>(
+<span class="no"><strong>10</strong></span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">owner</span><span class="dl">'</span></span>)
+<span class="no">11</span>   );
+<span class="no">12</span> 
+<span class="no">13</span>   <span class="r">static</span> <span class="lv">$has_one</span> = <span class="pd">array</span>(
+<span class="no">14</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">quarter_back</span><span class="dl">'</span></span>)
+<span class="no">15</span>   );
+<span class="no">16</span> }
+<span class="no">17</span> 
+<span class="no">18</span> <span class="r">class</span> <span class="cl">QuarterBack</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no">19</span>   <span class="r">static</span> <span class="lv">$belongs_to</span> = <span class="pd">array</span>(
+<span class="no"><strong>20</strong></span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">team</span><span class="dl">'</span></span>)
+<span class="no">21</span>   );
+<span class="no">22</span> }
+</span></code></pre>
+
+	<p><img src="../../../images/guides/has_one_through.png" alt="" /></p>
+
+
+	<h4 id="self-referential">Self-referential</h4>
+
+
+	<p>Model's can declare associations to themselves. This can be helpful for table auditing, or in the example below, where a post would need to know about its parent.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="r">class</span> <span class="cl">Post</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no">2</span>   <span class="r">static</span> <span class="lv">$belongs_to</span> = <span class="pd">array</span>(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">parent_post</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">class_name</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">Post</span><span class="dl">'</span></span>));
+<span class="no">3</span> }
+</span></code></pre> 
+
+	<p><img src="../../../images/guides/belongs_to_self_referential.png" alt="" /></p>
+
+<hr />
+<a name="Basic_CRUD" />
+<h2 id="Basic-CRUD">Basic CRUD<a href="#Basic-CRUD" class="wiki-anchor">&para;</a></h2>
+
+
+	<ul id="topic-list">
+	<li><a href="../../main/wiki/Basic_CRUD.html#create">Create</a></li>
+		<li><a href="../../main/wiki/Basic_CRUD.html#read">Read</a></li>
+		<li><a href="../../main/wiki/Basic_CRUD.html#update">Update</a></li>
+		<li><a href="../../main/wiki/Basic_CRUD.html#delete">Delete</a></li>
+		<li><a href="../../main/wiki/Basic_CRUD.html#massive">Massive</a></li>
+	</ul>
+
+
+	<p><a href="http://en.wikipedia.org/wiki/Create,_read,_update_and_delete" class="external">CRUD</a> as defined by Wikipedia:</p>
+
+
+<blockquote>
+
+	<p>Create, read, update and delete (CRUD) are the four basic functions of persistent storage, a major part of nearly all computer software. Sometimes CRUD is expanded with the words retrieve instead of read or destroy instead of delete. It is also sometimes used to describe user interface conventions that facilitate viewing, searching, and changing information; often using computer-based forms and reports.</p>
+
+
+</blockquote>
+
+	<p>In other words, CRUD is the day-to-day tedium of saving and reading data. ActiveRecord removes the remedial and encumbering task of hand-writing SQL queries. Instead, you will only need to write the relevant parts to work with your data.</p>
+
+
+	<h4 id="create">Create</h4>
+
+
+	<p>This is where you save records to your database. Here we create a new post by instantiating a new object and then invoking the save() method.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="lv">$post</span> = <span class="r">new</span> <span class="co">Post</span>();
+<span class="no"> 2</span> <span class="lv">$post</span>-&gt;title = <span class="s"><span class="dl">'</span><span class="k">My first blog post!!</span><span class="dl">'</span></span>;
+<span class="no"> 3</span> <span class="lv">$post</span>-&gt;author_id = <span class="i">5</span>;
+<span class="no"> 4</span> <span class="lv">$post</span>-&gt;save();
+<span class="no"> 5</span> <span class="c"># INSERT INTO `posts` (title,author_id) VALUES('My first blog post!!', 5)</span>
+<span class="no"> 6</span> 
+<span class="no"> 7</span> <span class="c"># the below methods accomplish the same thing</span>
+<span class="no"> 8</span> 
+<span class="no"> 9</span> <span class="lv">$attributes</span> = <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">title</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">My first blog post!!</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">author_id</span><span class="dl">'</span></span> =&gt; <span class="i">5</span>);
+<span class="no"><strong>10</strong></span> <span class="lv">$post</span> = <span class="r">new</span> <span class="co">Post</span>(<span class="lv">$attributes</span>);
+<span class="no">11</span> <span class="lv">$post</span>-&gt;save();
+<span class="no">12</span> <span class="c"># same sql as above</span>
+<span class="no">13</span> 
+<span class="no">14</span> <span class="lv">$post</span> = <span class="co">Post</span>::create(<span class="lv">$attributes</span>);
+<span class="no">15</span> <span class="c"># same sql as above</span>
+</span></code></pre>
+
+	<h4 id="read">Read</h4>
+
+
+	<p>These are your basic methods to find and retrieve records from your database. See the <a href="#" class="wiki-page">Finders</a> section for more details.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="lv">$post</span> = <span class="co">Post</span>::find(<span class="i">1</span>);
+<span class="no"> 2</span> <span class="pd">echo</span> <span class="lv">$post</span>-&gt;title; <span class="c"># 'My first blog post!!'</span>
+<span class="no"> 3</span> <span class="pd">echo</span> <span class="lv">$post</span>-&gt;author_id; <span class="c"># 5</span>
+<span class="no"> 4</span> 
+<span class="no"> 5</span> <span class="c"># also the same since it is the first record in the db</span>
+<span class="no"> 6</span> <span class="lv">$post</span> = <span class="co">Post</span>::first();
+<span class="no"> 7</span> 
+<span class="no"> 8</span> <span class="c"># using dynamic finders</span>
+<span class="no"> 9</span> <span class="lv">$post</span> = <span class="co">Post</span>::find_by_name(<span class="s"><span class="dl">'</span><span class="k">The Decider</span><span class="dl">'</span></span>);
+<span class="no"><strong>10</strong></span> <span class="lv">$post</span> = <span class="co">Post</span>::find_by_name_and_id(<span class="s"><span class="dl">'</span><span class="k">The Bridge Builder</span><span class="dl">'</span></span>,<span class="i">100</span>);
+<span class="no">11</span> <span class="lv">$post</span> = <span class="co">Post</span>::find_by_name_or_id(<span class="s"><span class="dl">'</span><span class="k">The Bridge Builder</span><span class="dl">'</span></span>,<span class="i">100</span>);
+<span class="no">12</span> 
+<span class="no">13</span> <span class="c"># using some conditions</span>
+<span class="no">14</span> <span class="lv">$posts</span> = <span class="co">Post</span>::find(<span class="s"><span class="dl">'</span><span class="k">all</span><span class="dl">'</span></span>,<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">conditions</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">name=?</span><span class="dl">'</span></span>,<span class="s"><span class="dl">'</span><span class="k">The Bridge Builder</span><span class="dl">'</span></span>)));
+</span></code></pre>
+
+	<h4 id="update">Update</h4>
+
+
+	<p>To update you would just need to find a record first and then change one of its attributes. It keeps an array of attributes that are "dirty" (that have been modified) and so our sql will only update the fields modified.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="lv">$post</span> = <span class="co">Post</span>::find(<span class="i">1</span>);
+<span class="no">2</span> <span class="pd">echo</span> <span class="lv">$post</span>-&gt;title; <span class="c"># 'My first blog post!!'</span>
+<span class="no">3</span> <span class="lv">$post</span>-&gt;title = <span class="s"><span class="dl">'</span><span class="k">Some real title</span><span class="dl">'</span></span>;
+<span class="no">4</span> <span class="lv">$post</span>-&gt;save();
+<span class="no">5</span> <span class="c"># UPDATE `posts` SET title='Some real title' WHERE id=1</span>
+<span class="no">6</span> 
+<span class="no">7</span> <span class="lv">$post</span>-&gt;update_attributes(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">title</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">Some other title</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">author_id</span><span class="dl">'</span></span> =&gt; <span class="i">1</span>));
+<span class="no">8</span> <span class="c"># UPDATE `posts` SET title='Some other title', author_id=1 WHERE id=1</span>
+</span></code></pre>
+
+	<h4 id="delete">Delete</h4>
+
+
+	<p>Deleting a record will not destroy the object. This means that it will call sql to delete the record in your database, however, you can still use the object.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="lv">$post</span> = <span class="co">Post</span>::find(<span class="i">1</span>);
+<span class="no">2</span> <span class="lv">$post</span>-&gt;<span class="pd">delete</span>();
+<span class="no">3</span> <span class="c"># DELETE FROM `posts` WHERE id=1</span>
+<span class="no">4</span> 
+<span class="no">5</span> <span class="pd">echo</span> <span class="lv">$post</span>-&gt;title; <span class="c"># Some other title</span>
+</span></code></pre>
+
+	<h4 id="massive">Massive Update or Delete</h4>
+
+
+	<p>You can do a massive update or massive delete easily. Look at this example:</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="c"># MASSIVE UPDATE</span>
+<span class="no"> 2</span> <span class="c"># Model::table()-&gt;update(AttributesToUpdate, WhereToUpdate);</span>
+<span class="no"> 3</span> <span class="co">Post</span>::table()-&gt;update(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">title</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">Massive title!</span><span class="dl">'</span></span>, <span class="c">/* Other attributes... */</span>, <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">id</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="i">1</span>, <span class="i">3</span>, <span class="i">7</span>));
+<span class="no"> 4</span> <span class="c"># UPDATE `posts` SET title = `Massive title!` WHERE id IN (1, 3, 7)</span>
+<span class="no"> 5</span> 
+<span class="no"> 6</span> <span class="c"># MASSIVE DELETE</span>
+<span class="no"> 7</span> <span class="c"># Model::table()-&gt;delete(WhereToDelete);</span>
+<span class="no"> 8</span> <span class="co">Post</span>::table()-&gt;<span class="pd">delete</span>(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">id</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="i">5</span>, <span class="i">9</span>, <span class="i">26</span>, <span class="i">30</span>));
+<span class="no"> 9</span> <span class="c"># DELETE FROM `posts` WHERE id IN (5, 9, 26, 30)</span>
+</span></code></pre>
+
+<hr />
+<a name="Callbacks" />
+<h2 id="Callbacks">Callbacks<a href="#Callbacks" class="wiki-anchor">&para;</a></h2>
+
+
+	<ul id="topic-list">
+	<li><a href="../../main/wiki/Callbacks.html#before-callbacks">Before callbacks</a></li>
+		<li><a href="../../main/wiki/Callbacks.html#after-callbacks">After callbacks</a></li>
+	</ul>
+
+
+	<p>Callbacks allow the programmer to hook into the life cycle of an ActiveRecord\Model object. You can control the state of your object by declaring certain methods to be called before or after methods are invoked on your object inside of ActiveRecord.</p>
+
+
+	<h4 id="before-callbacks">Before callbacks</h4>
+
+
+	<p>If a before_* callback returns false, execution of any other callbacks after the offending callback will not be fired and the model will not be saved/deleted.</p>
+
+
+	<p><strong>before_save</strong>: called before a model is saved<br /><strong>before_create</strong>: called before a NEW model is to be inserted into the database<br /><strong>before_update</strong>: called before an existing model has been saved<br /><strong>before_validation</strong>: called before running validators<br /><strong>before_validation_on_create</strong>: called before validation on a NEW model being inserted<br /><strong>before_validation_on_update</strong>: same as above except for an existing model being saved<br /><strong>before_destroy</strong>: called before a model has been deleted</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">Order</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 2</span>   <span class="r">static</span> <span class="lv">$before_create</span> = <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">apply_tax</span><span class="dl">'</span></span>); <span class="c"># new records only</span>
+<span class="no"> 3</span>   <span class="r">static</span> <span class="lv">$before_save</span> = <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">upcase_state</span><span class="dl">'</span></span>); <span class="c"># new OR updated records</span>
+<span class="no"> 4</span> 
+<span class="no"> 5</span>   <span class="r">public</span> <span class="r">function</span> <span class="fu">apply_tax</span>() {
+<span class="no"> 6</span>     <span class="r">if</span> (<span class="lv">$this</span>-&gt;state == <span class="s"><span class="dl">'</span><span class="k">VA</span><span class="dl">'</span></span>)
+<span class="no"> 7</span>       <span class="lv">$tax</span> = <span class="fl">0.045</span>;
+<span class="no"> 8</span>     <span class="r">elseif</span> (<span class="lv">$this</span>-&gt;state == <span class="s"><span class="dl">'</span><span class="k">CA</span><span class="dl">'</span></span>)
+<span class="no"> 9</span>       <span class="lv">$tax</span> = <span class="fl">0.10</span>;
+<span class="no"><strong>10</strong></span>     <span class="r">else</span>
+<span class="no">11</span>       <span class="lv">$tax</span> = <span class="fl">0.02</span>;
+<span class="no">12</span> 
+<span class="no">13</span>     <span class="lv">$this</span>-&gt;tax = <span class="lv">$this</span>-&gt;price * <span class="lv">$tax</span>;
+<span class="no">14</span>   }
+<span class="no">15</span> 
+<span class="no">16</span>   <span class="r">public</span> <span class="r">function</span> <span class="fu">upcase_state</span>() {
+<span class="no">17</span>     <span class="lv">$this</span>-&gt;state = <span class="pd">strtoupper</span>(<span class="lv">$this</span>-&gt;state);
+<span class="no">18</span>   }
+<span class="no">19</span> }
+<span class="no"><strong>20</strong></span> 
+<span class="no">21</span> <span class="lv">$attributes</span> = <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">item_name</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">Honda Civic</span><span class="dl">'</span></span>,
+<span class="no">22</span>   <span class="s"><span class="dl">'</span><span class="k">price</span><span class="dl">'</span></span> =&gt; <span class="fl">7000.00</span>, <span class="s"><span class="dl">'</span><span class="k">state</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">va</span><span class="dl">'</span></span>);
+<span class="no">23</span> 
+<span class="no">24</span> <span class="lv">$order</span> = <span class="co">Order</span>::create(<span class="lv">$attributes</span>);
+<span class="no">25</span> <span class="pd">echo</span> <span class="lv">$order</span>-&gt;tax; <span class="c"># =&gt; 315.00</span>
+<span class="no">26</span> <span class="pd">echo</span> <span class="lv">$order</span>-&gt;state; <span class="c"># =&gt; VA</span>
+<span class="no">27</span> 
+<span class="no">28</span> <span class="c"># somehow our order changed states!</span>
+<span class="no">29</span> <span class="lv">$order</span>-&gt;state = <span class="s"><span class="dl">'</span><span class="k">nc</span><span class="dl">'</span></span>;
+<span class="no"><strong>30</strong></span> <span class="lv">$order</span>-&gt;save();
+<span class="no">31</span> <span class="pd">echo</span> <span class="lv">$order</span>-&gt;state; <span class="c"># =&gt; NC</span>
+</span></code></pre>
+
+	<h4 id="after-callbacks">After callbacks</h4>
+
+
+	<p><strong>after_save</strong>: called after a model is saved<br /><strong>after_create</strong>: called after a NEW model has been inserted into the database<br /><strong>after_update</strong>: called after an existing model has been saved<br /><strong>after_validation</strong>: called after running validators<br /><strong>after_validation_on_create</strong>: called after validation on a NEW model being inserted<br /><strong>after_validation_on_update</strong>: same as above except for an existing model being saved<br /><strong>after_destroy</strong>: called after a model has been deleted</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">User</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 2</span>   <span class="r">static</span> <span class="lv">$after_create</span> = <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">send_new_user_email</span><span class="dl">'</span></span>); <span class="c"># new records only</span>
+<span class="no"> 3</span>   <span class="r">static</span> <span class="lv">$after_destroy</span> = <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">delete_all_related_data</span><span class="dl">'</span></span>);
+<span class="no"> 4</span> 
+<span class="no"> 5</span>   <span class="r">public</span> <span class="r">function</span> <span class="fu">delete_all_related_data</span>() {
+<span class="no"> 6</span>     <span class="c"># delete all associated objects</span>
+<span class="no"> 7</span>   }
+<span class="no"> 8</span> 
+<span class="no"> 9</span>   <span class="r">public</span> <span class="r">function</span> <span class="fu">send_new_user_email</span>() {
+<span class="no"><strong>10</strong></span>     <span class="pd">mail</span>(<span class="lv">$this</span>-&gt;email, <span class="s"><span class="dl">&quot;</span><span class="k">Thanks for signing up, </span><span class="il"><span class="dl">{</span><span class="lv">$this</span>-&gt;name<span class="dl">}</span></span><span class="k">!</span><span class="dl">&quot;</span></span>, <span class="s"><span class="dl">&quot;</span><span class="k">The subject</span><span class="dl">&quot;</span></span>);
+<span class="no">11</span>   }
+<span class="no">12</span> }
+<span class="no">13</span> 
+<span class="no">14</span> <span class="lv">$attributes</span> = <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">name</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">Jax</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">email</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k"><a class="__cf_email__" href="../../../cdn-cgi/l/email-protection.html" data-cfemail="771918190e16371918190e165914181a">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></span><span class="dl">'</span></span>);
+<span class="no">15</span> <span class="lv">$user</span> = <span class="co">User</span>::create(<span class="lv">$attributes</span>);
+<span class="no">16</span> <span class="c"># an e-mail was just sent...</span>
+<span class="no">17</span> 
+<span class="no">18</span> <span class="lv">$user</span>-&gt;<span class="pd">delete</span>();
+<span class="no">19</span> <span class="c"># everything associated with this user was just deleted</span>
+</span></code></pre>
+
+<hr />
+<a name="Configuration__Setup" />
+<h2 id="Configuration-Setup">Configuration  Setup<a href="#Configuration-Setup" class="wiki-anchor">&para;</a></h2>
+
+
+	<ul id="topic-list">
+	<li><a href="../../main/wiki/Configuration__Setup.html#default-connection">Default connection</a></li>
+		<li><a href="../../main/wiki/Configuration__Setup.html#multi-connections">Multi-connections</a></li>
+		<li><a href="../../main/wiki/Configuration__Setup.html#encoding">Setting the encoding</a></li>
+	</ul>
+
+
+	<p>Setup is very easy and straight-forward. There are essentially only two configuration points you must concern yourself with:</p>
+
+
+	<ol>
+	<li>Setting the model auto_load directory.</li>
+		<li>Configuring your database connections.</li>
+	</ol>
+
+
+	<p>By setting the model auto_load directory, you are telling PHP where to look for your model classes. This means that you can have an app/folder structure of your choice as long as you have a real directory that holds your model classes. Each class should have it's own php file that is the same name of the class with a .php extension of course.</p>
+
+
+	<p>There are two ways you can initialize your configuration options. The easiest path is wrapping the calls in a closure which is sent through the Config initializer method. This is a neat and clean way to take advantage of PHP's new closure feature.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="c"># inclue the ActiveRecord library</span>
+<span class="no"> 2</span> <span class="pd">require_once</span> <span class="s"><span class="dl">'</span><span class="k">php-activerecord/ActiveRecord.php</span><span class="dl">'</span></span>;
+<span class="no"> 3</span> 
+<span class="no"> 4</span> <span class="co">ActiveRecord</span>\<span class="co">Config</span>::initialize(<span class="r">function</span>(<span class="lv">$cfg</span>)
+<span class="no"> 5</span> {
+<span class="no"> 6</span>   <span class="lv">$cfg</span>-&gt;set_model_directory(<span class="s"><span class="dl">'</span><span class="k">/path/to/your/model_directory</span><span class="dl">'</span></span>);
+<span class="no"> 7</span>   <span class="lv">$cfg</span>-&gt;set_connections(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">development</span><span class="dl">'</span></span> =&gt;
+<span class="no"> 8</span>     <span class="s"><span class="dl">'</span><span class="k">mysql://username:<a class="__cf_email__" href="../../../cdn-cgi/l/email-protection.html" data-cfemail="9cecfdefefebf3eef8dcf0f3fffdf0f4f3efe8">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/database_name</span><span class="dl">'</span></span>));
+<span class="no"> 9</span> });
+</span></code></pre>
+
+	<p>That's it! ActiveRecord takes care of the rest for you. It does not require that you map your table schema to yaml/xml files. It will query the database for this information and cache it so that it does not make multiple calls to the database for a single schema.</p>
+
+
+	<p>If you aren't feeling fancy, you can drop the closure and access the ActiveRecord\Config singleton directly.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="lv">$cfg</span> = <span class="co">ActiveRecord</span>\<span class="co">Config</span>::instance();
+<span class="no">2</span> <span class="lv">$cfg</span>-&gt;set_model_directory(<span class="s"><span class="dl">'</span><span class="k">/path/to/your/model_directory</span><span class="dl">'</span></span>);
+<span class="no">3</span> <span class="lv">$cfg</span>-&gt;set_connections(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">development</span><span class="dl">'</span></span> =&gt;
+<span class="no">4</span>   <span class="s"><span class="dl">'</span><span class="k">mysql://username:<a class="__cf_email__" href="../../../cdn-cgi/l/email-protection.html" data-cfemail="6313021010140c1107230f0c00020f0b0c1017">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/database_name</span><span class="dl">'</span></span>));
+</span></code></pre>
+
+	<h4 id="default-connections">Default connection</h4>
+
+
+	<p>The development connection is the default by convention. You can change this by setting a new default connection based off of one of the connections you passed to set_connections.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="lv">$connections</span> = <span class="pd">array</span>(
+<span class="no"> 2</span>   <span class="s"><span class="dl">'</span><span class="k">development</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">mysql://username:<a class="__cf_email__" href="../../../cdn-cgi/l/email-protection.html" data-cfemail="5020312323273f2234103c3f33313c383f2324">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/development</span><span class="dl">'</span></span>,
+<span class="no"> 3</span>   <span class="s"><span class="dl">'</span><span class="k">production</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">mysql://username:<a class="__cf_email__" href="../../../cdn-cgi/l/email-protection.html" data-cfemail="c1b1a0b2b2b6aeb3a581adaea2a0ada9aeb2b5">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/production</span><span class="dl">'</span></span>,
+<span class="no"> 4</span>   <span class="s"><span class="dl">'</span><span class="k">test</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">mysql://username:<a class="__cf_email__" href="../../../cdn-cgi/l/email-protection.html" data-cfemail="2858495b5b5f475a4c6844474b494440475b5c">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/test</span><span class="dl">'</span></span>
+<span class="no"> 5</span> );
+<span class="no"> 6</span> 
+<span class="no"> 7</span> <span class="c"># must issue a &quot;use&quot; statement in your closure if passing variables</span>
+<span class="no"> 8</span> <span class="co">ActiveRecord</span>\<span class="co">Config</span>::initialize(<span class="r">function</span>(<span class="lv">$cfg</span>) <span class="r">use</span> (<span class="lv">$connections</span>)
+<span class="no"> 9</span> {
+<span class="no"><strong>10</strong></span>   <span class="lv">$cfg</span>-&gt;set_model_directory(<span class="s"><span class="dl">'</span><span class="k">/path/to/your/model_directory</span><span class="dl">'</span></span>);
+<span class="no">11</span>   <span class="lv">$cfg</span>-&gt;set_connections(<span class="lv">$connections</span>);
+<span class="no">12</span> 
+<span class="no">13</span>   <span class="c"># default connection is now production</span>
+<span class="no">14</span>   <span class="lv">$cfg</span>-&gt;set_default_connection(<span class="s"><span class="dl">'</span><span class="k">production</span><span class="dl">'</span></span>);
+<span class="no">15</span> });
+</span></code></pre>
+
+	<h4 id="multi-connections">Multi-connections</h4>
+
+
+	<p>You can easily configure ActiveRecord to accept multiple database connections. All you have to do is specify the connection in the given model that should be using a different database.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="lv">$connections</span> = <span class="pd">array</span>(
+<span class="no"> 2</span>   <span class="s"><span class="dl">'</span><span class="k">development</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">mysql://username:<a class="__cf_email__" href="../../../cdn-cgi/l/email-protection.html" data-cfemail="0979687a7a7e667b6d4965666a686561667a7d">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/development</span><span class="dl">'</span></span>,
+<span class="no"> 3</span>   <span class="s"><span class="dl">'</span><span class="k">pgsql</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">pgsql://username:<a class="__cf_email__" href="../../../cdn-cgi/l/email-protection.html" data-cfemail="8dfdecfefefae2ffe9cde1e2eeece1e5e2fef9">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/development</span><span class="dl">'</span></span>,
+<span class="no"> 4</span>   <span class="s"><span class="dl">'</span><span class="k">sqlite</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">sqlite://my_database.db</span><span class="dl">'</span></span>,
+<span class="no"> 5</span>   <span class="s"><span class="dl">'</span><span class="k">oci</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">oci://username:<a class="__cf_email__" href="../../../cdn-cgi/l/email-protection.html" data-cfemail="3b4b5a4848484c54495f7b5754585a575354484f">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/xe</span><span class="dl">'</span></span>
+<span class="no"> 6</span> );
+<span class="no"> 7</span> 
+<span class="no"> 8</span> <span class="c"># must issue a &quot;use&quot; statement in your closure if passing variables</span>
+<span class="no"> 9</span> <span class="co">ActiveRecord</span>\<span class="co">Config</span>::initialize(<span class="r">function</span>(<span class="lv">$cfg</span>) <span class="r">use</span> (<span class="lv">$connections</span>)
+<span class="no"><strong>10</strong></span> {
+<span class="no">11</span>   <span class="lv">$cfg</span>-&gt;set_model_directory(<span class="s"><span class="dl">'</span><span class="k">/path/to/your/model_directory</span><span class="dl">'</span></span>);
+<span class="no">12</span>   <span class="lv">$cfg</span>-&gt;set_connections(<span class="lv">$connections</span>);
+<span class="no">13</span> });
+</span></code></pre>
+
+	<p>Your models would look like the following.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="c"># SomeOciModel.php</span>
+<span class="no"> 2</span> <span class="r">class</span> <span class="cl">SomeOciModel</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span>
+<span class="no"> 3</span> {
+<span class="no"> 4</span>   <span class="r">static</span> <span class="lv">$connection</span> = <span class="s"><span class="dl">'</span><span class="k">oci</span><span class="dl">'</span></span>;
+<span class="no"> 5</span> }
+<span class="no"> 6</span> 
+<span class="no"> 7</span> <span class="c"># SomeSqliteModel.php</span>
+<span class="no"> 8</span> <span class="r">class</span> <span class="cl">SomeSqliteModel</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span>
+<span class="no"> 9</span> {
+<span class="no"><strong>10</strong></span>   <span class="r">static</span> <span class="lv">$connection</span> = <span class="s"><span class="dl">'</span><span class="k">sqlite</span><span class="dl">'</span></span>;
+<span class="no">11</span> }
+</span></code></pre>
+
+	<p>You could also have a base 'connection' model so all sub-classes will inherit the db setting.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="c"># OciModels.php</span>
+<span class="no"> 2</span> <span class="r">abstract</span> <span class="r">class</span> <span class="cl">OciModels</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span>
+<span class="no"> 3</span> {
+<span class="no"> 4</span>   <span class="r">static</span> <span class="lv">$connection</span> = <span class="s"><span class="dl">'</span><span class="k">oci</span><span class="dl">'</span></span>;
+<span class="no"> 5</span> }
+<span class="no"> 6</span> 
+<span class="no"> 7</span> <span class="c"># AnotherOciModel.php</span>
+<span class="no"> 8</span> <span class="r">class</span> <span class="cl">AnotherOciModel</span> <span class="r">extends</span> <span class="co">OciModels</span>
+<span class="no"> 9</span> {
+<span class="no"><strong>10</strong></span>    <span class="c"># automatically inherits the oci database</span>
+<span class="no">11</span> }
+</span></code></pre>
+
+	<h4 id="encoding">Setting the encoding</h4>
+
+
+	<p>The character encoding can be specified in your connection parameters:</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="lv">$config</span>-&gt;set_connections(<span class="pd">array</span>(
+<span class="no">2</span>   <span class="s"><span class="dl">'</span><span class="k">development</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">mysql://user:<a class="__cf_email__" href="../../../cdn-cgi/l/email-protection.html" data-cfemail="d1a1b0a2a291bdbeb2b0bdb9bea2a5">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/mydb?charset=utf8</span><span class="dl">'</span></span>)
+<span class="no">3</span> );
+</span></code></pre>
+
+<hr />
+<a name="Conventions" />
+<h2 id="Conventions">Conventions<a href="#Conventions" class="wiki-anchor">&para;</a></h2>
+
+
+	<p>Because we have embraced a convention over configuration philosophy, using our library is not painful. The conventions are easy to remember which will also contribute to stream-lining your productivity as a developer.</p>
+
+
+	<p>If you've already seen the <a href="#" class="wiki-page">Configuration / Setup</a> guide, then you know that there isn't much to it. Therefore, using PHP ActiveRecord mainly requires you to acquaint yourself with some simple conventions. Once you've done that, you can move on to the more advanced features.</p>
+
+
+	<p>ActiveRecord assumes the following conventions:</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="c"># name of your class represents the singular form of your table name.</span>
+<span class="no">2</span> <span class="r">class</span> <span class="cl">Book</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {}
+<span class="no">3</span> 
+<span class="no">4</span> <span class="c"># your table name would be &quot;people&quot; </span>
+<span class="no">5</span> <span class="r">class</span> <span class="cl">Person</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {}
+</span></code></pre>
+
+	<p>The primary key of your table is named "id".</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="r">class</span> <span class="cl">Book</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {}
+<span class="no">2</span> 
+<span class="no">3</span> <span class="c"># SELECT * FROM `books` where id = 1</span>
+<span class="no">4</span> <span class="co">Book</span>::find(<span class="i">1</span>);
+</span></code></pre>
+
+	<h4>Overriding conventions</h4>
+
+
+	<p>Even through ActiveRecord prefers to make assumptions about your table and primary key names, you can override them. Here is a simple example showing how one could configure a specific model.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">Book</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span>
+<span class="no"> 2</span> {
+<span class="no"> 3</span>   <span class="c"># explicit table name since our table is not &quot;books&quot; </span>
+<span class="no"> 4</span>   <span class="r">static</span> <span class="lv">$table_name</span> = <span class="s"><span class="dl">'</span><span class="k">my_book</span><span class="dl">'</span></span>;
+<span class="no"> 5</span> 
+<span class="no"> 6</span>   <span class="c"># explicit pk since our pk is not &quot;id&quot; </span>
+<span class="no"> 7</span>   <span class="r">static</span> <span class="lv">$primary_key</span> = <span class="s"><span class="dl">'</span><span class="k">book_id</span><span class="dl">'</span></span>;
+<span class="no"> 8</span> 
+<span class="no"> 9</span>   <span class="c"># explicit connection name since we always want our test db with this model</span>
+<span class="no"><strong>10</strong></span>   <span class="r">static</span> <span class="lv">$connection</span> = <span class="s"><span class="dl">'</span><span class="k">test</span><span class="dl">'</span></span>;
+<span class="no">11</span> 
+<span class="no">12</span>   <span class="c"># explicit database name will generate sql like so =&gt; my_db.my_book</span>
+<span class="no">13</span>   <span class="r">static</span> <span class="lv">$db</span> = <span class="s"><span class="dl">'</span><span class="k">my_db</span><span class="dl">'</span></span>;
+<span class="no">14</span> }
+</span></code></pre>
+
+<hr />
+<a name="Finders" />
+<h2 id="Finders">Finders<a href="#Finders" class="wiki-anchor">&para;</a></h2>
+
+
+	<ul id="topic-list">
+	<li><a href="../../main/wiki/Finders.html#single-record-result">Single record result</a></li>
+		<li><a href="../../main/wiki/Finders.html#multiple-records-result">Multiple records result</a></li>
+		<li><a href="../../main/wiki/Finders.html#finder-options">Finder options</a></li>
+		<li><a href="../../main/wiki/Finders.html#conditions">Conditions</a></li>
+		<li><a href="../../main/wiki/Finders.html#limit-offset">Limit &#38; Offset</a></li>
+		<li><a href="../../main/wiki/Finders.html#order">Order</a></li>
+		<li><a href="../../main/wiki/Finders.html#select">Select</a></li>
+		<li><a href="../../main/wiki/Finders.html#from">From</a></li>
+		<li><a href="../../main/wiki/Finders.html#group">Group</a></li>
+		<li><a href="../../main/wiki/Finders.html#having">Having</a></li>
+		<li><a href="../../main/wiki/Finders.html#read-only">Read only</a></li>
+		<li><a href="../../main/wiki/Finders.html#dynamic-finders">Dynamic finders</a></li>
+		<li><a href="../../main/wiki/Finders.html#joins">Joins</a></li>
+		<li><a href="../../main/wiki/Finders.html#find-by-custom-sql">Find by custom SQL</a></li>
+		<li><a href="../../main/wiki/Finders.html#eager-loading">Eager loading associations</a></li>
+	</ul>
+
+
+	<p>ActiveRecord supports a number of methods by which you can find records such as: via primary key, dynamic field name finders. It has the ability to fetch all the records in a table with a simple call, or you can make use of options like order, limit, select, and group.</p>
+
+
+	<p>There are essentially two groups of finders you will be working with: <a href="../../main/wiki/Finders.html#single-record-result">a single record result</a> and <a href="../../main/wiki/Finders.html#multiple-records-result">multiple records result</a>. Sometimes there will be little transparency for the method calls, meaning you may use the same method to get either one, but you will pass an option to that method to signify which type of result you will fetch.</p>
+
+
+	<p>All methods used to fetch records from your database will go through <strong>Model::find()</strong>, with one exception, custom sql can be passed to <a href="../../main/wiki/Finders.html#find-by-custom-sql">Model::find_by_sql()</a>. In all cases, the finder methods in ActiveRecord are statically invoked. This means you will always use the following type of syntax.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="r">class</span> <span class="cl">Book</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {}
+<span class="no">2</span> 
+<span class="no">3</span> <span class="co">Book</span>::find(<span class="s"><span class="dl">'</span><span class="k">all</span><span class="dl">'</span></span>);
+<span class="no">4</span> <span class="co">Book</span>::find(<span class="s"><span class="dl">'</span><span class="k">last</span><span class="dl">'</span></span>);
+<span class="no">5</span> <span class="co">Book</span>::first();
+<span class="no">6</span> <span class="co">Book</span>::last();
+<span class="no">7</span> <span class="co">Book</span>::all();
+</span></code></pre>
+
+	<h4 id="single-record-result">Single record result</h4>
+
+
+	<p>Whenever you invoke a method which produces a single result, that method will return an instance of your model class. There are 3 different ways to fetch a single record result. We'll start with one of the most basic forms.</p>
+
+
+	<h4>Find by primary key</h4>
+
+
+	<p>You can grab a record by passing a primary key to the find method. You may pass an <a href="../../main/wiki/Finders.html#finder-options">options array</a> as the second argument for creating specific queries. If no record is found, a RecordNotFound exception will be thrown.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="c"># Grab the book with the primary key of 2</span>
+<span class="no">2</span> <span class="co">Book</span>::find(<span class="i">2</span>);
+<span class="no">3</span> <span class="c"># sql =&gt; SELECT * FROM `books` WHERE id = 2</span>
+</span></code></pre>
+
+	<h4>Find first</h4>
+
+
+	<p>You can get the first record back from your database two ways. If you do not pass conditions as the second argument, then this method will fetch all the results from your database, but will only return the very first result back to you. Null will be returned if no records are found.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="c"># Grab all books, but only return the first result back as your model object.</span>
+<span class="no">2</span> <span class="lv">$book</span> = <span class="co">Book</span>::first();
+<span class="no">3</span> <span class="pd">echo</span> <span class="s"><span class="dl">&quot;</span><span class="k">the first id is: </span><span class="il"><span class="dl">{</span><span class="lv">$book</span>-&gt;id<span class="dl">}</span></span><span class="dl">&quot;</span></span> <span class="c"># =&gt; the first id is: 1</span>
+<span class="no">4</span> <span class="c"># sql =&gt; SELECT * FROM `books`</span>
+<span class="no">5</span> 
+<span class="no">6</span> <span class="c"># this produces the same sql/result as above</span>
+<span class="no">7</span> <span class="co">Book</span>::find(<span class="s"><span class="dl">'</span><span class="k">first</span><span class="dl">'</span></span>);
+</span></code></pre>
+
+	<h4>Find last</h4>
+
+
+	<p>If you haven't yet fallen asleep reading this guide, you should've guessed this is the same as "find first", except that it will return the last result. Null will be returned if no records are found.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="c"># Grab all books, but only return the last result back as your model object.</span>
+<span class="no">2</span> <span class="lv">$book</span> = <span class="co">Book</span>::last();
+<span class="no">3</span> <span class="pd">echo</span> <span class="s"><span class="dl">&quot;</span><span class="k">the last id is: </span><span class="il"><span class="dl">{</span><span class="lv">$book</span>-&gt;id<span class="dl">}</span></span><span class="dl">&quot;</span></span> <span class="c"># =&gt; the last id is: 32</span>
+<span class="no">4</span> <span class="c"># sql =&gt; SELECT * FROM `books`</span>
+<span class="no">5</span> 
+<span class="no">6</span> <span class="c"># this produces the same sql/result as above</span>
+<span class="no">7</span> <span class="co">Book</span>::find(<span class="s"><span class="dl">'</span><span class="k">last</span><span class="dl">'</span></span>);
+</span></code></pre>
+
+	<h4 id="multiple-records-result">Multiple records result</h4>
+
+
+	<p>This type of result will always return an array of model objects. If your table holds no records, or your query yields no results, then an empty array will be given.</p>
+
+
+	<h4>Find by primary key</h4>
+
+
+	<p>Just like the single record result for find by primary key, you can pass an array to the find method for multiple primary keys. Again, you may pass an <a href="../../main/wiki/Finders.html#finder-options">options array</a> as the last argument for creating specific queries. Every key which you use as an argument must produce a corresponding record, otherwise, a RecordNotFound exception will be thrown.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="c"># Grab books with the primary key of 2 or 3</span>
+<span class="no">2</span> <span class="co">Book</span>::find(<span class="i">2</span>,<span class="i">3</span>);
+<span class="no">3</span> <span class="c"># sql =&gt; SELECT * FROM `books` WHERE id IN (2,3)</span>
+<span class="no">4</span> 
+<span class="no">5</span> <span class="c"># same as above</span>
+<span class="no">6</span> <span class="co">Book</span>::find(<span class="pd">array</span>(<span class="i">2</span>,<span class="i">3</span>));
+</span></code></pre>
+
+	<h4>Find all</h4>
+
+
+	<p>There are 2 more ways which you can use to get multiple records back from your database. They use different methods; however, they are basically the same thing. If you do not pass an <a href="../../main/wiki/Finders.html#finder-options">options array</a>, then it will fetch all records.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="c"># Grab all books from the database</span>
+<span class="no">2</span> <span class="co">Book</span>::all();
+<span class="no">3</span> <span class="c"># sql =&gt; SELECT * FROM `books`</span>
+<span class="no">4</span> 
+<span class="no">5</span> <span class="c"># same as above</span>
+<span class="no">6</span> <span class="co">Book</span>::find(<span class="s"><span class="dl">'</span><span class="k">all</span><span class="dl">'</span></span>);
+</span></code></pre>
+
+	<p>Here we pass some options to the same method so that we don't fetch <strong>every</strong> record.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="lv">$options</span> = <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">limit</span><span class="dl">'</span></span> =&gt; <span class="i">2</span>);
+<span class="no">2</span> <span class="co">Book</span>::all(<span class="lv">$options</span>);
+<span class="no">3</span> <span class="c"># sql =&gt; SELECT * FROM `books` LIMIT 0,2</span>
+<span class="no">4</span> 
+<span class="no">5</span> <span class="c"># same as above</span>
+<span class="no">6</span> <span class="co">Book</span>::find(<span class="s"><span class="dl">'</span><span class="k">all</span><span class="dl">'</span></span>, <span class="lv">$options</span>);
+</span></code></pre>
+
+	<h4 id="finder-options">Finder options</h4>
+
+
+	<p>There are a number of options available to pass to one of the finder methods for granularity. Let's start with one of the most important options: conditions.</p>
+
+
+	<h4 id="conditions">Conditions</h4>
+
+
+	<p>This is the "WHERE" of a SQL statement. By creating conditions, ActiveRecord will parse them into a corresponding "WHERE" SQL statement to filter out your results. Conditions can be extremely simple by only supplying a string. They can also be as complex as you'd like by creating a conditions string that uses ? marks as placeholders for values. Let's start with a simple example of a conditions string.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="c"># fetch all the cheap books!</span>
+<span class="no">2</span> <span class="co">Book</span>::all(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">conditions</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">price &lt; 15.00</span><span class="dl">'</span></span>));
+<span class="no">3</span> <span class="c"># sql =&gt; SELECT * FROM `books` WHERE price &lt; 15.00</span>
+<span class="no">4</span> 
+<span class="no">5</span> <span class="c"># fetch all books that have &quot;war&quot; somewhere in the title</span>
+<span class="no">6</span> <span class="co">Book</span>::find(<span class="s"><span class="dl">'</span><span class="k">all</span><span class="dl">'</span></span>, <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">conditions</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">&quot;</span><span class="k">title LIKE '%war%'</span><span class="dl">&quot;</span></span>));
+<span class="no">7</span> <span class="c"># sql =&gt; SELECT * FROM `books` WHERE title LIKE '%war%'</span>
+</span></code></pre>
+
+	<p>As stated, you can use *?* marks as placeholders for values which ActiveRecord will replace with your supplied values. The benefit of using this process is that ActiveRecord will escape your string in the backend with your database's native function to prevent SQL injection.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="c"># fetch all the cheap books!</span>
+<span class="no"> 2</span> <span class="co">Book</span>::all(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">conditions</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">price &lt; ?</span><span class="dl">'</span></span>, <span class="fl">15.00</span>)));
+<span class="no"> 3</span> <span class="c"># sql =&gt; SELECT * FROM `books` WHERE price &lt; 15.00</span>
+<span class="no"> 4</span> 
+<span class="no"> 5</span> <span class="c"># fetch all lousy romance novels</span>
+<span class="no"> 6</span> <span class="co">Book</span>::find(<span class="s"><span class="dl">'</span><span class="k">all</span><span class="dl">'</span></span>, <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">conditions</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">genre = ?</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">Romance</span><span class="dl">'</span></span>)));
+<span class="no"> 7</span> <span class="c"># sql =&gt; SELECT * FROM `books` WHERE genre = 'Romance'</span>
+<span class="no"> 8</span> 
+<span class="no"> 9</span> <span class="c"># fetch all books with these authors</span>
+<span class="no"><strong>10</strong></span> <span class="co">Book</span>::find(<span class="s"><span class="dl">'</span><span class="k">all</span><span class="dl">'</span></span>, <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">conditions</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">author_id in (?)</span><span class="dl">'</span></span>, <span class="pd">array</span>(<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>))));
+<span class="no">11</span> <span class="c"># sql =&gt; SELECT * FROM `books` WHERE author_id in (1,2,3)</span>
+<span class="no">12</span> 
+<span class="no">13</span> <span class="c"># fetch all lousy romance novels which are cheap</span>
+<span class="no">14</span> <span class="co">Book</span>::all(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">conditions</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">genre = ? AND price &lt; ?</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">Romance</span><span class="dl">'</span></span>, <span class="fl">15.00</span>)));
+<span class="no">15</span> <span class="c"># sql =&gt; SELECT * FROM `books` WHERE genre = 'Romance' AND price &lt; 15.00</span>
+</span></code></pre>
+
+	<p>Here is a more complicated example. Again, the first index of the conditions array are the condition strings. The values in the array after that are the values which replace their corresponding ? marks.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="c"># fetch all cheap books by these authors</span>
+<span class="no">2</span> <span class="lv">$cond</span> =<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">conditions</span><span class="dl">'</span></span>=&gt;<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">author_id in(?) AND price &lt; ?</span><span class="dl">'</span></span>, <span class="pd">array</span>(<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>), <span class="fl">15.00</span>));
+<span class="no">3</span> <span class="co">Book</span>::all(<span class="lv">$cond</span>);
+<span class="no">4</span> <span class="c"># sql =&gt; SELECT * FROM `books` WHERE author_id in(1,2,3) AND price &lt; 15.00</span>
+</span></code></pre>
+
+	<h4 id="limit-offset">Limit &#38; Offset</h4>
+
+
+	<p>This one should be fairly obvious. A limit option will produce a SQL limit clause for supported databases. It can be used in conjunction with the <strong>offset</strong> option.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="c"># fetch all but limit to 10 total books</span>
+<span class="no">2</span> <span class="co">Book</span>::find(<span class="s"><span class="dl">'</span><span class="k">all</span><span class="dl">'</span></span>, <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">limit</span><span class="dl">'</span></span> =&gt; <span class="i">10</span>));
+<span class="no">3</span> <span class="c"># sql =&gt; SELECT * FROM `books` LIMIT 0,10</span>
+<span class="no">4</span> 
+<span class="no">5</span> <span class="c"># fetch all but limit to 10 total books starting at the 6th book</span>
+<span class="no">6</span> <span class="co">Book</span>::find(<span class="s"><span class="dl">'</span><span class="k">all</span><span class="dl">'</span></span>, <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">limit</span><span class="dl">'</span></span> =&gt; <span class="i">10</span>, <span class="s"><span class="dl">'</span><span class="k">offset</span><span class="dl">'</span></span> =&gt; <span class="i">5</span>));
+<span class="no">7</span> <span class="c"># sql =&gt; SELECT * FROM `books` LIMIT 5,10</span>
+</span></code></pre>
+
+	<h4 id="order">Order</h4>
+
+
+	<p>Produces an ORDERY BY SQL clause.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="c"># order all books by title desc</span>
+<span class="no">2</span> <span class="co">Book</span>::find(<span class="s"><span class="dl">'</span><span class="k">all</span><span class="dl">'</span></span>, <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">order</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">title desc</span><span class="dl">'</span></span>));
+<span class="no">3</span> <span class="c"># sql =&gt; SELECT * FROM `books` ORDER BY title desc</span>
+<span class="no">4</span> 
+<span class="no">5</span> <span class="c"># order by most expensive and title</span>
+<span class="no">6</span> <span class="co">Book</span>::find(<span class="s"><span class="dl">'</span><span class="k">all</span><span class="dl">'</span></span>, <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">order</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">price desc, title asc</span><span class="dl">'</span></span>));
+<span class="no">7</span> <span class="c"># sql =&gt; SELECT * FROM `books` ORDER BY price desc, title asc</span>
+</span></code></pre>
+
+	<h4 id="select">Select</h4>
+
+
+	<p>Passing a select key in your <a href="../../main/wiki/Finders.html#finder-options">options array</a> will allow you to specify which columns you want back from the database. This is helpful when you have a table with too many columns, but you might only want 3 columns back for 50 records. It is also helpful when used with a group statement.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="c"># fetch all books, but only the id and title columns</span>
+<span class="no">2</span> <span class="co">Book</span>::find(<span class="s"><span class="dl">'</span><span class="k">all</span><span class="dl">'</span></span>, <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">select</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">id, title</span><span class="dl">'</span></span>));
+<span class="no">3</span> <span class="c"># sql =&gt; SELECT id, title FROM `books`</span>
+<span class="no">4</span> 
+<span class="no">5</span> <span class="c"># custom sql to feed some report</span>
+<span class="no">6</span> <span class="co">Book</span>::find(<span class="s"><span class="dl">'</span><span class="k">all</span><span class="dl">'</span></span>, <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">select</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">avg(price) as avg_price, avg(tax) as avg_tax</span><span class="dl">'</span></span>));
+<span class="no">7</span> <span class="c"># sql =&gt; SELECT avg(price) as avg_price, avg(tax) as avg_tax FROM `books` LIMIT 5,10</span>
+</span></code></pre>
+
+	<h4 id="from">From</h4>
+
+
+	<p>This designates the table you are selecting from. This can come in handy if you do a <a href="../../main/wiki/Finders.html#joins">join</a> or require finer control.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="c"># fetch the first book by aliasing the table name</span>
+<span class="no">2</span> <span class="co">Book</span>::first(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">select</span><span class="dl">'</span></span>=&gt; <span class="s"><span class="dl">'</span><span class="k">b.*</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">from</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">books as b</span><span class="dl">'</span></span>));
+<span class="no">3</span> <span class="c"># sql =&gt; SELECT b.* FROM books as b LIMIT 0,1</span>
+</span></code></pre>
+
+	<h4 id="group">Group</h4>
+
+
+	<p>Generate a GROUP BY clause.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="c"># group all books by prices</span>
+<span class="no">2</span> <span class="co">Book</span>::all(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">group</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">price</span><span class="dl">'</span></span>));
+<span class="no">3</span> <span class="c"># sql =&gt; SELECT * FROM `books` GROUP BY price</span>
+</span></code></pre>
+
+	<h4 id="having">Having</h4>
+
+
+	<p>Generate a HAVING clause to add conditions to your GROUP BY.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="c"># group all books by prices greater than $45</span>
+<span class="no">2</span> <span class="co">Book</span>::all(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">group</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">price</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">having</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">price &gt; 45.00</span><span class="dl">'</span></span>));
+<span class="no">3</span> <span class="c"># sql =&gt; SELECT * FROM `books` GROUP BY price HAVING price &gt; 45.00</span>
+</span></code></pre>
+
+	<h4 id="read-only">Read only</h4>
+
+
+	<p>Readonly models are just that: readonly. If you try to save a readonly model, then a ReadOnlyException will be thrown.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="c"># specify the object is readonly and cannot be saved</span>
+<span class="no"> 2</span> <span class="lv">$book</span> = <span class="co">Book</span>::first(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">readonly</span><span class="dl">'</span></span> =&gt; <span class="pc">true</span>));
+<span class="no"> 3</span> 
+<span class="no"> 4</span> <span class="r">try</span> {
+<span class="no"> 5</span>   <span class="lv">$book</span>-&gt;save();
+<span class="no"> 6</span> } <span class="r">catch</span> (<span class="co">ActiveRecord</span>\<span class="co">ReadOnlyException</span> <span class="lv">$e</span>) {
+<span class="no"> 7</span>   <span class="pd">echo</span> <span class="lv">$e</span>-&gt;getMessage();
+<span class="no"> 8</span>   <span class="c"># =&gt; Book::save() cannot be invoked because this model is set to read only</span>
+<span class="no"> 9</span> }
+</span></code></pre>
+
+	<h4 id="dynamic-finders">Dynamic finders</h4>
+
+
+	<p>These offer a quick and easy way to construct conditions without having to pass in a bloated array option. This option makes use of PHP 5.3's <a href="http://www.php.net/lsb" class="external">late static binding</a> combined with <a href="http://www.php.net/__callstatic" class="external">__callStatic()</a> allowing you to invoke undefined static methods on your model. You can either use YourModel::find_by which returns a <a href="../../main/wiki/Finders.html#single-record-result">single record result</a> and YourModel::find_all_by returns <a href="../../main/wiki/Finders.html#multiple-records-result">multiple records result</a>. All you have to do is add an underscore and another field name after either of those two methods. Let's take a look.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="c"># find a single book by the title of War and Peace</span>
+<span class="no"> 2</span> <span class="lv">$book</span> = <span class="co">Book</span>::find_by_title(<span class="s"><span class="dl">'</span><span class="k">War and Peace</span><span class="dl">'</span></span>);
+<span class="no"> 3</span> <span class="c">#sql =&gt; SELECT * FROM `books` WHERE title = 'War and Peace'</span>
+<span class="no"> 4</span> 
+<span class="no"> 5</span> <span class="c"># find all discounted books</span>
+<span class="no"> 6</span> <span class="lv">$book</span> = <span class="co">Book</span>::find_all_by_discounted(<span class="i">1</span>);
+<span class="no"> 7</span> <span class="c">#sql =&gt; SELECT * FROM `books` WHERE discounted = 1</span>
+<span class="no"> 8</span> 
+<span class="no"> 9</span> <span class="c"># find all discounted books by given author</span>
+<span class="no"><strong>10</strong></span> <span class="lv">$book</span> = <span class="co">Book</span>::find_all_by_discounted_and_author_id(<span class="i">1</span>, <span class="i">5</span>);
+<span class="no">11</span> <span class="c">#sql =&gt; SELECT * FROM `books` WHERE discounted = 1 AND author_id = 5</span>
+<span class="no">12</span> 
+<span class="no">13</span> <span class="c"># find all discounted books or those which cost 5 bux</span>
+<span class="no">14</span> <span class="lv">$book</span> = <span class="co">Book</span>::find_by_discounted_or_price(<span class="i">1</span>, <span class="fl">5.00</span>);
+<span class="no">15</span> <span class="c">#sql =&gt; SELECT * FROM `books` WHERE discounted = 1 OR price = 5.00</span>
+</span></code></pre>
+
+	<h4 id="joins">Joins</h4>
+
+
+	<p>A join option may be passed to specify SQL JOINS. There are two ways to produce a JOIN. You may pass custom SQL to perform a join as a simple string. By default, the joins option will not <a href="../../main/wiki/Finders.html#select">select</a> the attributes from the joined table; instead, it will only select the attributes from your model's table. You can pass a select option to specify the fields.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="c"># fetch all books joining their corresponding authors</span>
+<span class="no">2</span> <span class="lv">$join</span> = <span class="s"><span class="dl">'</span><span class="k">LEFT JOIN authors a ON(books.author_id = a.author_id)</span><span class="dl">'</span></span>;
+<span class="no">3</span> <span class="lv">$book</span> = <span class="co">Book</span>::all(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">joins</span><span class="dl">'</span></span> =&gt; <span class="lv">$join</span>));
+<span class="no">4</span> <span class="c"># sql =&gt; SELECT `books`.* FROM `books`</span>
+<span class="no">5</span> <span class="c">#      LEFT JOIN authors a ON(books.author_id = a.author_id)</span>
+</span></code></pre>
+
+	<p>Or, you may specify a join via an <a href="../../main/wiki/Associations.html">associated</a> model.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">Book</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span>
+<span class="no"> 2</span> {
+<span class="no"> 3</span>   <span class="r">static</span> <span class="lv">$belongs_to</span> = <span class="pd">array</span>(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">author</span><span class="dl">'</span></span>),<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">publisher</span><span class="dl">'</span></span>));
+<span class="no"> 4</span> }
+<span class="no"> 5</span> 
+<span class="no"> 6</span> <span class="c"># fetch all books joining their corresponding author</span>
+<span class="no"> 7</span> <span class="lv">$book</span> = <span class="co">Book</span>::all(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">joins</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">author</span><span class="dl">'</span></span>)));
+<span class="no"> 8</span> <span class="c"># sql =&gt; SELECT `books`.* FROM `books`</span>
+<span class="no"> 9</span> <span class="c">#      INNER JOIN `authors` ON(`books`.author_id = `authors`.id)</span>
+<span class="no"><strong>10</strong></span> 
+<span class="no">11</span> <span class="c"># here's a compound join</span>
+<span class="no">12</span> <span class="lv">$book</span> = <span class="co">Book</span>::all(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">joins</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">author</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">publisher</span><span class="dl">'</span></span>)));
+<span class="no">13</span> <span class="c"># sql =&gt; SELECT `books`.* FROM `books`</span>
+<span class="no">14</span> <span class="c">#      INNER JOIN `authors` ON(`books`.author_id = `authors`.id)</span>
+<span class="no">15</span> <span class="c">#         INNER JOIN `publishers` ON(`books`.publisher_id = `publishers`.id)</span>
+</span></code></pre>
+
+	<p>Joins can be combined with strings and associated models.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">Book</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span>
+<span class="no"> 2</span> {
+<span class="no"> 3</span>   <span class="r">static</span> <span class="lv">$belongs_to</span> = <span class="pd">array</span>(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">publisher</span><span class="dl">'</span></span>));
+<span class="no"> 4</span> }
+<span class="no"> 5</span> 
+<span class="no"> 6</span> <span class="lv">$join</span> = <span class="s"><span class="dl">'</span><span class="k">LEFT JOIN authors a ON(books.author_id = a.author_id)</span><span class="dl">'</span></span>;
+<span class="no"> 7</span> <span class="c"># here we use our $join string and the association publisher</span>
+<span class="no"> 8</span> <span class="lv">$book</span> = <span class="co">Book</span>::all(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">joins</span><span class="dl">'</span></span> =&gt; <span class="lv">$join</span>, <span class="s"><span class="dl">'</span><span class="k">publisher</span><span class="dl">'</span></span>));
+<span class="no"> 9</span> <span class="c"># sql =&gt; SELECT `books`.* FROM `books`</span>
+<span class="no"><strong>10</strong></span> <span class="c">#      LEFT JOIN authors a ON(books.author_id = a.author_id)</span>
+<span class="no">11</span> <span class="c">#         INNER JOIN `publishers` ON(`books`.publisher_id = `publishers`.id)</span>
+</span></code></pre>
+
+	<h4 id="find-by-custom-sql">Find by custom SQL</h4>
+
+
+	<p>If, for some reason, you need to create a complicated SQL query beyond the capacity of <a href="../../main/wiki/Finders.html#finder-options">finder options</a>, then you can pass a custom SQL query through Model::find_by_sql(). This will render your model as <a href="../../main/wiki/Finders.html#read-only">readonly</a> so that you cannot use any write methods on your returned model(s).</p>
+
+
+	<p><strong>Caution:</strong> find_by_sql() will NOT prevent SQL injection like all other finder methods. The burden to secure your custom find_by_sql() query is on you. You can use the Model::connection()->escape() method to escape SQL strings.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="c"># this will return a single result of a book model with only the title as an attirubte</span>
+<span class="no">2</span> <span class="lv">$book</span> = <span class="co">Book</span>::find_by_sql(<span class="s"><span class="dl">'</span><span class="k">select title from `books`</span><span class="dl">'</span></span>);
+<span class="no">3</span> 
+<span class="no">4</span> <span class="c"># you can even select from another table</span>
+<span class="no">5</span> <span class="lv">$cached_book</span> = <span class="co">Book</span>::find_by_sql(<span class="s"><span class="dl">'</span><span class="k">select * from books_cache</span><span class="dl">'</span></span>);
+<span class="no">6</span> <span class="c"># this will give you the attributes from the books_cache table</span>
+</span></code></pre>
+
+	<h4 id="eager-loading">Eager loading associations</h4>
+
+
+	<p>Eager loading retrieves the base model and its associations using only a few queries. This avoids the N + 1 problem.</p>
+
+
+	<p>Imagine you have this code which finds 10 posts and then displays each post's author's first name.<br /><pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="lv">$posts</span> = <span class="co">Post</span>::find(<span class="s"><span class="dl">'</span><span class="k">all</span><span class="dl">'</span></span>, <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">limit</span><span class="dl">'</span></span> =&gt; <span class="i">10</span>));
+<span class="no">2</span> <span class="r">foreach</span> (<span class="lv">$posts</span> <span class="r">as</span> <span class="lv">$post</span>)
+<span class="no">3</span>   <span class="pd">echo</span> <span class="lv">$post</span>-&gt;author-&gt;first_name;
+</span></code></pre></p>
+
+
+	<p>What happens here is the we get 11 queries, 1 to find 10 posts, + 10 (one per each post to get the first name from the authors table).</p>
+
+
+	<p>We solve this problem by using the <strong>include</strong> option which would only issue two queries instead of 11. Here's how this would be done:</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="lv">$posts</span> = <span class="co">Post</span>::find(<span class="s"><span class="dl">'</span><span class="k">all</span><span class="dl">'</span></span>, <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">limit</span><span class="dl">'</span></span> =&gt; <span class="i">10</span>, <span class="s"><span class="dl">'</span><span class="k">include</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">author</span><span class="dl">'</span></span>)));
+<span class="no">2</span> <span class="r">foreach</span> (<span class="lv">$posts</span> <span class="r">as</span> <span class="lv">$post</span>)
+<span class="no">3</span>   <span class="pd">echo</span> <span class="lv">$post</span>-&gt;author-&gt;first_name;
+<span class="no">4</span> 
+<span class="no">5</span> <span class="co">SELECT</span> * <span class="co">FROM</span> <span class="s"><span class="dl">`</span><span class="k">posts</span><span class="dl">`</span></span> <span class="co">LIMIT</span> <span class="i">10</span>
+<span class="no">6</span> <span class="co">SELECT</span> * <span class="co">FROM</span> <span class="s"><span class="dl">`</span><span class="k">authors</span><span class="dl">`</span></span> <span class="co">WHERE</span> <span class="s"><span class="dl">`</span><span class="k">post_id</span><span class="dl">`</span></span> <span class="co">IN</span> (<span class="i">1</span>,<span class="i">2</span>,<span class="i">3</span>,<span class="i">4</span>,<span class="i">5</span>,<span class="i">6</span>,<span class="i">7</span>,<span class="i">8</span>,<span class="i">9</span>,<span class="i">10</span>)
+</span></code></pre>
+
+	<p>Since <strong>include</strong> uses an array, you can specify more than one association:<br /><pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="lv">$posts</span> = <span class="co">Post</span>::find(<span class="s"><span class="dl">'</span><span class="k">all</span><span class="dl">'</span></span>, <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">limit</span><span class="dl">'</span></span> =&gt; <span class="i">10</span>, <span class="s"><span class="dl">'</span><span class="k">include</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">author</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">comments</span><span class="dl">'</span></span>)));
+</span></code></pre></p>
+
+
+	<p>You can also <strong>nest</strong> the <strong>include</strong> option to eager load associations of associations. The following would find the first post, eager load the first post's category, its associated comments and the associated comments' author:</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="lv">$posts</span> = <span class="co">Post</span>::find(<span class="s"><span class="dl">'</span><span class="k">first</span><span class="dl">'</span></span>, <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">include</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">category</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">comments</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">author</span><span class="dl">'</span></span>))));
+</span></code></pre>
+
+<hr />
+<a name="Frameworks" />
+<h2 id="Frameworks">Frameworks<a href="#Frameworks" class="wiki-anchor">&para;</a></h2>
+
+
+	<p>An MVC framework is not required to use php-activerecord but we thought putting some guides here would be helpful. Looking for more guides so if you have written one or come across any please feel free to link it here.</p>
+
+
+	<h4>Zend Framework</h4>
+
+
+	<ul>
+	<li><a class="external" href="http://www.derivante.com/2009/05/21/php-rapid-application-development-with-zf18-and-ar/">http://www.derivante.com/2009/05/21/php-rapid-application-development-with-zf18-and-ar/</a></li>
+		<li><a class="external" href="http://spokefire.co.uk/2010/07/using-phpactiverecord-with-zend-framework/">http://spokefire.co.uk/2010/07/using-phpactiverecord-with-zend-framework/</a></li>
+	</ul>
+
+
+	<h4>CodeIgniter</h4>
+
+
+	<ul>
+	<li>Manual Install: <a class="external" href="http://matthewmachuga.com/post/4571278653/revised-php-activerecord-codeigniter-2-0-reactor">http://matthewmachuga.com/post/4571278653/revised-php-activerecord-codeigniter-2-0-reactor</a></li>
+		<li>Spark plugin: <a class="external" href="http://getsparks.org/packages/php-activerecord/versions/HEAD/show">http://getsparks.org/packages/php-activerecord/versions/HEAD/show</a></li>
+	</ul>
+
+
+	<h4>Lithium</h4>
+
+
+	<ul>
+	<li><a class="external" href="http://rad-dev.org/li3_activerecord">http://rad-dev.org/li3_activerecord</a> [broken link]</li>
+	</ul>
+
+
+	<h4>Kohana</h4>
+
+
+	<ul>
+	<li><a class="external" href="http://github.com/devi/kohana-activerecord">http://github.com/devi/kohana-activerecord</a></li>
+	</ul>
+
+
+	<h4>Pragwork</h4>
+
+
+	<p>Pragwork uses PHP ActiveRecord as its only ORM by default.</p>
+
+
+	<ul>
+	<li><a class="external" href="http://pragwork.com/">http://pragwork.com</a></li>
+	</ul>
+
+
+	<h4>FuelPHP</h4>
+
+
+	<ul>
+	<li><a class="external" href="http://github.com/jschreuder/fuel-phpactiverecord">http://github.com/jschreuder/fuel-phpactiverecord</a> [project removed]</li>
+	</ul>
+
+
+	<h4>Silex</h4>
+
+
+	<p>A PHP ActiveRecord ServiceProvider for Silex.<br />Note : the download of php-activerecord is included via composer in the provider configuration.</p>
+
+
+	<ul>
+	<li><a class="external" href="https://github.com/ruckuus/ActiveRecordServiceProvider">https://github.com/ruckuus/ActiveRecordServiceProvider</a></li>
+	</ul>
+
+<hr />
+<a name="Guides" />
+<h1 id="Guides">Guides<a href="#Guides" class="wiki-anchor">&para;</a></h1>
+
+<hr />
+<a name="Quick_Start" />
+<h2 id="Quick-Start">Quick Start<a href="#Quick-Start" class="wiki-anchor">&para;</a></h2>
+
+
+	<p>This guide will show you the bare essentials to get up and running with php-activerecord. I will assume you have downloaded the library into your include_path in a directory called php-activerecord.</p>
+
+
+	<p>The first steps are to include the library and define our database connection:</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="pd">require_once</span> <span class="s"><span class="dl">'</span><span class="k">php-activerecord/ActiveRecord.php</span><span class="dl">'</span></span>;
+<span class="no">2</span> 
+<span class="no">3</span> <span class="co">ActiveRecord</span>\<span class="co">Config</span>::initialize(<span class="r">function</span>(<span class="lv">$cfg</span>)
+<span class="no">4</span> {
+<span class="no">5</span>     <span class="lv">$cfg</span>-&gt;set_model_directory(<span class="s"><span class="dl">'</span><span class="k">models</span><span class="dl">'</span></span>);
+<span class="no">6</span>     <span class="lv">$cfg</span>-&gt;set_connections(<span class="pd">array</span>(
+<span class="no">7</span>         <span class="s"><span class="dl">'</span><span class="k">development</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">mysql://username:<a class="__cf_email__" href="../../../cdn-cgi/l/email-protection.html" data-cfemail="4e3e2f3d3d39213c2a0e22212d2f2226213d3a">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/database_name</span><span class="dl">'</span></span>));
+<span class="no">8</span> });
+</span></code></pre>
+
+	<p>Next, lets create a model for a table called users. We'll save this class in the file models/User.php</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="r">class</span> <span class="cl">User</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span>
+<span class="no">2</span> {
+<span class="no">3</span> }
+</span></code></pre>
+
+	<p>That's it! Now you can access the users table thru the User model.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="c"># create Tito</span>
+<span class="no"> 2</span> <span class="lv">$user</span> = <span class="co">User</span>::create(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">name</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">Tito</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">state</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">VA</span><span class="dl">'</span></span>));
+<span class="no"> 3</span> 
+<span class="no"> 4</span> <span class="c"># read Tito</span>
+<span class="no"> 5</span> <span class="lv">$user</span> = <span class="co">User</span>::find_by_name(<span class="s"><span class="dl">'</span><span class="k">Tito</span><span class="dl">'</span></span>);
+<span class="no"> 6</span> 
+<span class="no"> 7</span> <span class="c"># update Tito</span>
+<span class="no"> 8</span> <span class="lv">$user</span>-&gt;name = <span class="s"><span class="dl">'</span><span class="k">Tito Jr</span><span class="dl">'</span></span>;
+<span class="no"> 9</span> <span class="lv">$user</span>-&gt;save();
+<span class="no"><strong>10</strong></span> 
+<span class="no">11</span> <span class="c"># delete Tito</span>
+<span class="no">12</span> <span class="lv">$user</span>-&gt;<span class="pd">delete</span>();
+</span></code></pre>
+
+	<p>That's it! Pretty simple. Check out the <a href="#" class="wiki-page">Frameworks</a> page for more in depth guides on setting up php-activerecord in specific frameworks.</p>
+
+<hr />
+<a name="SQLBuilder" />
+<h2 id="SQLBuilder">SQLBuilder<a href="#SQLBuilder" class="wiki-anchor">&para;</a></h2>
+
+
+	<p>This guide will show you how to use the php-activerecord SQL builder.</p>
+
+
+	<p>The first steps are to get the database connection and setup the SQL builder.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="lv">$conn</span> = <span class="co">ActiveRecord</span>\<span class="co">ConnectionManager</span>::get_connection(<span class="s"><span class="dl">&quot;</span><span class="k">development</span><span class="dl">&quot;</span></span>);                                                                                                                         
+<span class="no">2</span> <span class="lv">$builder</span> = <span class="r">new</span> <span class="co">ActiveRecord</span>\<span class="co">SQLBuilder</span>(<span class="lv">$conn</span>, <span class="s"><span class="dl">&quot;</span><span class="k">authors</span><span class="dl">&quot;</span></span>); 
+</span></code></pre>
+
+	<h4 id="select">SELECT queries</h4>
+
+
+	<p>We are now ready to generate a simple SELECT query:</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="lv">$builder</span>-&gt;where(<span class="s"><span class="dl">&quot;</span><span class="k">name = ?</span><span class="dl">&quot;</span></span>, <span class="s"><span class="dl">&quot;</span><span class="k">Hemingway</span><span class="dl">&quot;</span></span>);
+<span class="no">2</span> <span class="pd">echo</span> <span class="lv">$builder</span>; <span class="c">/* =&gt; SELECT * FROM authors WHERE name = ? */</span>
+<span class="no">3</span> <span class="pd">print_r</span>(<span class="lv">$builder</span>-&gt;get_where_values()); <span class="c">/* =&gt; array(&quot;Hemingway&quot;) */</span>
+</span></code></pre>
+
+	<p>You can also pass a hash to the where() method:</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="lv">$builder</span> = <span class="r">new</span> <span class="co">ActiveRecord</span>\<span class="co">SQLBuilder</span>(<span class="lv">$conn</span>, <span class="s"><span class="dl">&quot;</span><span class="k">authors</span><span class="dl">&quot;</span></span>);                                                                                                            
+<span class="no">2</span> <span class="lv">$builder</span>-&gt;where(<span class="pd">array</span>(<span class="s"><span class="dl">&quot;</span><span class="k">name</span><span class="dl">&quot;</span></span> =&gt; <span class="s"><span class="dl">&quot;</span><span class="k">Hemingway</span><span class="dl">&quot;</span></span>,                                                                                                                         
+<span class="no">3</span>                       <span class="s"><span class="dl">&quot;</span><span class="k">country</span><span class="dl">&quot;</span></span> =&gt; <span class="s"><span class="dl">&quot;</span><span class="k">USA</span><span class="dl">&quot;</span></span>));
+<span class="no">4</span> <span class="pd">echo</span> <span class="lv">$builder</span>; <span class="c">/* =&gt; SELECT * FROM authors WHERE `name`=? AND `country`=? */</span>
+<span class="no">5</span> <span class="pd">print_r</span>(<span class="lv">$builder</span>-&gt;get_where_values()); <span class="c">/* =&gt; array('Hemingway', 'USA'); */</span>
+<span class="no">6</span> 
+</span></code></pre>
+
+	<p>You can add ordering information:</p>
+
+
+<pre class="code><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="lv">$builder</span> = <span class="r">new</span> <span class="co">ActiveRecord</span>\<span class="co">SQLBuilder</span>(<span class="lv">$conn</span>, <span class="s"><span class="dl">&quot;</span><span class="k">authors</span><span class="dl">&quot;</span></span>);
+<span class="no">2</span> <span class="lv">$builder</span>-&gt;order(<span class="s"><span class="dl">'</span><span class="k">id DESC</span><span class="dl">'</span></span>);
+<span class="no">3</span> <span class="pd">echo</span> <span class="lv">$builder</span>.<span class="s"><span class="dl">&quot;</span><span class="ch">\n</span><span class="dl">&quot;</span></span>; <span class="c">/* =&gt; SELECT * FROM authors ORDER BY id DESC */</span>
+</span></code></pre><br /> Cool
+
+<hr />
+<a name="Utilities" />
+<h2 id="Utilities">Utilities<a href="#Utilities" class="wiki-anchor">&para;</a></h2>
+
+
+	<ul id="topic-list">
+	<li><a href="../../main/wiki/Utilities.html#delegators">Delegators</a></li>
+		<li><a href="../../main/wiki/Utilities.html#attribute-setters">Attribute Setters</a></li>
+		<li><a href="../../main/wiki/Utilities.html#attribute-getters">Attribute Getters</a></li>
+		<li><a href="../../main/wiki/Utilities.html#aliased-attributes">Aliased attributes</a></li>
+		<li><a href="../../main/wiki/Utilities.html#protected-attributes">Protected attributes</a></li>
+		<li><a href="../../main/wiki/Utilities.html#accessible-attributes">Accessible attributes</a></li>
+		<li><a href="../../main/wiki/Utilities.html#serialization">Serialization</a></li>
+		<li><a href="../../main/wiki/Utilities.html#automatic-timestamps">Automatic Timestamps</a></li>
+	</ul>
+
+
+	<p>ActiveRecord offers numerous ways to make your life easier by adding some interesting features to your models.</p>
+
+
+	<h4 id="delegators">Delegators</h4>
+
+
+	<p>This is similar to <a href="../../main/wiki/Utilities.html#aliased-attributes">attribute aliasing</a>, except that it works via your associations. You can alias an attribute on your model to use a particular attribute on an association. Let's take a look.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">Person</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 2</span>   <span class="r">static</span> <span class="lv">$belongs_to</span> = <span class="pd">array</span>(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">venue</span><span class="dl">'</span></span>),<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">host</span><span class="dl">'</span></span>));
+<span class="no"> 3</span>   <span class="r">static</span> <span class="lv">$delegate</span> = <span class="pd">array</span>(
+<span class="no"> 4</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">name</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">state</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">to</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">venue</span><span class="dl">'</span></span>),
+<span class="no"> 5</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">name</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">to</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">host</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">prefix</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">host</span><span class="dl">'</span></span>));
+<span class="no"> 6</span> }
+<span class="no"> 7</span> 
+<span class="no"> 8</span> <span class="lv">$person</span> = <span class="co">Person</span>::first();
+<span class="no"> 9</span> <span class="lv">$person</span>-&gt;state     <span class="c"># same as calling $person-&gt;venue-&gt;state</span>
+<span class="no"><strong>10</strong></span> <span class="lv">$person</span>-&gt;name      <span class="c"># same as calling $person-&gt;venue-&gt;name</span>
+<span class="no">11</span> <span class="lv">$person</span>-&gt;host_name <span class="c"># same as calling $person-&gt;host-&gt;name</span>
+</span></code></pre>
+
+	<h4 id="attribute-setters">Attribute setters</h4>
+
+
+	<p>Setters allow you to define custom methods for assigning a value to one of your attributes. This means you can intercept the assign process and filter/modify the data to your needs. This is helpful in a situation such as encrypting user passwords. Normally, you define a setter which does not carry the same name as your attribute, but you can set your attribute inside of the method. In the example below, <strong>$user->password</strong> is a virtual attribute: if you try to read/access the attribute instead of assign, an <a href="../../../docs/ActiveRecord/UndefinedPropertyException.html">UndefinedPropertyException</a> will be thrown.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">User</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 2</span> 
+<span class="no"> 3</span>   <span class="c"># A setter method must have set_ prepended to its name to qualify.</span>
+<span class="no"> 4</span>   <span class="c"># $this-&gt;encrypted_password is the actual attribute for this model.</span>
+<span class="no"> 5</span>   <span class="r">public</span> <span class="r">function</span> <span class="fu">set_password</span>(<span class="lv">$plaintext</span>) {
+<span class="no"> 6</span>     <span class="lv">$this</span>-&gt;encrypted_password = <span class="pd">md5</span>(<span class="lv">$plaintext</span>);
+<span class="no"> 7</span>   }
+<span class="no"> 8</span> }
+<span class="no"> 9</span> 
+<span class="no"><strong>10</strong></span> <span class="lv">$user</span> = <span class="r">new</span> <span class="co">User</span>;
+<span class="no">11</span> <span class="lv">$user</span>-&gt;password = <span class="s"><span class="dl">'</span><span class="k">plaintext</span><span class="dl">'</span></span>;  <span class="c"># will call $user-&gt;set_password('plaintext')</span>
+<span class="no">12</span> <span class="c"># if you did an echo $user-&gt;password you would get an UndefinedPropertyException</span>
+</span></code></pre>
+
+	<p>If you define a custom setter with the same name as an attribute then you will need to use <a href="../../../docs/ActiveRecord/Model.html#methodassign_attribute">assign_attribute()</a> to assign the value to the attribute. This is necessary due to the way <a href="../../../docs/ActiveRecord/Model.html#method__set">Model::__set()</a> works. For example, assume 'name' is a field on the table and we're defining a custom setter called 'name':</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">User</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 2</span> 
+<span class="no"> 3</span>   <span class="c"># INCORRECT:</span>
+<span class="no"> 4</span>   <span class="c"># function set_name($name) {</span>
+<span class="no"> 5</span>   <span class="c">#   $this-&gt;name = strtoupper($name);</span>
+<span class="no"> 6</span>   <span class="c"># }</span>
+<span class="no"> 7</span> 
+<span class="no"> 8</span>   <span class="r">public</span> <span class="r">function</span> <span class="fu">set_name</span>(<span class="lv">$name</span>) {
+<span class="no"> 9</span>     <span class="lv">$this</span>-&gt;assign_attribute(<span class="s"><span class="dl">'</span><span class="k">name</span><span class="dl">'</span></span>,<span class="pd">strtoupper</span>(<span class="lv">$name</span>));
+<span class="no"><strong>10</strong></span>   }
+<span class="no">11</span> }
+<span class="no">12</span> 
+<span class="no">13</span> <span class="lv">$user</span> = <span class="r">new</span> <span class="co">User</span>;
+<span class="no">14</span> <span class="lv">$user</span>-&gt;name = <span class="s"><span class="dl">'</span><span class="k">bob</span><span class="dl">'</span></span>;
+<span class="no">15</span> <span class="pd">echo</span> <span class="lv">$user</span>-&gt;name; <span class="c"># =&gt; BOB</span>
+</span></code></pre>
+
+	<h4 id="attribute-getters">Attribute getters</h4>
+
+
+	<p>Getters allow you to intercept attribute/property value retrieval on your models. They are defined in a similar manner to setters. See <a href="../../../docs/ActiveRecord/Model.html#method__get">Model::__get</a> for details.</p>
+
+
+	<h4 id="aliased-attributes">Aliased attributes</h4>
+
+
+	<p>This option is fairly straight-forward. An aliased attribute allows you to set/get the attribute via a different name. This comes in handy when you have terrible field names like field_one, field_two, or for legacy tables. In this example, the alias first_name is created to reference the existing field person_first_name.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">Person</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 2</span>   <span class="r">static</span> <span class="lv">$alias_attribute</span> = <span class="pd">array</span>(
+<span class="no"> 3</span>     <span class="s"><span class="dl">'</span><span class="k">first_name</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">person_first_name</span><span class="dl">'</span></span>,
+<span class="no"> 4</span>     <span class="s"><span class="dl">'</span><span class="k">last_name</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">person_last_name</span><span class="dl">'</span></span>);
+<span class="no"> 5</span> }
+<span class="no"> 6</span> 
+<span class="no"> 7</span> <span class="lv">$person</span> = <span class="co">Person</span>::first();
+<span class="no"> 8</span> <span class="pd">echo</span> <span class="lv">$person</span>-&gt;person_first_name; <span class="c"># =&gt; Jax</span>
+<span class="no"> 9</span> 
+<span class="no"><strong>10</strong></span> <span class="lv">$person</span>-&gt;first_name = <span class="s"><span class="dl">'</span><span class="k">Tito</span><span class="dl">'</span></span>;
+<span class="no">11</span> <span class="pd">echo</span> <span class="lv">$person</span>-&gt;first_name; <span class="c"># =&gt; Tito</span>
+<span class="no">12</span> <span class="pd">echo</span> <span class="lv">$person</span>-&gt;person_first_name; <span class="c"># =&gt; Tito</span>
+</span></code></pre>
+
+	<h4 id="protected-attributes">Protected attributes</h4>
+
+
+	<p>Blacklist of attributes that cannot be mass-assigned. Protecting these attributes allows you to avoid security problems where a malicious user may try to create additional post values. This is the opposite of <a href="../../main/wiki/Utilities.html#accessible-attributes">accessible attributes</a>.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">User</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 2</span>   <span class="r">static</span> <span class="lv">$attr_protected</span> = <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">admin</span><span class="dl">'</span></span>);
+<span class="no"> 3</span> }
+<span class="no"> 4</span> 
+<span class="no"> 5</span> <span class="lv">$attributes</span> = <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">first_name</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">Tito</span><span class="dl">'</span></span>,<span class="s"><span class="dl">'</span><span class="k">admin</span><span class="dl">'</span></span> =&gt; <span class="i">1</span>);
+<span class="no"> 6</span> <span class="lv">$user</span> = <span class="r">new</span> <span class="co">User</span>(<span class="lv">$attributes</span>);
+<span class="no"> 7</span> 
+<span class="no"> 8</span> <span class="pd">echo</span> <span class="lv">$user</span>-&gt;first_name; <span class="c"># =&gt; Tito</span>
+<span class="no"> 9</span> <span class="pd">echo</span> <span class="lv">$user</span>-&gt;admin; <span class="c"># =&gt; null</span>
+<span class="no"><strong>10</strong></span> <span class="c"># now no one can fake post values and make themselves an admin against your will!</span>
+</span></code></pre>
+
+	<h4 id="accessible-attributes">Accessible attributes</h4>
+
+
+	<p>Whitelist of attributes that are checked from mass-assignment calls such as constructing a model or using <a href="../../../docs/ActiveRecord/Model.html#methodupdate_attributes">Model::update_attributes()</a>. This is the opposite of <a href="../../main/wiki/Utilities.html#protected-attributes">protected attributes</a>. Accessible attributes can also be used as a security measure against fake post values, except that it is often more pragmatic because it is a whitelist approach.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">User</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 2</span>   <span class="r">static</span> <span class="lv">$attr_accessible</span> = <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">first_name</span><span class="dl">'</span></span>);
+<span class="no"> 3</span> }
+<span class="no"> 4</span> 
+<span class="no"> 5</span> <span class="lv">$attributes</span> = <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">first_name</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">Tito</span><span class="dl">'</span></span>,<span class="s"><span class="dl">'</span><span class="k">last_name</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">J.</span><span class="dl">'</span></span>,<span class="s"><span class="dl">'</span><span class="k">admin</span><span class="dl">'</span></span> =&gt; <span class="i">1</span>);
+<span class="no"> 6</span> <span class="lv">$user</span> = <span class="r">new</span> <span class="co">User</span>(<span class="lv">$attributes</span>);
+<span class="no"> 7</span> 
+<span class="no"> 8</span> <span class="pd">echo</span> <span class="lv">$person</span>-&gt;last_name; <span class="c"># =&gt; null</span>
+<span class="no"> 9</span> <span class="pd">echo</span> <span class="lv">$person</span>-&gt;admin; <span class="c"># =&gt; null</span>
+<span class="no"><strong>10</strong></span> <span class="pd">echo</span> <span class="lv">$person</span>-&gt;first_name; <span class="c"># =&gt; Tito</span>
+<span class="no">11</span> <span class="c"># first_name is the only attribute that can be mass-assigned, so the other 2 are null</span>
+</span></code></pre>
+
+	<h4 id="serialization">Serialization</h4>
+
+
+	<p>This is not the normal kind of PHP serialization you are used to. This will not serialize your entire object; however, it will serialize the attributes of your model to either an xml or a json representation. An options array can take the following parameters:</p>
+
+
+	<p><strong>only</strong>: a string or array of attributes to be included.<br /><strong>except</strong>: a string or array of attributes to be excluded.<br /><strong>methods</strong>: a string or array of methods to invoke. The method's name will be used as a key for the final attributes array along with the method's returned value<br /><strong>include</strong>: a string or array of associated models to include in the final serialized product.<br /><strong>skip_instruct</strong>: set to true to skip the <?xml ...?> declaration.</p>
+
+
+	<p>Below only includes <a href="../../../docs/ActiveRecord/Model.html#methodto_json">Model::to_json()</a> examples; however, you can use all of the examples with <a href="../../../docs/ActiveRecord/Model.html#methodto_xml">Model::to_xml()</a></p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">User</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span> {
+<span class="no"> 2</span>   <span class="r">static</span> <span class="lv">$has_many</span> = <span class="pd">array</span>(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">orders</span><span class="dl">'</span></span>));
+<span class="no"> 3</span> 
+<span class="no"> 4</span>   <span class="r">public</span> <span class="r">function</span> <span class="fu">name</span>() {
+<span class="no"> 5</span>     <span class="r">return</span> <span class="lv">$this</span>-&gt;first_name .<span class="s"><span class="dl">'</span><span class="k"> </span><span class="dl">'</span></span>. <span class="lv">$this</span>-&gt;last_name;
+<span class="no"> 6</span>   }
+<span class="no"> 7</span> }
+<span class="no"> 8</span> 
+<span class="no"> 9</span> <span class="c"># assume these fields are on our `users` table:</span>
+<span class="no"><strong>10</strong></span> <span class="c"># id, first_name, last_name, email, social_security, phone_number</span>
+<span class="no">11</span> 
+<span class="no">12</span> <span class="lv">$user</span> = <span class="co">User</span>::first();
+<span class="no">13</span> 
+<span class="no">14</span> <span class="c"># json should only contain id and email</span>
+<span class="no">15</span> <span class="lv">$json</span> = <span class="lv">$user</span>-&gt;to_json(<span class="pd">array</span>(
+<span class="no">16</span>   <span class="s"><span class="dl">'</span><span class="k">only</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">id</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">email</span><span class="dl">'</span></span>)
+<span class="no">17</span> ));
+<span class="no">18</span> 
+<span class="no">19</span> <span class="pd">echo</span> <span class="lv">$json</span>; <span class="c"># =&gt; {&quot;id&quot;:1,&quot;email&quot;:&quot;<a class="__cf_email__" href="../../../cdn-cgi/l/email-protection.html" data-cfemail="a4cacbcac1e4c1c9c5cdc88ac7cbc9">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&quot;}</span>
+<span class="no"><strong>20</strong></span> 
+<span class="no">21</span> <span class="c"># limit via exclusion (here we use a string, but an array can be passed)</span>
+<span class="no">22</span> <span class="lv">$json</span> = <span class="lv">$user</span>-&gt;to_json(<span class="pd">array</span>(
+<span class="no">23</span>   <span class="s"><span class="dl">'</span><span class="k">except</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">social_security</span><span class="dl">'</span></span>
+<span class="no">24</span> ));
+<span class="no">25</span> 
+<span class="no">26</span> <span class="pd">echo</span> <span class="lv">$json</span>; <span class="c"># =&gt; {&quot;id&quot;:1,&quot;first_name&quot;:&quot;George&quot;,&quot;last_name&quot;:&quot;Bush&quot;,</span>
+<span class="no">27</span>             <span class="c">#     &quot;email&quot;:&quot;<a class="__cf_email__" href="../../../cdn-cgi/l/email-protection.html" data-cfemail="eb8584858eab8e868a8287c5888486">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&quot;,&quot;phone_number&quot;:&quot;555-5555&quot;}</span>
+<span class="no">28</span> 
+<span class="no">29</span> <span class="c"># call $user-&gt;name() and the returned value will be in our json</span>
+<span class="no"><strong>30</strong></span> <span class="lv">$json</span> = <span class="lv">$user</span>-&gt;to_json(<span class="pd">array</span>(
+<span class="no">31</span>   <span class="s"><span class="dl">'</span><span class="k">only</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">email</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">name</span><span class="dl">'</span></span>),
+<span class="no">32</span>   <span class="s"><span class="dl">'</span><span class="k">methods</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">name</span><span class="dl">'</span></span>
+<span class="no">33</span> ));
+<span class="no">34</span> 
+<span class="no">35</span> <span class="pd">echo</span> <span class="lv">$json</span>; <span class="c"># =&gt; {&quot;name&quot;:&quot;George Bush&quot;,&quot;email&quot;:&quot;<a class="__cf_email__" href="../../../cdn-cgi/l/email-protection.html" data-cfemail="99f7f6f7fcd9fcf4f8f0f5b7faf6f4">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&quot;}</span>
+<span class="no">36</span> 
+<span class="no">37</span> <span class="c"># include the orders association</span>
+<span class="no">38</span> <span class="lv">$json</span> = <span class="lv">$user</span>-&gt;to_json(<span class="pd">array</span>(
+<span class="no">39</span>   <span class="s"><span class="dl">'</span><span class="k">include</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">orders</span><span class="dl">'</span></span>)
+<span class="no"><strong>40</strong></span> ));
+<span class="no">41</span> 
+<span class="no">42</span> <span class="c"># you can nest includes .. here orders also has a payments association</span>
+<span class="no">43</span> <span class="lv">$json</span> = <span class="lv">$user</span>-&gt;to_json(<span class="pd">array</span>(
+<span class="no">44</span>   <span class="s"><span class="dl">'</span><span class="k">include</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">orders</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">except</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">id</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">include</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">payments</span><span class="dl">'</span></span>)
+<span class="no">45</span> ));
+</span></code></pre>
+
+	<p>DateTime fields are serialized to <a href="http://www.php.net/manual/en/class.datetime.php#datetime.constants.iso8601" class="external">ISO8601</a> format by default. This format can be changed by setting <strong>ActiveRecord\Serialization::$DATETIME_FORMAT</strong>. You can use a raw formatter or any of the pre-defined formats defined in <a href="../../../docs/ActiveRecord/DateTime.html#var$FORMATS">DateTime::$FORMAT</a></p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="co">ActiveRecord</span>\<span class="co">Serialization</span>::<span class="lv">$DATETIME_FORMAT</span> = <span class="s"><span class="dl">'</span><span class="k">Y-m-d</span><span class="dl">'</span></span>;
+<span class="no">2</span> <span class="co">ActiveRecord</span>\<span class="co">Serialization</span>::<span class="lv">$DATETIME_FORMAT</span> = <span class="s"><span class="dl">'</span><span class="k">atom</span><span class="dl">'</span></span>;
+<span class="no">3</span> <span class="co">ActiveRecord</span>\<span class="co">Serialization</span>::<span class="lv">$DATETIME_FORMAT</span> = <span class="s"><span class="dl">'</span><span class="k">long</span><span class="dl">'</span></span>;
+<span class="no">4</span> <span class="co">ActiveRecord</span>\<span class="co">Serialization</span>::<span class="lv">$DATETIME_FORMAT</span> = \<span class="co">DateTime</span>::<span class="co">RSS</span>;
+</span></code></pre>
+
+	<h4 id="automatic-timestamps">Automatic Timestamps</h4>
+
+
+	<p>Models with fields named <strong>created_at</strong> and <strong>updated_at</strong> will have those fields automatically updated upon model creation and model updates.</p>
+
+<hr />
+<a name="Validations" />
+<h2 id="Validations">Validations<a href="#Validations" class="wiki-anchor">&para;</a></h2>
+
+
+	<ul id="topic-list">
+	<li><a href="../../main/wiki/Validations.html#is-my-model-valid-or-not">Is my model valid or not?</a></li>
+		<li><a href="../../main/wiki/Validations.html#commonalities">Commonalities</a></li>
+		<li><a href="../../main/wiki/Validations.html#available-validations">Available validations</a></li>
+		<li><a href="../../main/wiki/Validations.html#validates_presence_of">validates_presence_of</a></li>
+		<li><a href="../../main/wiki/Validations.html#validates_size_of">validates_size_of / validates_length_of</a></li>
+		<li><a href="../../main/wiki/Validations.html#validates_in_ex_clusion_of">validates_(in|ex)clusion_of</a></li>
+		<li><a href="../../main/wiki/Validations.html#validates_format_of">validates_format_of</a></li>
+		<li><a href="../../main/wiki/Validations.html#validates_numericality_of">validates_numericality_of</a></li>
+		<li><a href="../../main/wiki/Validations.html#validates_uniqueness_of">validates_uniqueness_of</a></li>
+		<li><a href="../../main/wiki/Validations.html#validate">validate *custom</a></li>
+	</ul>
+
+
+	<p>Validations offer a simple and powerful pattern to ensure the integrity of your data. By declaring validations on your models, you can be certain that only valid data will be saved to your database. No longer will you need to recall where you put that function which verifies the legitimacy of an e-mail and whether or not it will stop the record fom being saved. With validations, if your data is invalid, ActiveRecord will take care of marking the record as invalid instead of writing it to the database.</p>
+
+
+	<p>Validations will run for the following methods normally:</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="lv">$book</span>-&gt;save();
+<span class="no">2</span> <span class="co">Book</span>::create();
+<span class="no">3</span> <span class="lv">$book</span>-&gt;update_attributes(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">title</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">new title</span><span class="dl">'</span></span>));
+</span></code></pre>
+
+	<p>The following will skip validations and save the record:</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no">1</span> <span class="lv">$book</span>-&gt;update_attribute();
+<span class="no">2</span> <span class="lv">$book</span>-&gt;save(<span class="pc">false</span>); <span class="c"># anytime you pass false to save it will skip validations</span>
+</span></code></pre>
+
+	<h4 id="is-my-model-valid-or-not">Is my model valid or not?</h4>
+
+
+	<p>You can determine whether or not your model is valid and can be saved to the database by issuing one of these methods: <a href="../../../docs/ActiveRecord/Model.html#methodis_valid">Model::is_valid</a> or <a href="../../../docs/ActiveRecord/Model.html#methodis_invalid">Model::is_invalid</a>. Both of these methods will run the validations for your model when invoked.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">Book</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span>
+<span class="no"> 2</span> {
+<span class="no"> 3</span>   <span class="r">static</span> <span class="lv">$validates_presence_of</span> = <span class="pd">array</span>(
+<span class="no"> 4</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">title</span><span class="dl">'</span></span>)
+<span class="no"> 5</span>   );
+<span class="no"> 6</span> }
+<span class="no"> 7</span> 
+<span class="no"> 8</span> <span class="c"># our book won't pass validates_presence_of</span>
+<span class="no"> 9</span> <span class="lv">$book</span> = <span class="r">new</span> <span class="co">Book</span>(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">title</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="dl">'</span></span>));
+<span class="no"><strong>10</strong></span> <span class="pd">echo</span> <span class="lv">$book</span>-&gt;is_valid(); <span class="c"># false</span>
+<span class="no">11</span> <span class="pd">echo</span> <span class="lv">$book</span>-&gt;is_invalid(); <span class="c"># true</span>
+</span></code></pre>
+
+	<p>If validation(s) fails for your model, then you can access the error message(s) like so. Let's assume that our validation was <a href="../../main/wiki/Validations.html#validates_presence_of">validates_presence_of</a>.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">Book</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span>
+<span class="no"> 2</span> {
+<span class="no"> 3</span>   <span class="r">static</span> <span class="lv">$validates_presence_of</span> = <span class="pd">array</span>(
+<span class="no"> 4</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">title</span><span class="dl">'</span></span>)
+<span class="no"> 5</span>   );
+<span class="no"> 6</span> }
+<span class="no"> 7</span> 
+<span class="no"> 8</span> <span class="lv">$book</span> = <span class="r">new</span> <span class="co">Book</span>(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">title</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="dl">'</span></span>));
+<span class="no"> 9</span> <span class="lv">$book</span>-&gt;save();
+<span class="no"><strong>10</strong></span> <span class="lv">$book</span>-&gt;errors-&gt;is_invalid(<span class="s"><span class="dl">'</span><span class="k">title</span><span class="dl">'</span></span>); <span class="c"># =&gt; true</span>
+<span class="no">11</span> 
+<span class="no">12</span> <span class="c"># if the attribute fails more than 1 validation,</span>
+<span class="no">13</span> <span class="c"># you would get an array of errors below</span>
+<span class="no">14</span> 
+<span class="no">15</span> <span class="pd">echo</span> <span class="lv">$book</span>-&gt;errors-&gt;on(<span class="s"><span class="dl">'</span><span class="k">title</span><span class="dl">'</span></span>); <span class="c"># =&gt; can't be blank</span>
+</span></code></pre>
+
+	<p>Now let's assume our model failed two validations: <a href="../../main/wiki/Validations.html#validates_presence_of">validates_presence_of</a> and <a href="../../main/wiki/Validations.html#validates_size_of">validates_size_of</a>.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">Book</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span>
+<span class="no"> 2</span> {
+<span class="no"> 3</span>   <span class="r">static</span> <span class="lv">$validates_presence_of</span> = <span class="pd">array</span>(
+<span class="no"> 4</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">title</span><span class="dl">'</span></span>)
+<span class="no"> 5</span>   );
+<span class="no"> 6</span> 
+<span class="no"> 7</span>   <span class="r">static</span> <span class="lv">$validates_size_of</span> = <span class="pd">array</span>(
+<span class="no"> 8</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">title</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">within</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="i">1</span>,<span class="i">20</span>))
+<span class="no"> 9</span>   );
+<span class="no"><strong>10</strong></span> }
+<span class="no">11</span> 
+<span class="no">12</span> <span class="lv">$book</span> = <span class="r">new</span> <span class="co">Book</span>(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">title</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="dl">'</span></span>));
+<span class="no">13</span> <span class="lv">$book</span>-&gt;save();
+<span class="no">14</span> <span class="lv">$book</span>-&gt;errors-&gt;is_invalid(<span class="s"><span class="dl">'</span><span class="k">title</span><span class="dl">'</span></span>); <span class="c"># true</span>
+<span class="no">15</span> 
+<span class="no">16</span> <span class="pd">print_r</span>(<span class="lv">$book</span>-&gt;errors-&gt;on(<span class="s"><span class="dl">'</span><span class="k">title</span><span class="dl">'</span></span>));
+<span class="no">17</span> 
+<span class="no">18</span> <span class="c"># which would give us:</span>
+<span class="no">19</span> 
+<span class="no"><strong>20</strong></span> <span class="c"># Array</span>
+<span class="no">21</span> <span class="c"># (</span>
+<span class="no">22</span> <span class="c">#   [0] =&gt; can't be blank</span>
+<span class="no">23</span> <span class="c">#   [1] =&gt; is too short (minimum is 1 characters)</span>
+<span class="no">24</span> <span class="c"># )</span>
+<span class="no">25</span> 
+<span class="no">26</span> <span class="c"># to access errors for all attributes, not just 'title'</span>
+<span class="no">27</span> <span class="pd">print_r</span>(<span class="lv">$book</span>-&gt;errors-&gt;full_messages());
+<span class="no">28</span> 
+</span></code></pre>
+
+	<h4 id="commonalities">Commonalities</h4>
+
+
+	<p>Validations are defined with a common set of options and some of them have specific options. As you've seen above, creating a validation is as simple as declaring a static validation variable in your model class as a multi-dimensional array (to validate multiple attributes). Each validation will require you to put the attribute name in the 0 index of the array. You can configure the error message by creating a message key with the message string as the value. You can also add an option which will only run the validation on either creation or update. By default, your validation will run everytime Model#save() is called.</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">Book</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span>
+<span class="no"> 2</span> {
+<span class="no"> 3</span>   <span class="c"># 0 index is title, the attribute to test against</span>
+<span class="no"> 4</span>   <span class="c"># message is our custom error msg</span>
+<span class="no"> 5</span>   <span class="c"># only run this validation on creation - not when updating</span>
+<span class="no"> 6</span>   <span class="r">static</span> <span class="lv">$validates_presence_of</span> = <span class="pd">array</span>(
+<span class="no"> 7</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">title</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">message</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">cannot be blank on a book!</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">on</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">create</span><span class="dl">'</span></span>)
+<span class="no"> 8</span>   );
+<span class="no"> 9</span> }
+</span></code></pre>
+
+	<p>In some validations you may use: in, is within. In/within designate a range whereby you use an array with the first and second elements representing the beginning and end of the range respectively. Is represents equality.</p>
+
+
+	<p>Common options available to all validators:</p>
+
+
+	<ul>
+	<li><strong>on:</strong> run the validator during "save", "update" </li>
+		<li><strong>allow_null:</strong> allow null to satisfy the validation</li>
+		<li><strong>allow_blank:</strong> allow a blank string to satisfy the validation</li>
+		<li><strong>message:</strong> specify a custom error message</li>
+	</ul>
+
+
+	<h4 id="available-validations">Available validations</h4>
+
+
+	<p>There are a number of pre-defined validation routines that you can declare on your model for specific attributes.</p>
+
+
+	<ul>
+	<li><a href="../../main/wiki/Validations.html#validates_presence_of">validates_presence_of</a></li>
+		<li><a href="../../main/wiki/Validations.html#validates_size_of">validates_size_of</a></li>
+		<li><a href="../../main/wiki/Validations.html#validates_size_of">validates_length_of</a></li>
+		<li><a href="../../main/wiki/Validations.html#validates_in_ex_clusion_of">validates_(in|ex)clusion_of</a></li>
+		<li><a href="../../main/wiki/Validations.html#validates_format_of">validates_format_of</a></li>
+		<li><a href="../../main/wiki/Validations.html#validates_numericality_of">validates_numericality_of</a></li>
+		<li><a href="../../main/wiki/Validations.html#validates_uniqueness_of">validates_uniqueness_of</a></li>
+		<li><a href="../../main/wiki/Validations.html#validate">validate *custom</a></li>
+	</ul>
+
+
+	<h4 id="validates_presence_of">validates_presence_of</h4>
+
+
+	<p>This is probably the simplest of all the validations. It will make sure that the value of the attribute is not null or a blank string. Available options:</p>
+
+
+	<ul>
+	<li>message: default: <strong>can't be blank</strong></li>
+	</ul>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">Book</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span>
+<span class="no"> 2</span> {
+<span class="no"> 3</span>   <span class="r">static</span> <span class="lv">$validates_presence_of</span> = <span class="pd">array</span>(
+<span class="no"> 4</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">title</span><span class="dl">'</span></span>),
+<span class="no"> 5</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">cover_blurb</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">message</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">must be present and witty</span><span class="dl">'</span></span>)
+<span class="no"> 6</span>   );
+<span class="no"> 7</span> }
+<span class="no"> 8</span> 
+<span class="no"> 9</span> <span class="lv">$book</span> = <span class="r">new</span> <span class="co">Book</span>(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">title</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="dl">'</span></span>));
+<span class="no"><strong>10</strong></span> <span class="lv">$book</span>-&gt;save();
+<span class="no">11</span> 
+<span class="no">12</span> <span class="pd">echo</span> <span class="lv">$book</span>-&gt;errors-&gt;on(<span class="s"><span class="dl">'</span><span class="k">cover_blurb</span><span class="dl">'</span></span>); <span class="c"># =&gt; must be present and witty</span>
+<span class="no">13</span> <span class="pd">echo</span> <span class="lv">$book</span>-&gt;errors-&gt;on(<span class="s"><span class="dl">'</span><span class="k">title</span><span class="dl">'</span></span>); <span class="c"># =&gt; can't be blank</span>
+</span></code></pre>
+
+	<h4 id="validates_size_of">validates_size_of / validates_length_of</h4>
+
+
+	<p>These two validations are one and the same. The purpose is to validate the length in characters of a given attribute. Available options:</p>
+
+
+	<p><strong>is</strong>: attribute should be <strong>exactly</strong> n characters long<br /><strong>in/within</strong>: attribute should be within an range array(n, m)<br /><strong>maximum/minimum</strong>: attribute should not be above/below respectively</p>
+
+
+	<p>Each of the options has a particular message and can be changed.</p>
+
+
+	<ul>
+	<li><strong>is</strong>: uses key 'wrong_length'</li>
+		<li><strong>in/within</strong>: uses keys 'too_long' &#38; 'too_short'</li>
+		<li><strong>maximum/minimum</strong>: uses keys 'too_long' &#38; 'too_short'</li>
+	</ul>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">Book</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span>
+<span class="no"> 2</span> {
+<span class="no"> 3</span>   <span class="r">static</span> <span class="lv">$validates_size_of</span> = <span class="pd">array</span>(
+<span class="no"> 4</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">title</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">within</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="i">1</span>,<span class="i">5</span>), <span class="s"><span class="dl">'</span><span class="k">too_short</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">too short!</span><span class="dl">'</span></span>),
+<span class="no"> 5</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">cover_blurb</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">is</span><span class="dl">'</span></span> =&gt; <span class="i">20</span>),
+<span class="no"> 6</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">description</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">maximum</span><span class="dl">'</span></span> =&gt; <span class="i">10</span>, <span class="s"><span class="dl">'</span><span class="k">too_long</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">should be short and sweet</span><span class="dl">'</span></span>)
+<span class="no"> 7</span>   );
+<span class="no"> 8</span> }
+<span class="no"> 9</span> 
+<span class="no"><strong>10</strong></span> <span class="lv">$book</span> = <span class="r">new</span> <span class="co">Book</span>;
+<span class="no">11</span> <span class="lv">$book</span>-&gt;title = <span class="s"><span class="dl">'</span><span class="k">War and Peace</span><span class="dl">'</span></span>;
+<span class="no">12</span> <span class="lv">$book</span>-&gt;cover_blurb = <span class="s"><span class="dl">'</span><span class="k">not 20 chars</span><span class="dl">'</span></span>;
+<span class="no">13</span> <span class="lv">$book</span>-&gt;description = <span class="s"><span class="dl">'</span><span class="k">this description is longer than 10 chars</span><span class="dl">'</span></span>;
+<span class="no">14</span> <span class="lv">$ret</span> = <span class="lv">$book</span>-&gt;save();
+<span class="no">15</span> 
+<span class="no">16</span> <span class="c"># validations failed so we get a false return</span>
+<span class="no">17</span> <span class="r">if</span> (<span class="lv">$ret</span> == <span class="pc">false</span>)
+<span class="no">18</span> {
+<span class="no">19</span>   <span class="c"># too short!</span>
+<span class="no"><strong>20</strong></span>   <span class="pd">echo</span> <span class="lv">$book</span>-&gt;errors-&gt;on(<span class="s"><span class="dl">'</span><span class="k">title</span><span class="dl">'</span></span>);
+<span class="no">21</span> 
+<span class="no">22</span>   <span class="c"># is the wrong length (should be 20 chars)</span>
+<span class="no">23</span>   <span class="pd">echo</span> <span class="lv">$book</span>-&gt;errors-&gt;on(<span class="s"><span class="dl">'</span><span class="k">cover_blurb</span><span class="dl">'</span></span>);
+<span class="no">24</span> 
+<span class="no">25</span>   <span class="c"># should be short and sweet</span>
+<span class="no">26</span>   <span class="pd">echo</span> <span class="lv">$book</span>-&gt;errors-&gt;on(<span class="s"><span class="dl">'</span><span class="k">description</span><span class="dl">'</span></span>);
+<span class="no">27</span> }
+</span></code></pre>
+
+	<h4 id="validates_in_ex_clusion_of">validates_(in|ex)clusion_of</h4>
+
+
+	<p>As you can see from the names, these two are similar. In fact, this is just a white/black list approach to your validations. Inclusion is a whitelist that will require a value to be within a given set. Exclusion is the opposite: a blacklist that requires a value to <strong>not</strong> be within a given set. Available options:</p>
+
+
+	<ul>
+	<li><strong>in/within</strong>: attribute should/shouldn't be a value within an array</li>
+		<li><strong>message</strong>: custom error message</li>
+	</ul>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">Car</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span>
+<span class="no"> 2</span> {
+<span class="no"> 3</span>   <span class="r">static</span> <span class="lv">$validates_inclusion_of</span> = <span class="pd">array</span>(
+<span class="no"> 4</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">fuel_type</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">in</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">petroleum</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">hydrogen</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">electric</span><span class="dl">'</span></span>)),
+<span class="no"> 5</span>   );
+<span class="no"> 6</span> }
+<span class="no"> 7</span> 
+<span class="no"> 8</span> <span class="c"># this will pass since it's in the above list</span>
+<span class="no"> 9</span> <span class="lv">$car</span> = <span class="r">new</span> <span class="co">Car</span>(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">fuel_type</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">electric</span><span class="dl">'</span></span>));
+<span class="no"><strong>10</strong></span> <span class="lv">$ret</span> = <span class="lv">$car</span>-&gt;save();
+<span class="no">11</span> <span class="pd">echo</span> <span class="lv">$ret</span> <span class="c"># =&gt; true</span>
+<span class="no">12</span> 
+<span class="no">13</span> <span class="r">class</span> <span class="cl">User</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span>
+<span class="no">14</span> {
+<span class="no">15</span>   <span class="r">static</span> <span class="lv">$validates_exclusion_of</span> = <span class="pd">array</span>(
+<span class="no">16</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">password</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">in</span><span class="dl">'</span></span> =&gt; <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">god</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">sex</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">password</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">love</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">secret</span><span class="dl">'</span></span>),
+<span class="no">17</span>       <span class="s"><span class="dl">'</span><span class="k">message</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">should not be one of the four most used passwords</span><span class="dl">'</span></span>)
+<span class="no">18</span>   );
+<span class="no">19</span> }
+<span class="no"><strong>20</strong></span> 
+<span class="no">21</span> <span class="lv">$user</span> = <span class="r">new</span> <span class="co">User</span>;
+<span class="no">22</span> <span class="lv">$user</span>-&gt;password = <span class="s"><span class="dl">'</span><span class="k">god</span><span class="dl">'</span></span>;
+<span class="no">23</span> <span class="lv">$user</span>-&gt;save();
+<span class="no">24</span> 
+<span class="no">25</span> <span class="c"># =&gt; should not be one of the four most used passwords</span>
+<span class="no">26</span> <span class="pd">echo</span> <span class="lv">$user</span>-&gt;errors-&gt;on(<span class="s"><span class="dl">'</span><span class="k">password</span><span class="dl">'</span></span>);
+</span></code></pre>
+
+	<h4 id="validates_format_of">validates_format_of</h4>
+
+
+	<p>This validation uses <a href="http://www.php.net/preg_match" class="external">preg_match</a> to verify the format of an attribute. You can create a regular expression to test against. Available options:</p>
+
+
+	<ul>
+	<li><strong>with</strong>: regular expression</li>
+		<li><strong>message</strong>: custom error message</li>
+	</ul>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">User</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span>
+<span class="no"> 2</span> {
+<span class="no"> 3</span>   <span class="r">static</span> <span class="lv">$validates_format_of</span> = <span class="pd">array</span>(
+<span class="no"> 4</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">email</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">with</span><span class="dl">'</span></span> =&gt;
+<span class="no"> 5</span>       <span class="s"><span class="dl">'</span><span class="k">/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/</span><span class="dl">'</span></span>)
+<span class="no"> 6</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">password</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">with</span><span class="dl">'</span></span> =&gt;
+<span class="no"> 7</span>       <span class="s"><span class="dl">'</span><span class="k">/^.*(?=.{8,})(?=.*</span><span class="k">\d</span><span class="k">)(?=.*[a-z])(?=.*[A-Z]).*$/</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">message</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">is too weak</span><span class="dl">'</span></span>)
+<span class="no"> 8</span>   );
+<span class="no"> 9</span> }
+<span class="no"><strong>10</strong></span> 
+<span class="no">11</span> <span class="lv">$user</span> = <span class="r">new</span> <span class="co">User</span>;
+<span class="no">12</span> <span class="lv">$user</span>-&gt;email = <span class="s"><span class="dl">'</span><span class="k">not_a_real_email.com</span><span class="dl">'</span></span>;
+<span class="no">13</span> <span class="lv">$user</span>-&gt;password = <span class="s"><span class="dl">'</span><span class="k">notstrong</span><span class="dl">'</span></span>;
+<span class="no">14</span> <span class="lv">$user</span>-&gt;save();
+<span class="no">15</span> 
+<span class="no">16</span> <span class="pd">echo</span> <span class="lv">$user</span>-&gt;errors-&gt;on(<span class="s"><span class="dl">'</span><span class="k">email</span><span class="dl">'</span></span>); <span class="c"># =&gt; is invalid</span>
+<span class="no">17</span> <span class="pd">echo</span> <span class="lv">$user</span>-&gt;errors-&gt;on(<span class="s"><span class="dl">'</span><span class="k">password</span><span class="dl">'</span></span>); <span class="c"># =&gt; is too weak</span>
+</span></code></pre>
+
+	<h4 id="validates_numericality_of">validates_numericality_of</h4>
+
+
+	<p>As the name suggests, this gem tests whether or not a given attribute is a number, and whether or not it is of a certain value. Available options:</p>
+
+
+	<ul>
+	<li><strong>only_integer</strong>: value must be an integer (e.g. not a float), message: "is not a number" </li>
+		<li><strong>even, message</strong>: "must be even" </li>
+		<li><strong>odd, message</strong>: "must be odd" </li>
+		<li><strong>greater_than</strong>: >, message: "must be greater than %d" </li>
+		<li><strong>greater_than_or_equal_to</strong>: >=, message: "must be greater than or equal to %d" </li>
+		<li><strong>equal_to</strong>: ==, message: "must be equal to %d" </li>
+		<li><strong>less_than</strong>: <, message: "must be less than %d" </li>
+		<li><strong>less_than_or_equal_to</strong>: <=, message: "must be less than or equal to %d"</li>
+	</ul>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">Order</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span>
+<span class="no"> 2</span> {
+<span class="no"> 3</span>   <span class="r">static</span> <span class="lv">$validates_numericality_of</span> = <span class="pd">array</span>(
+<span class="no"> 4</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">price</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">greater_than</span><span class="dl">'</span></span> =&gt; <span class="fl">0.01</span>),
+<span class="no"> 5</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">quantity</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">only_integer</span><span class="dl">'</span></span> =&gt; <span class="pc">true</span>),
+<span class="no"> 6</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">shipping</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">greater_than_or_equal_to</span><span class="dl">'</span></span> =&gt; <span class="i">0</span>),
+<span class="no"> 7</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">discount</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">less_than_or_equal_to</span><span class="dl">'</span></span> =&gt; <span class="i">5</span>, <span class="s"><span class="dl">'</span><span class="k">greater_than_or_equal_to</span><span class="dl">'</span></span> =&gt; <span class="i">0</span>)
+<span class="no"> 8</span>   );
+<span class="no"> 9</span> }
+<span class="no"><strong>10</strong></span> 
+<span class="no">11</span> <span class="lv">$order</span> = <span class="r">new</span> <span class="co">Order</span>;
+<span class="no">12</span> <span class="lv">$order</span>-&gt;price = <span class="i">0</span>;
+<span class="no">13</span> <span class="lv">$order</span>-&gt;quantity = <span class="fl">1.25</span>;
+<span class="no">14</span> <span class="lv">$order</span>-&gt;shipping = <span class="i">5</span>;
+<span class="no">15</span> <span class="lv">$order</span>-&gt;discount = <span class="i">2</span>;
+<span class="no">16</span> <span class="lv">$order</span>-&gt;save();
+<span class="no">17</span> 
+<span class="no">18</span> <span class="pd">echo</span> <span class="lv">$order</span>-&gt;errors-&gt;on(<span class="s"><span class="dl">'</span><span class="k">price</span><span class="dl">'</span></span>); <span class="c"># =&gt; must be greater than 0.01</span>
+<span class="no">19</span> <span class="pd">echo</span> <span class="lv">$order</span>-&gt;errors-&gt;on(<span class="s"><span class="dl">'</span><span class="k">quantity</span><span class="dl">'</span></span>); <span class="c"># =&gt; is not a number</span>
+<span class="no"><strong>20</strong></span> <span class="pd">echo</span> <span class="lv">$order</span>-&gt;errors-&gt;on(<span class="s"><span class="dl">'</span><span class="k">shipping</span><span class="dl">'</span></span>); <span class="c"># =&gt; null</span>
+<span class="no">21</span> <span class="pd">echo</span> <span class="lv">$order</span>-&gt;errors-&gt;on(<span class="s"><span class="dl">'</span><span class="k">discount</span><span class="dl">'</span></span>); <span class="c"># =&gt; null</span>
+</span></code></pre>
+
+	<h4 id="validates_uniqueness_of">validates_uniqueness_of</h4>
+
+
+	<p>Tests whether or not a given attribute already exists in the table or not.</p>
+
+
+	<ul>
+	<li><strong>message</strong>: custom error message</li>
+	</ul>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">User</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span>
+<span class="no"> 2</span> {
+<span class="no"> 3</span>   <span class="r">static</span> <span class="lv">$validates_uniqueness_of</span> = <span class="pd">array</span>(
+<span class="no"> 4</span>     <span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">name</span><span class="dl">'</span></span>),
+<span class="no"> 5</span>     <span class="pd">array</span>(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">blah</span><span class="dl">'</span></span>,<span class="s"><span class="dl">'</span><span class="k">bleh</span><span class="dl">'</span></span>), <span class="s"><span class="dl">'</span><span class="k">message</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">blah and bleh!</span><span class="dl">'</span></span>)
+<span class="no"> 6</span>   );
+<span class="no"> 7</span> }
+<span class="no"> 8</span> 
+<span class="no"> 9</span> <span class="co">User</span>::create(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">name</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">Tito</span><span class="dl">'</span></span>));
+<span class="no"><strong>10</strong></span> <span class="lv">$user</span> = <span class="co">User</span>::create(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">name</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">Tito</span><span class="dl">'</span></span>));
+<span class="no">11</span> <span class="lv">$user</span>-&gt;is_valid(); <span class="c"># =&gt; false</span>
+</span></code></pre>
+
+	<h4 id="validate">validate (custom)</h4>
+
+
+	<p>Generic method allows for custom business logic or advanced validation. You can add your own errors to errors object. This does not take any parameters. You place this logic in a <strong>public</strong> method  named <strong>validate</strong>. (This feature is available since v1.1 or nightly builds.)</p>
+
+
+<pre class="code"><code class="php syntaxhl"><span class="CodeRay"><span class="no"> 1</span> <span class="r">class</span> <span class="cl">User</span> <span class="r">extends</span> <span class="co">ActiveRecord</span>\<span class="co">Model</span>
+<span class="no"> 2</span> {
+<span class="no"> 3</span>   <span class="r">public</span> <span class="r">function</span> <span class="fu">validate</span>() 
+<span class="no"> 4</span>   {
+<span class="no"> 5</span>     <span class="r">if</span> (<span class="lv">$this</span>-&gt;first_name == <span class="lv">$this</span>-&gt;last_name)
+<span class="no"> 6</span>     {
+<span class="no"> 7</span>       <span class="lv">$this</span>-&gt;errors-&gt;add(<span class="s"><span class="dl">'</span><span class="k">first_name</span><span class="dl">'</span></span>, <span class="s"><span class="dl">&quot;</span><span class="k">can't be the same as Last Name</span><span class="dl">&quot;</span></span>);
+<span class="no"> 8</span>       <span class="lv">$this</span>-&gt;errors-&gt;add(<span class="s"><span class="dl">'</span><span class="k">last_name</span><span class="dl">'</span></span>, <span class="s"><span class="dl">&quot;</span><span class="k">can't be the same as First Name</span><span class="dl">&quot;</span></span>);
+<span class="no"> 9</span>     }
+<span class="no"><strong>10</strong></span>   }
+<span class="no">11</span> }
+<span class="no">12</span> 
+<span class="no">13</span> <span class="lv">$user</span> = <span class="co">User</span>::create(<span class="pd">array</span>(<span class="s"><span class="dl">'</span><span class="k">first_name</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">Tito</span><span class="dl">'</span></span>, <span class="s"><span class="dl">'</span><span class="k">last_name</span><span class="dl">'</span></span> =&gt; <span class="s"><span class="dl">'</span><span class="k">Tito</span><span class="dl">'</span></span>));
+<span class="no">14</span> <span class="lv">$user</span>-&gt;is_valid(); <span class="c"># =&gt; false</span>
+<span class="no">15</span> <span class="pd">echo</span> <span class="lv">$user</span>-&gt;errors-&gt;on(<span class="s"><span class="dl">'</span><span class="k">first_name</span><span class="dl">'</span></span>); <span class="c"># =&gt; can't be the same as Last Name</span>
+</span></code></pre>
+
+<hr />
+<a name="Wiki" />
+<h2 id="Wiki">Wiki<a href="#Wiki" class="wiki-anchor">&para;</a></h2>
+
+
+	<table class="no-border">
+		<tr>
+			<td style="vertical-align:top;"><img src="../../../images/page_white_text.png" alt="" /></td>
+			<td><a href="#" class="wiki-page">Quick Start</a><br />Just the basics to get up and running</td>
+			<td style="vertical-align:top;"><img src="../../../images/page_white_text.png" alt="" /></td>
+			<td><a href="#" class="wiki-page">Configuration / Setup</a><br />Configuration and setup options.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><img src="../../../images/page_white_text.png" alt="" /></td>
+			<td><a href="#" class="wiki-page">Conventions</a><br />Introduction to the conventions used.</td>
+			<td style="vertical-align:top;"><img src="../../../images/page_white_text.png" alt="" /></td>
+			<td><a href="#" class="wiki-page">Basic CRUD</a><br />How to perform basic CRUD operations</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><img src="../../../images/page_white_text.png" alt="" /></td>
+			<td><a href="#" class="wiki-page">Finders</a><br />In-depth look at getting the data you need.</td>
+			<td style="vertical-align:top;"><img src="../../../images/page_white_text.png" alt="" /></td>
+			<td><a href="#" class="wiki-page">Associations</a><br />Using table relationships with your models.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><img src="../../../images/page_white_text.png" alt="" /></td>
+			<td><a href="#" class="wiki-page">Validations</a><br />These help ensure data integrity.</td>
+			<td style="vertical-align:top;"><img src="../../../images/page_white_text.png" alt="" /></td>
+			<td><a href="#" class="wiki-page">Callbacks</a><br />Take control of your models.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><img src="../../../images/page_white_text.png" alt="" /></td>
+			<td><a href="#" class="wiki-page">Utilities</a><br />Miscellaneous options and helpful short-cuts.</td>
+			<td style="vertical-align:top;"><img src="../../../images/page_white_text.png" alt="" /></td>
+			<td><a href="#" class="wiki-page">Frameworks</a><br />Using with various frameworks.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><img src="../../../images/page_white_text.png" alt="" /></td>
+			<td><a href="#" class="wiki-page">SQLBuilder</a><br />How to use the SQL Builder.</td>
+			<td></td>
+		</tr>
+	</table>
+
+
+</body>
+
+<!-- Mirrored from www.phpactiverecord.com/projects/3/wiki/export?format=html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 May 2017 20:19:08 GMT -->
+</html>

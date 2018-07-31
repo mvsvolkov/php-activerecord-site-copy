@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- Mirrored from www.phpactiverecord.com/projects/main/wiki/Quick_Start?format=html&version=2 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 May 2017 20:18:35 GMT -->
+<head>
+<title>Quick Start</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<style>
+body { font:80% Verdana,Tahoma,Arial,sans-serif; }
+h1, h2, h3, h4 {  font-family: "Trebuchet MS",Georgia,"Times New Roman",serif; }
+ul.toc { padding: 4px; margin-left: 0; }
+ul.toc li { list-style-type:none; }
+ul.toc li.heading2 { margin-left: 1em; }
+ul.toc li.heading3 { margin-left: 2em; }
+a.wiki-anchor { display: none; margin-left: 6px; text-decoration: none; }
+a.wiki-anchor:hover { color: #aaa !important; text-decoration: none; }
+h1:hover a.wiki-anchor, h2:hover a.wiki-anchor, h3:hover a.wiki-anchor { display: inline; color: #ddd; }
+</style>
+</head>
+<body>
+<h2 id="Quick-Start">Quick Start<a href="#Quick-Start" class="wiki-anchor">&para;</a></h2>
+
+
+	<p>This guide will show you the bare essentials to get up and running with php-activerecord. I will assume you have downloaded the library into your include_path in a directory called php-activerecord.</p>
+
+
+	<p>The first steps are to include the library and define our database connection:</p>
+
+
+<pre class="php">
+require_once 'php-activerecord/ActiveRecord.php';
+
+ActiveRecord\Config::initialize(function($cfg)
+{
+    $cfg-&gt;set_model_directory('models');
+    $cfg-&gt;set_connections(array(
+        'development' =&gt; 'mysql://username:<a class="__cf_email__" href="../../../cdn-cgi/l/email-protection.html" data-cfemail="f888998b8b8f978a9cb894979b999490978b8c">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/database_name'));
+});
+</pre>
+
+	<p>Next, lets create a model for a table called users. We'll save this class in the file models/User.php</p>
+
+
+<pre class="php">
+class User extends ActiveRecord\Model
+{
+}
+</pre>
+
+	<p>That's it! Now you can access the users table thru the User model.</p>
+
+
+<pre class="php">
+# create Tito
+$user = User::create(array('name' =&gt; 'Tito', 'state' =&gt; 'VA'));
+
+# read Tito
+$user = User::find_by_name('Tito');
+
+# update Tito
+$user-&gt;name = 'Tito Jr';
+$user-&gt;save();
+
+# delete Tito
+$user-&gt;delete();
+</pre>
+
+	<p>Easy, huh?</p>
+</body>
+
+<!-- Mirrored from www.phpactiverecord.com/projects/main/wiki/Quick_Start?format=html&version=2 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 May 2017 20:18:35 GMT -->
+</html>

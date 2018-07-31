@@ -1,0 +1,971 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+	
+<!-- Mirrored from www.phpactiverecord.com/projects/main/repository/revisions/ede4bed8703f7e69d0cd651f40f320d43dbd8ab6/entry/README.md by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 May 2017 20:14:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+		<title>PHP ActiveRecord - /README.md - An easy to use ORM for PHP</title>
+		<link rel="canonical" href="http://www.phpactiverecord.org/projects/main/repository/revisions/ede4bed8703f7e69d0cd651f40f320d43dbd8ab6/entry/README.md"/>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="issue,bug,tracker" />
+		<meta name="description" content="Redmine" />
+		<meta name="googlebot" content="NOODP" />
+		<meta name="robots" content="index,follow,noodp,noydir" />
+		<link href="../../../../../../stylesheets/blueprint/screen35c2.css?1366183229" media="screen" rel="stylesheet" type="text/css" />
+		<link href="../../../../../../stylesheets/blueprint/print35c2.css?1366183229" media="print" rel="stylesheet" type="text/css" />
+		<!--[if lt IE 8]><link href="/stylesheets/blueprint/ie.css?1366183229" media="screen" rel="stylesheet" type="text/css" /><![endif]-->
+		<link href="../../../../../../themes/basecamp/stylesheets/application3445.css?1366183196" media="screen" rel="stylesheet" type="text/css" />
+		<link href="../../../../../../stylesheets/jstoolbar35c2.css?1366183229" media="screen" rel="stylesheet" type="text/css" />
+		<!--[if IE]>
+		    <style type="text/css">
+		      * html body{ width: expression( document.documentElement.clientWidth < 900 ? '900px' : '100%' ); }
+		      body {behavior: url(/stylesheets/csshover.htc?1366183229);}
+		    </style>
+		<![endif]-->
+		
+		<!-- page specific tags -->
+		
+  <script src="../../../../../../javascripts/repository_navigation35c2.html?1366183229" type="text/javascript"></script>
+
+<link href="../../../../../../stylesheets/scm35c2.css?1366183229" media="screen" rel="stylesheet" type="text/css" />
+		<link href="../../../../../../themes/basecamp/stylesheets/main3445.css?1366183196" media="screen" rel="stylesheet" type="text/css" />
+	</head>
+<body>
+	
+<div id="wrapper">
+	<div id="header">
+	    <div class="container">
+	        <div class="span-7">
+	            <h1><a href="http://www.phpactiverecord.org/" target="_top">php.activerecord</a></h1>
+	        </div>
+	        <div class="span-13" id="main-nav">
+		        <ul class="horizontal"><li><a href="../../../../../../download/index/main.html" class="download">Download</a></li>
+<li><a href="../../../../wiki.html" class="guides">Wiki</a></li>
+<li><a href="../../../../../../docs/index/main.html" class="docs">Docs</a></li>
+<li><a href="../../../../../../news/index/mainddf6.html?project_id=main" class="news">News</a></li>
+<li><a href="../../../../boards.html" class="boards">Forums</a></li>
+<li><a href="../../../../../../welcome/about/main.html" class="about-us">About us</a></li></ul>	        </div>
+          <div class="span-4 last" id="account-menu">
+		        <ul class="horizontal"><li><a href="../../../../../../login.html" class="login">Sign in</a></li>
+<li><a href="../../../../../../account/register.html" class="register">Register</a></li></ul>          </div>
+	    </div>
+	</div>
+
+	<div id="main-frame">
+		<div id="breadcrumbs" class="container">
+			<ul class="span-24 last">
+				<li><a href="../../../../../../index.html">Home</a></li><li><a href="../../ede4bed8703f7e69d0cd651f40f320d43dbd8ab6.html">Repositories</a></li><li class="last"><a href="README.html">Entry</a></li>
+			</ul>
+		</div>
+
+		<div id="main" class="container">
+			<div id="content" class="span-16 colborder">
+				
+				
+
+<div class="contextual">
+  
+
+<a href="../../../statistics.html" class="icon icon-stats">Statistics</a>
+
+<form action="http://www.phpactiverecord.com/projects/main/repository/entry/README.md?rev=" id="revision_selector" method="get">  <!-- Branches Dropdown -->
+      | Branch: 
+    <select id="branch" name="branch"><option value=""></option>
+<option value="master">master</option></select>
+  
+      | Tag: 
+    <select id="tag" name="tag"><option value=""></option>
+<option value="1.0">1.0</option>
+<option value="1.0rc1">1.0rc1</option></select>
+  
+  | Revision: 
+  <input id="rev" name="rev" size="8" type="text" value="ede4bed8703f7e69d0cd651f40f320d43dbd8ab6" />
+</form>
+</div>
+
+<h2><a href="../show.html">root</a>
+
+
+    / <a href="../changes/README.html">README.md</a>
+
+
+@ ede4bed8703f7e69d0cd651f40f320d43dbd8ab6
+
+</h2>
+
+<p>
+
+<p>
+<a href="../changes/README.html">History</a> |
+
+    View |
+
+
+    <a href="../annotate/README.html">Annotate</a> |
+
+<a href="../raw/README.html">Download</a>
+(5.3 KB)
+</p>
+
+
+</p>
+
+<div class="autoscroll">
+<table class="filecontent syntaxhl">
+<tbody>
+
+
+<tr><th class="line-num" id="L1"><a href="#L1">1</a></th><td class="line-code"><pre># PHP ActiveRecord - Version 1.0 #
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L2"><a href="#L2">2</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L3"><a href="#L3">3</a></th><td class="line-code"><pre>[![Build Status](https://travis-ci.org/kla/php-activerecord.png?branch=master)](https://travis-ci.org/kla/php-activerecord)
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L4"><a href="#L4">4</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L5"><a href="#L5">5</a></th><td class="line-code"><pre>by 
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L6"><a href="#L6">6</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L7"><a href="#L7">7</a></th><td class="line-code"><pre>* [@kla](https://github.com/kla) - Kien La
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L8"><a href="#L8">8</a></th><td class="line-code"><pre>* [@jpfuentes2](https://github.com/jpfuentes2) - Jacques Fuentes
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L9"><a href="#L9">9</a></th><td class="line-code"><pre>* [And these terrific Contributors](https://github.com/kla/php-activerecord/contributors)
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L10"><a href="#L10">10</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L11"><a href="#L11">11</a></th><td class="line-code"><pre>&lt;http://www.phpactiverecord.org/&gt; 
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L12"><a href="#L12">12</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L13"><a href="#L13">13</a></th><td class="line-code"><pre>## Introduction ##
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L14"><a href="#L14">14</a></th><td class="line-code"><pre>A brief summarization of what ActiveRecord is:
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L15"><a href="#L15">15</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L16"><a href="#L16">16</a></th><td class="line-code"><pre>&gt; Active record is an approach to access data in a database. A database table or view is wrapped into a class,
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L17"><a href="#L17">17</a></th><td class="line-code"><pre>&gt; thus an object instance is tied to a single row in the table. After creation of an object, a new row is added to
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L18"><a href="#L18">18</a></th><td class="line-code"><pre>&gt; the table upon save. Any object loaded gets its information from the database; when an object is updated, the
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L19"><a href="#L19">19</a></th><td class="line-code"><pre>&gt; corresponding row in the table is also updated. The wrapper class implements accessor methods or properties for
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L20"><a href="#L20">20</a></th><td class="line-code"><pre>&gt; each column in the table or view.
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L21"><a href="#L21">21</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L22"><a href="#L22">22</a></th><td class="line-code"><pre>More details can be found [here](http://en.wikipedia.org/wiki/Active_record_pattern).
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L23"><a href="#L23">23</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L24"><a href="#L24">24</a></th><td class="line-code"><pre>This implementation is inspired and thus borrows heavily from Ruby on Rails&#39; ActiveRecord.
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L25"><a href="#L25">25</a></th><td class="line-code"><pre>We have tried to maintain their conventions while deviating mainly because of convenience or necessity.
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L26"><a href="#L26">26</a></th><td class="line-code"><pre>Of course, there are some differences which will be obvious to the user if they are familiar with rails.
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L27"><a href="#L27">27</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L28"><a href="#L28">28</a></th><td class="line-code"><pre>## Minimum Requirements ##
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L29"><a href="#L29">29</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L30"><a href="#L30">30</a></th><td class="line-code"><pre>- PHP 5.3+
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L31"><a href="#L31">31</a></th><td class="line-code"><pre>- PDO driver for your respective database
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L32"><a href="#L32">32</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L33"><a href="#L33">33</a></th><td class="line-code"><pre>## Supported Databases ##
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L34"><a href="#L34">34</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L35"><a href="#L35">35</a></th><td class="line-code"><pre>- MySQL
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L36"><a href="#L36">36</a></th><td class="line-code"><pre>- SQLite
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L37"><a href="#L37">37</a></th><td class="line-code"><pre>- PostgreSQL
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L38"><a href="#L38">38</a></th><td class="line-code"><pre>- Oracle
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L39"><a href="#L39">39</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L40"><a href="#L40">40</a></th><td class="line-code"><pre># Features ##
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L41"><a href="#L41">41</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L42"><a href="#L42">42</a></th><td class="line-code"><pre>- Finder methods
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L43"><a href="#L43">43</a></th><td class="line-code"><pre>- Dynamic finder methods
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L44"><a href="#L44">44</a></th><td class="line-code"><pre>- Writer methods
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L45"><a href="#L45">45</a></th><td class="line-code"><pre>- Relationships
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L46"><a href="#L46">46</a></th><td class="line-code"><pre>- Validations
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L47"><a href="#L47">47</a></th><td class="line-code"><pre>- Callbacks
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L48"><a href="#L48">48</a></th><td class="line-code"><pre>- Serializations (json/xml)
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L49"><a href="#L49">49</a></th><td class="line-code"><pre>- Transactions
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L50"><a href="#L50">50</a></th><td class="line-code"><pre>- Support for multiple adapters
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L51"><a href="#L51">51</a></th><td class="line-code"><pre>- Miscellaneous options such as: aliased/protected/accessible attributes
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L52"><a href="#L52">52</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L53"><a href="#L53">53</a></th><td class="line-code"><pre>### Installation ##
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L54"><a href="#L54">54</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L55"><a href="#L55">55</a></th><td class="line-code"><pre>Setup is very easy and straight-forward. There are essentially only three configuration points you must concern yourself with:
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L56"><a href="#L56">56</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L57"><a href="#L57">57</a></th><td class="line-code"><pre>1. Setting the model auto_load directory.
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L58"><a href="#L58">58</a></th><td class="line-code"><pre>2. Configuring your database connections.
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L59"><a href="#L59">59</a></th><td class="line-code"><pre>3. Setting the database connection to use for your environment.
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L60"><a href="#L60">60</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L61"><a href="#L61">61</a></th><td class="line-code"><pre>Example:
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L62"><a href="#L62">62</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L63"><a href="#L63">63</a></th><td class="line-code"><pre>```php
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L64"><a href="#L64">64</a></th><td class="line-code"><pre>ActiveRecord\Config::initialize(function($cfg)
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L65"><a href="#L65">65</a></th><td class="line-code"><pre>{
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L66"><a href="#L66">66</a></th><td class="line-code"><pre>   $cfg-&gt;set_model_directory(&#39;/path/to/your/model_directory&#39;);
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L67"><a href="#L67">67</a></th><td class="line-code"><pre>   $cfg-&gt;set_connections(
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L68"><a href="#L68">68</a></th><td class="line-code"><pre>     array(
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L69"><a href="#L69">69</a></th><td class="line-code"><pre>       &#39;development&#39; =&gt; &#39;mysql://username:<a class="__cf_email__" href="../../../../../../cdn-cgi/l/email-protection.html" data-cfemail="acdccddfdfdbc3dec8ecc0c3cfcdc0c4c3dfd8">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/development_database_name&#39;,
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L70"><a href="#L70">70</a></th><td class="line-code"><pre>       &#39;test&#39; =&gt; &#39;mysql://username:<a class="__cf_email__" href="../../../../../../cdn-cgi/l/email-protection.html" data-cfemail="2454455757534b564064484b4745484c4b5750">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/test_database_name&#39;,
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L71"><a href="#L71">71</a></th><td class="line-code"><pre>       &#39;production&#39; =&gt; &#39;mysql://username:<a class="__cf_email__" href="../../../../../../cdn-cgi/l/email-protection.html" data-cfemail="176776646460786573577b7874767b7f786463">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/production_database_name&#39;
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L72"><a href="#L72">72</a></th><td class="line-code"><pre>     )
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L73"><a href="#L73">73</a></th><td class="line-code"><pre>   );
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L74"><a href="#L74">74</a></th><td class="line-code"><pre>});
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L75"><a href="#L75">75</a></th><td class="line-code"><pre>```
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L76"><a href="#L76">76</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L77"><a href="#L77">77</a></th><td class="line-code"><pre>Alternatively (w/o the 5.3 closure):
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L78"><a href="#L78">78</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L79"><a href="#L79">79</a></th><td class="line-code"><pre>```php
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L80"><a href="#L80">80</a></th><td class="line-code"><pre>$cfg = ActiveRecord\Config::instance();
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L81"><a href="#L81">81</a></th><td class="line-code"><pre>$cfg-&gt;set_model_directory(&#39;/path/to/your/model_directory&#39;);
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L82"><a href="#L82">82</a></th><td class="line-code"><pre>$cfg-&gt;set_connections(
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L83"><a href="#L83">83</a></th><td class="line-code"><pre>  array(
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L84"><a href="#L84">84</a></th><td class="line-code"><pre>    &#39;development&#39; =&gt; &#39;mysql://username:<a class="__cf_email__" href="../../../../../../cdn-cgi/l/email-protection.html" data-cfemail="99e9f8eaeaeef6ebfdd9f5f6faf8f5f1f6eaed">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/development_database_name&#39;,
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L85"><a href="#L85">85</a></th><td class="line-code"><pre>    &#39;test&#39; =&gt; &#39;mysql://username:<a class="__cf_email__" href="../../../../../../cdn-cgi/l/email-protection.html" data-cfemail="4a3a2b39393d25382e0a2625292b262225393e">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/test_database_name&#39;,
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L86"><a href="#L86">86</a></th><td class="line-code"><pre>    &#39;production&#39; =&gt; &#39;mysql://username:<a class="__cf_email__" href="../../../../../../cdn-cgi/l/email-protection.html" data-cfemail="364657454541594452765a5955575a5e594542">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/production_database_name&#39;
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L87"><a href="#L87">87</a></th><td class="line-code"><pre>  )
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L88"><a href="#L88">88</a></th><td class="line-code"><pre>);
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L89"><a href="#L89">89</a></th><td class="line-code"><pre>```
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L90"><a href="#L90">90</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L91"><a href="#L91">91</a></th><td class="line-code"><pre>PHP ActiveRecord will default to use your development database. For testing or production, you simply set the default
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L92"><a href="#L92">92</a></th><td class="line-code"><pre>connection according to your current environment (&#39;test&#39; or &#39;production&#39;):
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L93"><a href="#L93">93</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L94"><a href="#L94">94</a></th><td class="line-code"><pre>```php
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L95"><a href="#L95">95</a></th><td class="line-code"><pre>ActiveRecord\Config::initialize(function($cfg)
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L96"><a href="#L96">96</a></th><td class="line-code"><pre>{
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L97"><a href="#L97">97</a></th><td class="line-code"><pre>  $cfg-&gt;set_default_connection(your_environment);
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L98"><a href="#L98">98</a></th><td class="line-code"><pre>});
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L99"><a href="#L99">99</a></th><td class="line-code"><pre>```
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L100"><a href="#L100">100</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L101"><a href="#L101">101</a></th><td class="line-code"><pre>Once you have configured these three settings you are done. ActiveRecord takes care of the rest for you.
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L102"><a href="#L102">102</a></th><td class="line-code"><pre>It does not require that you map your table schema to yaml/xml files. It will query the database for this information and
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L103"><a href="#L103">103</a></th><td class="line-code"><pre>cache it so that it does not make multiple calls to the database for a single schema.
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L104"><a href="#L104">104</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L105"><a href="#L105">105</a></th><td class="line-code"><pre>## Basic CRUD ##
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L106"><a href="#L106">106</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L107"><a href="#L107">107</a></th><td class="line-code"><pre>### Retrieve ###
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L108"><a href="#L108">108</a></th><td class="line-code"><pre>These are your basic methods to find and retrieve records from your database.
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L109"><a href="#L109">109</a></th><td class="line-code"><pre>See the *Finders* section for more details.
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L110"><a href="#L110">110</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L111"><a href="#L111">111</a></th><td class="line-code"><pre>```php
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L112"><a href="#L112">112</a></th><td class="line-code"><pre>$post = Post::find(1);
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L113"><a href="#L113">113</a></th><td class="line-code"><pre>echo $post-&gt;title; # &#39;My first blog post!!&#39;
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L114"><a href="#L114">114</a></th><td class="line-code"><pre>echo $post-&gt;author_id; # 5
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L115"><a href="#L115">115</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L116"><a href="#L116">116</a></th><td class="line-code"><pre># also the same since it is the first record in the db
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L117"><a href="#L117">117</a></th><td class="line-code"><pre>$post = Post::first();
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L118"><a href="#L118">118</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L119"><a href="#L119">119</a></th><td class="line-code"><pre># finding using dynamic finders
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L120"><a href="#L120">120</a></th><td class="line-code"><pre>$post = Post::find_by_name(&#39;The Decider&#39;);
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L121"><a href="#L121">121</a></th><td class="line-code"><pre>$post = Post::find_by_name_and_id(&#39;The Bridge Builder&#39;,100);
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L122"><a href="#L122">122</a></th><td class="line-code"><pre>$post = Post::find_by_name_or_id(&#39;The Bridge Builder&#39;,100);
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L123"><a href="#L123">123</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L124"><a href="#L124">124</a></th><td class="line-code"><pre># finding using a conditions array
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L125"><a href="#L125">125</a></th><td class="line-code"><pre>$posts = Post::find(&#39;all&#39;,array(&#39;conditions&#39; =&gt; array(&#39;name=? or id &gt; ?&#39;,&#39;The Bridge Builder&#39;,100)));
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L126"><a href="#L126">126</a></th><td class="line-code"><pre>```
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L127"><a href="#L127">127</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L128"><a href="#L128">128</a></th><td class="line-code"><pre>### Create ###
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L129"><a href="#L129">129</a></th><td class="line-code"><pre>Here we create a new post by instantiating a new object and then invoking the save() method.
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L130"><a href="#L130">130</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L131"><a href="#L131">131</a></th><td class="line-code"><pre>```php
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L132"><a href="#L132">132</a></th><td class="line-code"><pre>$post = new Post();
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L133"><a href="#L133">133</a></th><td class="line-code"><pre>$post-&gt;title = &#39;My first blog post!!&#39;;
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L134"><a href="#L134">134</a></th><td class="line-code"><pre>$post-&gt;author_id = 5;
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L135"><a href="#L135">135</a></th><td class="line-code"><pre>$post-&gt;save();
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L136"><a href="#L136">136</a></th><td class="line-code"><pre># INSERT INTO `posts` (title,author_id) VALUES(&#39;My first blog post!!&#39;, 5)
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L137"><a href="#L137">137</a></th><td class="line-code"><pre>```
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L138"><a href="#L138">138</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L139"><a href="#L139">139</a></th><td class="line-code"><pre>### Update ###
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L140"><a href="#L140">140</a></th><td class="line-code"><pre>To update you would just need to find a record first and then change one of its attributes.
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L141"><a href="#L141">141</a></th><td class="line-code"><pre>It keeps an array of attributes that are &quot;dirty&quot; (that have been modified) and so our
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L142"><a href="#L142">142</a></th><td class="line-code"><pre>sql will only update the fields modified.
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L143"><a href="#L143">143</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L144"><a href="#L144">144</a></th><td class="line-code"><pre>```php
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L145"><a href="#L145">145</a></th><td class="line-code"><pre>$post = Post::find(1);
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L146"><a href="#L146">146</a></th><td class="line-code"><pre>echo $post-&gt;title; # &#39;My first blog post!!&#39;
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L147"><a href="#L147">147</a></th><td class="line-code"><pre>$post-&gt;title = &#39;Some real title&#39;;
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L148"><a href="#L148">148</a></th><td class="line-code"><pre>$post-&gt;save();
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L149"><a href="#L149">149</a></th><td class="line-code"><pre># UPDATE `posts` SET title=&#39;Some real title&#39; WHERE id=1
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L150"><a href="#L150">150</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L151"><a href="#L151">151</a></th><td class="line-code"><pre>$post-&gt;title = &#39;New real title&#39;;
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L152"><a href="#L152">152</a></th><td class="line-code"><pre>$post-&gt;author_id = 1;
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L153"><a href="#L153">153</a></th><td class="line-code"><pre>$post-&gt;save();
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L154"><a href="#L154">154</a></th><td class="line-code"><pre># UPDATE `posts` SET title=&#39;New real title&#39;, author_id=1 WHERE id=1
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L155"><a href="#L155">155</a></th><td class="line-code"><pre>```
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L156"><a href="#L156">156</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L157"><a href="#L157">157</a></th><td class="line-code"><pre>### Delete ###
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L158"><a href="#L158">158</a></th><td class="line-code"><pre>Deleting a record will not *destroy* the object. This means that it will call sql to delete
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L159"><a href="#L159">159</a></th><td class="line-code"><pre>the record in your database but you can still use the object if you need to.
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L160"><a href="#L160">160</a></th><td class="line-code"><pre></pre></td></tr>
+
+
+<tr><th class="line-num" id="L161"><a href="#L161">161</a></th><td class="line-code"><pre>```php
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L162"><a href="#L162">162</a></th><td class="line-code"><pre>$post = Post::find(1);
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L163"><a href="#L163">163</a></th><td class="line-code"><pre>$post-&gt;delete();
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L164"><a href="#L164">164</a></th><td class="line-code"><pre># DELETE FROM `posts` WHERE id=1
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L165"><a href="#L165">165</a></th><td class="line-code"><pre>echo $post-&gt;title; # &#39;New real title&#39;
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L166"><a href="#L166">166</a></th><td class="line-code"><pre>```
+</pre></td></tr>
+
+
+</tbody>
+</table>
+</div>
+
+
+
+
+				
+			</div>
+
+			<div id="sidebar" class="span-7 last">
+				<div class="r-button" id="stable-build">
+					<a href="../../../../../../download.html">Get Stable Build - <em>v1.0</em><p>June 27 2010</p></a>
+				</div>
+				<div class="r-button" id="nightly-build">
+					<a href="../../../../../../download.html">Get Nightly Build <p>April 16, 2013</p></a>
+				</div>
+		
+				
+
+				<h2 id="news-header">
+	<a href="../../../../../../news.html">Latest News</a>
+	<a class="feed" href="../../../../news.atom"><img src="../../../../../../images/feed-icon-14x14.png"/></a>
+</h2>
+
+<ul id="news-summary" class="icon-list">
+	
+	<li class="article">
+		<a href="../../../../../../news/6-website-downtime.html">Website Downtime</a>
+		
+		<div class="meta">
+			<em class="relative" title="2011-09-26T16:43:49Z">Mon Sep 26 12:43:49 -0400 2011</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="../../../../../../news/5-did-you-know-php-ar-has-eager-loading.html">Did you know? PHP-AR has Eager Loading</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-08-31T23:31:08Z">Tue Aug 31 19:31:08 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="../../../../../../news/4-php-activerecord-1-0-released.html">php-activerecord 1.0 released!</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-06-28T00:02:55Z">Sun Jun 27 20:02:55 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="../../../../../../news/3-website-updated-with-forums-and-wiki.html">Website updated with forums and wiki</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-06-18T21:37:23Z">Fri Jun 18 17:37:23 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+	<li class="article">
+		<a href="../../../../../../news/2-php-activerecord-1-0-rc1-released.html">php-activerecord 1.0 RC1 released!</a>
+		
+		<div class="meta">
+			<em class="relative" title="2010-04-07T00:00:15Z">Tue Apr 06 20:00:15 -0400 2010</em> ago
+			
+		</div>
+		
+	</li>
+	
+</ul>
+
+
+
+
+				<h2><a href="../../../../activity.html">Recent Activity</a></h2>
+<ul id="recent-activity" class="icon-list">
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/1/topics/2069-re-support-for-multi-row-inserts-and-insert-ignore">Encotrei uma solução alternativa para varias inserções.
+
+Model::query(&#39;inse...</a>
+		
+		<div class="author">
+			by <a href="../../../../../../users/3231.html">renan henrique constancio</a>
+			<em class="relative" title="2017-03-17T14:08:17Z">Fri Mar 17 10:08:17 -0400 2017</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/4/topics/2068-re-can-t-get-groupname-using-associations">I have the same question, have you find the answer?</a>
+		
+		<div class="author">
+			by <a href="../../../../../../users/3194.html">Israel Sousa</a>
+			<em class="relative" title="2017-03-03T19:52:52Z">Fri Mar 03 14:52:52 -0500 2017</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/4/topics/2067-cannot-change-primary_key">Hi, 
+I cannot change  $primary_key of entity.
+After save is still in database o...</a>
+		
+		<div class="author">
+			by <a href="../../../../../../users/2785.html">Vasek Keberdle</a>
+			<em class="relative" title="2017-01-03T17:20:13Z">Tue Jan 03 12:20:13 -0500 2017</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/4/topics/2066-re-saving-date-to-mysql-problem">That static property is not available anymore in stable build 1.0, so that won&#39;t ...</a>
+		
+		<div class="author">
+			by <a href="../../../../../../users/3038.html">Jos Faber</a>
+			<em class="relative" title="2016-12-07T13:21:47Z">Wed Dec 07 08:21:47 -0500 2016</em>
+		</div>
+	</li>
+		<li class="message">
+	  
+		<a href="http://www.phpactiverecord.com/boards/4/topics/2065-re-can-t-get-groupname-using-associations">Project is dead?</a>
+		
+		<div class="author">
+			by <a href="../../../../../../users/2948.html">McLotos McLotos</a>
+			<em class="relative" title="2016-09-28T09:58:57Z">Wed Sep 28 05:58:57 -0400 2016</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/96100175f2c268648a6b9fad3157620a6a6649d1">Merge pull request #284 from fetch/test-require-fix
+
+Using __DIR__ in require_onc...</a>
+		
+		<div class="author">
+			by <a href="../../../../../../users/3.html">Jacques Fuentes</a>
+			<em class="relative" title="2013-04-15T13:09:16Z">Mon Apr 15 09:09:16 -0400 2013</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/f8220bfaaf820f53d99e3c97b97b4a5ee2a0adfe">absolute path require_once</a>
+		
+		<div class="author">
+			by <a href="../../../../../../users/1660.html">Koen Punt</a>
+			<em class="relative" title="2013-04-15T08:07:39Z">Mon Apr 15 04:07:39 -0400 2013</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/17eb9c6155ae3fb8ac144ab07ee828a19a8be9c1">Re #282, pointing phpunit at the tests...</a>
+		
+		<div class="author">
+			by <a href="../../../../../../users/show/David%20Rogers%20.html">David Rogers </a>
+			<em class="relative" title="2013-04-11T20:39:30Z">Thu Apr 11 16:39:30 -0400 2013</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/ec53c90187577c9671fd16a1a96979aed067b8cf">Driving tests with phpunit.xml re #282</a>
+		
+		<div class="author">
+			by <a href="../../../../../../users/show/David%20Rogers%20.html">David Rogers </a>
+			<em class="relative" title="2013-04-11T20:26:29Z">Thu Apr 11 16:26:29 -0400 2013</em>
+		</div>
+	</li>
+		<li class="commit">
+	  
+		<a href="http://github.com/kla/php-activerecord/commit/d8c90b6a640da93539ec0e758e60800fcee9bc8a">Create .travis.yml to drive Travis CI build</a>
+		
+		<div class="author">
+			by <a href="../../../../../../users/show/David%20Rogers%20.html">David Rogers </a>
+			<em class="relative" title="2013-04-11T19:39:42Z">Thu Apr 11 15:39:42 -0400 2013</em>
+		</div>
+	</li>
+	</ul>
+
+
+				
+				
+			</div>
+		</div>
+	</div>
+
+	<div id="ajax-indicator" style="display:none;"><span>Loading...</span></div>
+
+	<div id="footer">
+	    <div class="container">
+	        <div class="span-24 last">
+			    <ul class="horizontal">
+	<li><a href="../../../../../../index.html">Home</a></li>
+	<li><a href="../../../../../../download/index/main.html">Download</a></li>
+	<li><a href="../../../../wiki.html">Wiki</a></li>
+	<li><a href="../../../../../../docs.html">Documentation</a></li>
+	<li><a href="http://github.com/kla/php-activerecord/issues">Issues</a></li
+	<li><a href="../../../../../../news.html">News</a></li>
+	<li><a href="../../../../boards.html">Forums</a></li>
+	<li class="last"><a href="../../../../../../welcome/about.html">About Us</a></li>
+</ul>
+<p>
+	<a href="http://www.phpactiverecord.org/" target="_top">phpactiverecord.org - An easy to use ORM for PHP</a><br/>
+	<a href="http://www.opensource.org/licenses/mit-license.php">MIT License</a>
+</p>
+
+	        </div>
+	    </div>
+	</div>
+</div>
+
+
+<script src="../../../../../../assets/core35c2.js?1366183229" type="text/javascript"></script>
+
+
+<script type="text/javascript">var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));</script>
+<script type="text/javascript">try { var pageTracker = _gat._getTracker("UA-10078176-1"); pageTracker._trackPageview();} catch(err) {}</script>
+
+
+
+</body>
+
+<!-- Mirrored from www.phpactiverecord.com/projects/main/repository/revisions/ede4bed8703f7e69d0cd651f40f320d43dbd8ab6/entry/README.md by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 May 2017 20:14:24 GMT -->
+</html>

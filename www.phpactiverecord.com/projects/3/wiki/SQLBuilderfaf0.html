@@ -1,0 +1,40 @@
+h2. SQLBuilder
+
+This guide will show you how to use the php-activerecord SQL builder.
+
+The first steps are to get the database connection and setup the SQL builder.
+
+<pre class="code"><code class="php">
+$conn = ActiveRecord\ConnectionManager::get_connection("development");                                                                                                                         
+$builder = new ActiveRecord\SQLBuilder($conn, "authors"); 
+</code></pre>
+
+h4(#select). SELECT queries
+
+We are now ready to generate a simple SELECT query:
+
+<pre class="code"><code class="php">
+$builder->where("name = ?", "Hemingway");
+echo $builder; /* => SELECT * FROM authors WHERE name = ? */
+print_r($builder->get_where_values()); /* => array("Hemingway") */
+</code></pre>
+
+You can also pass a hash to the where() method:
+
+<pre class="code"><code class="php">
+$builder = new ActiveRecord\SQLBuilder($conn, "authors");                                                                                                            
+$builder->where(array("name" => "Hemingway",                                                                                                                         
+                      "country" => "USA"));
+echo $builder; /* => SELECT * FROM authors WHERE `name`=? AND `country`=? */
+print_r($builder->get_where_values()); /* => array('Hemingway', 'USA'); */
+
+</code></pre>
+
+You can add ordering information:
+
+<pre class="code><code class="php">
+$builder = new ActiveRecord\SQLBuilder($conn, "authors");
+$builder->order('id DESC');
+echo $builder."\n"; /* => SELECT * FROM authors ORDER BY id DESC */
+</code></pre>
+ Cool
